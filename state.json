@@ -1,27 +1,19 @@
 {
-  "updated_at": "2026-05-21 16:24:35",
-  "updated_at_iso": "2026-05-21T16:24:35.134470+08:00",
+  "updated_at": "2026-05-21 16:25:08",
+  "updated_at_iso": "2026-05-21T16:25:08.953168+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
     "equity": 23.00300457,
-    "available": 23.00300457351,
+    "available": 22.39449457351,
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-21T08:24:35.127833+00:00"
+    "fetched_at": "2026-05-21T08:25:08.943707+00:00"
   },
   "log": {
-    "last_tick": "2026-05-21 16:20:02",
+    "last_tick": "2026-05-21 16:25:02",
     "events": [
-      {
-        "ts": "2026-05-21 12:40:02",
-        "msg": "Filled: short @ 86.88"
-      },
-      {
-        "ts": "2026-05-21 12:45:05",
-        "msg": "All pending orders cancelled [verified]"
-      },
       {
         "ts": "2026-05-21 12:45:08",
         "msg": "Flash close click: direction=short ticker_before=86.95 click_ts=2026-05-21T04:45:08.381529+00:00"
@@ -133,6 +125,14 @@
       {
         "ts": "2026-05-21 15:55:11",
         "msg": "V1_FILTER skip SHORT at ts=2026-05-21 07:50:00 confirm l=86.5700 >= pivot l=86.5300"
+      },
+      {
+        "ts": "2026-05-21 16:25:03",
+        "msg": "Order submit: short theoretical=86.93 sl=87.18 lev=100x qty=$0.69 ticker_before=86.92"
+      },
+      {
+        "ts": "2026-05-21 16:25:05",
+        "msg": "Order submitted & verified: short price=86.93 sl=87.18 lev=100x qty=$0.69"
       }
     ],
     "errors": [],
@@ -340,7 +340,7 @@
   },
   "status": {
     "online": true,
-    "last_tick": "2026-05-21 16:20:02",
-    "last_tick_age_sec": 273
+    "last_tick": "2026-05-21 16:25:02",
+    "last_tick_age_sec": 6
   }
 }
