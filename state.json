@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-21 12:24:31",
-  "updated_at_iso": "2026-05-21T12:24:31.522922+08:00",
+  "updated_at": "2026-05-21 12:25:05",
+  "updated_at_iso": "2026-05-21T12:25:05.293488+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
@@ -9,15 +9,11 @@
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-21T04:24:31.514895+00:00"
+    "fetched_at": "2026-05-21T04:25:05.284768+00:00"
   },
   "log": {
-    "last_tick": "2026-05-21 12:20:03",
+    "last_tick": "2026-05-21 12:25:02",
     "events": [
-      {
-        "ts": "2026-05-21 10:00:07",
-        "msg": "Filled: short @ 86.49"
-      },
       {
         "ts": "2026-05-21 10:00:07",
         "msg": "V1_FILTER skip LONG at ts=2026-05-21 01:55:00 confirm h=86.5300 <= pivot h=86.6400"
@@ -133,6 +129,10 @@
       {
         "ts": "2026-05-21 12:15:02",
         "msg": "V1_FILTER skip SHORT at ts=2026-05-21 04:10:00 confirm l=86.8200 >= pivot l=86.8000"
+      },
+      {
+        "ts": "2026-05-21 12:25:02",
+        "msg": "V1_FILTER skip SHORT at ts=2026-05-21 04:20:00 confirm l=86.8200 >= pivot l=86.8200"
       }
     ],
     "errors": [],
@@ -351,7 +351,7 @@
   },
   "status": {
     "online": true,
-    "last_tick": "2026-05-21 12:20:03",
-    "last_tick_age_sec": 268
+    "last_tick": "2026-05-21 12:25:02",
+    "last_tick_age_sec": 3
   }
 }
