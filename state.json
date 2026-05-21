@@ -1,48 +1,32 @@
 {
-  "updated_at": "2026-05-22 03:24:47",
-  "updated_at_iso": "2026-05-22T03:24:47.433554+08:00",
+  "updated_at": "2026-05-22 03:25:21",
+  "updated_at_iso": "2026-05-22T03:25:21.791261+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
-    "equity": 22.82375889,
-    "available": 22.17625889951,
+    "equity": 22.80975889,
+    "available": 22.21146889951,
     "position": {
-      "direction": "short",
+      "direction": "long",
       "size": 7.0,
-      "entry": 87.5,
+      "entry": 87.47,
       "pnl": 0.0,
       "leverage": 100
     },
     "plan_orders": [],
     "stop_orders": [
       {
-        "id": 515489586,
-        "sl": 87.55,
+        "id": 515491174,
+        "sl": 87.34,
         "tp": 0.0,
         "vol": 7.0
       }
     ],
-    "fetched_at": "2026-05-21T19:24:47.426106+00:00"
+    "fetched_at": "2026-05-21T19:25:21.782601+00:00"
   },
   "log": {
-    "last_tick": "2026-05-22 03:20:02",
+    "last_tick": "2026-05-22 03:25:02",
     "events": [
-      {
-        "ts": "2026-05-22 01:35:09",
-        "msg": "Order instant-filled & confirmed: short theoretical=87.55 actual=87.6 sl=88.02 ticker_before=87.6"
-      },
-      {
-        "ts": "2026-05-22 01:40:05",
-        "msg": "All pending orders cancelled [verified]"
-      },
-      {
-        "ts": "2026-05-22 01:40:08",
-        "msg": "Flash close click: direction=short ticker_before=87.6 click_ts=2026-05-21T17:40:08.439042+00:00"
-      },
-      {
-        "ts": "2026-05-22 01:40:10",
-        "msg": "V1_FILTER skip LONG at ts=2026-05-21 17:35:00 confirm h=87.6700 <= pivot h=87.9700"
-      },
       {
         "ts": "2026-05-22 01:50:03",
         "msg": "Order submit: short theoretical=87.43 sl=87.72 lev=100x qty=$0.69 ticker_before=87.56"
@@ -146,15 +130,25 @@
       {
         "ts": "2026-05-22 03:20:09",
         "msg": "Order instant-filled & confirmed: short theoretical=87.39 actual=87.5 sl=87.55 ticker_before=87.53"
-      }
-    ],
-    "errors": [
+      },
       {
-        "ts": "2026-05-21 20:30:09",
-        "level": "ERROR",
-        "msg": "2026-05-21 20:30:09,333 ERROR: Flash close button not found"
+        "ts": "2026-05-22 03:25:05",
+        "msg": "All pending orders cancelled [verified]"
+      },
+      {
+        "ts": "2026-05-22 03:25:08",
+        "msg": "Flash close click: direction=short ticker_before=87.44 click_ts=2026-05-21T19:25:08.472099+00:00"
+      },
+      {
+        "ts": "2026-05-22 03:25:11",
+        "msg": "Order submit: long theoretical=87.52 sl=87.34 lev=100x qty=$0.67 ticker_before=87.46"
+      },
+      {
+        "ts": "2026-05-22 03:25:14",
+        "msg": "Order instant-filled & confirmed: long theoretical=87.52 actual=87.47 sl=87.34 ticker_before=87.46"
       }
     ],
+    "errors": [],
     "error_count_1h": 0
   },
   "v0": {
@@ -172,12 +166,12 @@
     "max_dd_pct": 6.191187652848704,
     "position": null,
     "pending": {
-      "dir": "short",
-      "entry": 87.39,
-      "sl": 87.55,
-      "placed_ts": "2026-05-21T19:15:00+00:00"
+      "dir": "long",
+      "entry": 87.52,
+      "sl": 87.34,
+      "placed_ts": "2026-05-21T19:20:00+00:00"
     },
-    "last_bar_ts": "2026-05-22 03:15:00",
+    "last_bar_ts": "2026-05-22 03:20:00",
     "recent_trades": [
       {
         "ts": "2026-05-21T15:50:00+00:00",
@@ -277,12 +271,12 @@
     "max_dd_pct": 3.540088046986168,
     "position": null,
     "pending": {
-      "dir": "short",
-      "entry": 87.39,
-      "sl": 87.55,
-      "placed_ts": "2026-05-21T19:15:00+00:00"
+      "dir": "long",
+      "entry": 87.52,
+      "sl": 87.34,
+      "placed_ts": "2026-05-21T19:20:00+00:00"
     },
-    "last_bar_ts": "2026-05-22 03:15:00",
+    "last_bar_ts": "2026-05-22 03:20:00",
     "recent_trades": [
       {
         "ts": "2026-05-21T14:05:00+00:00",
@@ -374,12 +368,12 @@
     },
     {
       "date": "2026-05-22",
-      "equity": 22.82375889
+      "equity": 22.80975889
     }
   ],
   "status": {
     "online": true,
-    "last_tick": "2026-05-22 03:20:02",
-    "last_tick_age_sec": 285
+    "last_tick": "2026-05-22 03:25:02",
+    "last_tick_age_sec": 19
   }
 }
