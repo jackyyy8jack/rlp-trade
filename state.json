@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-05-21 17:59:33",
-  "updated_at_iso": "2026-05-21T17:59:33.865726+08:00",
+  "updated_at": "2026-05-21 18:00:07",
+  "updated_at_iso": "2026-05-21T18:00:07.728196+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
-    "equity": 22.96800457,
+    "equity": 22.98900457,
     "available": 22.37685457351,
     "position": {
       "direction": "short",
@@ -22,15 +22,11 @@
         "vol": 7.0
       }
     ],
-    "fetched_at": "2026-05-21T09:59:33.856134+00:00"
+    "fetched_at": "2026-05-21T10:00:07.723087+00:00"
   },
   "log": {
-    "last_tick": "2026-05-21 17:55:02",
+    "last_tick": "2026-05-21 18:00:02",
     "events": [
-      {
-        "ts": "2026-05-21 15:00:06",
-        "msg": "All pending orders cancelled [verified]"
-      },
       {
         "ts": "2026-05-21 15:00:09",
         "msg": "Flash close click: direction=long ticker_before=86.25 click_ts=2026-05-21T07:00:09.167020+00:00"
@@ -146,6 +142,10 @@
       {
         "ts": "2026-05-21 17:55:05",
         "msg": "Order instant-filled & confirmed: short theoretical=86.44 actual=86.45 sl=86.53 ticker_before=86.48"
+      },
+      {
+        "ts": "2026-05-21 18:00:06",
+        "msg": "All pending orders cancelled [verified]"
       }
     ],
     "errors": [],
@@ -364,7 +364,7 @@
   },
   "status": {
     "online": true,
-    "last_tick": "2026-05-21 17:55:02",
-    "last_tick_age_sec": 271
+    "last_tick": "2026-05-21 18:00:02",
+    "last_tick_age_sec": 5
   }
 }
