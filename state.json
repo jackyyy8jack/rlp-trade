@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-21 17:04:42",
-  "updated_at_iso": "2026-05-21T17:04:42.673168+08:00",
+  "updated_at": "2026-05-21 17:05:16",
+  "updated_at_iso": "2026-05-21T17:05:16.570709+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
@@ -9,15 +9,11 @@
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-21T09:04:42.665851+00:00"
+    "fetched_at": "2026-05-21T09:05:16.566568+00:00"
   },
   "log": {
-    "last_tick": "2026-05-21 17:00:02",
+    "last_tick": "2026-05-21 17:05:02",
     "events": [
-      {
-        "ts": "2026-05-21 13:05:12",
-        "msg": "Order submit: short theoretical=86.94 sl=87.16 lev=100x qty=$0.66 ticker_before=87.04"
-      },
       {
         "ts": "2026-05-21 13:05:14",
         "msg": "Order instant-filled & confirmed: short theoretical=86.94 actual=87.03 sl=87.16 ticker_before=87.04"
@@ -133,6 +129,10 @@
       {
         "ts": "2026-05-21 17:00:05",
         "msg": "Order submitted & verified: long price=86.74 sl=86.64 lev=100x qty=$0.69"
+      },
+      {
+        "ts": "2026-05-21 17:05:02",
+        "msg": "V1_FILTER skip SHORT at ts=2026-05-21 09:00:00 confirm l=86.7600 >= pivot l=86.6600"
       }
     ],
     "errors": [],
@@ -153,12 +153,12 @@
     "max_dd_pct": 6.191187652848704,
     "position": null,
     "pending": {
-      "dir": "long",
-      "entry": 86.74,
-      "sl": 86.64,
-      "placed_ts": "2026-05-21T08:55:00+00:00"
+      "dir": "short",
+      "entry": 86.66,
+      "sl": 86.94,
+      "placed_ts": "2026-05-21T09:00:00+00:00"
     },
-    "last_bar_ts": "2026-05-21 16:55:00",
+    "last_bar_ts": "2026-05-21 17:00:00",
     "recent_trades": [
       {
         "ts": "2026-05-21T05:45:00+00:00",
@@ -263,7 +263,7 @@
       "sl": 86.64,
       "placed_ts": "2026-05-21T08:55:00+00:00"
     },
-    "last_bar_ts": "2026-05-21 16:55:00",
+    "last_bar_ts": "2026-05-21 17:00:00",
     "recent_trades": [
       {
         "ts": "2026-05-21T02:10:00+00:00",
@@ -346,11 +346,11 @@
         "exit": "FLIP"
       }
     ],
-    "n_filtered": 81
+    "n_filtered": 82
   },
   "status": {
     "online": true,
-    "last_tick": "2026-05-21 17:00:02",
-    "last_tick_age_sec": 280
+    "last_tick": "2026-05-21 17:05:02",
+    "last_tick_age_sec": 14
   }
 }
