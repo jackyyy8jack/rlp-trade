@@ -2,7 +2,7 @@
 
 即時監控 SOL/USDT MEXC 永續合約上的 RLP 翻轉策略執行狀態。
 
-🌐 **線上版**：https://gnaixihZ.github.io/rlp-dashboard/
+🌐 **線上版**：https://jackyyy8jack.github.io/rlp-trade/
 
 ## 顯示內容
 
