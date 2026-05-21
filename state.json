@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-21 15:59:44",
-  "updated_at_iso": "2026-05-21T15:59:44.141015+08:00",
+  "updated_at": "2026-05-21 16:00:17",
+  "updated_at_iso": "2026-05-21T16:00:17.945175+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
@@ -9,10 +9,10 @@
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-21T07:59:44.135201+00:00"
+    "fetched_at": "2026-05-21T08:00:17.937561+00:00"
   },
   "log": {
-    "last_tick": "2026-05-21 15:55:02",
+    "last_tick": "2026-05-21 16:00:02",
     "events": [
       {
         "ts": "2026-05-21 12:40:02",
@@ -142,32 +142,19 @@
     "label": "V0 (no filter)",
     "available": true,
     "initial": 30.0,
-    "equity": 31.815417731360853,
-    "pnl": 1.8154177313608566,
-    "roi_pct": 6.051392437869518,
-    "trades": 123,
+    "equity": 31.79337980635645,
+    "pnl": 1.793379806356455,
+    "roi_pct": 5.977932687854848,
+    "trades": 124,
     "wins": 56,
-    "losses": 67,
-    "win_rate": 45.52845528455284,
+    "losses": 68,
+    "win_rate": 45.16129032258064,
     "peak_equity": 33.244272681990736,
     "max_dd_pct": 6.191187652848704,
     "position": null,
-    "pending": {
-      "dir": "short",
-      "entry": 86.53,
-      "sl": 86.64,
-      "placed_ts": "2026-05-21T07:50:00+00:00"
-    },
-    "last_bar_ts": "2026-05-21 15:50:00",
+    "pending": null,
+    "last_bar_ts": "2026-05-21 15:55:00",
     "recent_trades": [
-      {
-        "ts": "2026-05-21T04:40:00+00:00",
-        "dir": "short",
-        "ep": 86.83,
-        "xp": 86.95,
-        "pnl": -0.13144889791221864,
-        "exit": "FLIP"
-      },
       {
         "ts": "2026-05-21T05:00:00+00:00",
         "dir": "long",
@@ -239,6 +226,14 @@
         "xp": 86.62,
         "pnl": 0.2629977125899044,
         "exit": "FLIP"
+      },
+      {
+        "ts": "2026-05-21T07:55:00+00:00",
+        "dir": "short",
+        "ep": 86.62,
+        "xp": 86.64,
+        "pnl": -0.022037925004401656,
+        "exit": "SL_SAMEBAR"
       }
     ],
     "n_filtered": 0
@@ -258,7 +253,7 @@
     "max_dd_pct": 3.540088046986168,
     "position": null,
     "pending": null,
-    "last_bar_ts": "2026-05-21 15:50:00",
+    "last_bar_ts": "2026-05-21 15:55:00",
     "recent_trades": [
       {
         "ts": "2026-05-21T01:50:00+00:00",
@@ -345,7 +340,7 @@
   },
   "status": {
     "online": true,
-    "last_tick": "2026-05-21 15:55:02",
-    "last_tick_age_sec": 282
+    "last_tick": "2026-05-21 16:00:02",
+    "last_tick_age_sec": 15
   }
 }
