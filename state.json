@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-05-21 20:44:33",
-  "updated_at_iso": "2026-05-21T20:44:33.870680+08:00",
+  "updated_at": "2026-05-21 20:45:08",
+  "updated_at_iso": "2026-05-21T20:45:08.083314+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
-    "equity": 22.82800457,
+    "equity": 22.81200457,
     "available": 22.19008457351,
     "position": {
       "direction": "long",
@@ -22,19 +22,11 @@
         "vol": 8.0
       }
     ],
-    "fetched_at": "2026-05-21T12:44:33.864532+00:00"
+    "fetched_at": "2026-05-21T12:45:08.076682+00:00"
   },
   "log": {
-    "last_tick": "2026-05-21 20:40:02",
+    "last_tick": "2026-05-21 20:45:04",
     "events": [
-      {
-        "ts": "2026-05-21 18:25:06",
-        "msg": "All pending orders cancelled [verified]"
-      },
-      {
-        "ts": "2026-05-21 18:25:08",
-        "msg": "Flash close click: direction=long ticker_before=86.55 click_ts=2026-05-21T10:25:08.733382+00:00"
-      },
       {
         "ts": "2026-05-21 18:25:10",
         "msg": "V1_FILTER skip SHORT at ts=2026-05-21 10:20:00 confirm l=86.5200 >= pivot l=86.5200"
@@ -146,6 +138,14 @@
       {
         "ts": "2026-05-21 20:40:05",
         "msg": "Order submitted & verified: long price=85.74 sl=85.37 lev=100x qty=$0.69"
+      },
+      {
+        "ts": "2026-05-21 20:45:04",
+        "msg": "Filled: long @ 85.74"
+      },
+      {
+        "ts": "2026-05-21 20:45:04",
+        "msg": "V1_FILTER skip SHORT at ts=2026-05-21 12:40:00 confirm l=85.6300 >= pivot l=85.6200"
       }
     ],
     "errors": [
@@ -369,7 +369,7 @@
   },
   "status": {
     "online": true,
-    "last_tick": "2026-05-21 20:40:02",
-    "last_tick_age_sec": 271
+    "last_tick": "2026-05-21 20:45:04",
+    "last_tick_age_sec": 4
   }
 }
