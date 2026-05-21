@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-05-22 05:55:05",
-  "updated_at_iso": "2026-05-22T05:55:05.141260+08:00",
+  "updated_at": "2026-05-22 05:55:39",
+  "updated_at_iso": "2026-05-22T05:55:39.418416+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
-    "equity": 22.62075889,
+    "equity": 22.61375889,
     "available": 22.00209889951,
     "position": {
       "direction": "long",
@@ -22,15 +22,11 @@
         "vol": 7.0
       }
     ],
-    "fetched_at": "2026-05-21T21:55:05.129769+00:00"
+    "fetched_at": "2026-05-21T21:55:39.409191+00:00"
   },
   "log": {
     "last_tick": "2026-05-22 05:55:02",
     "events": [
-      {
-        "ts": "2026-05-22 03:30:05",
-        "msg": "All pending orders cancelled [verified]"
-      },
       {
         "ts": "2026-05-22 03:30:08",
         "msg": "Flash close click: direction=long ticker_before=87.4 click_ts=2026-05-21T19:30:08.712830+00:00"
@@ -146,6 +142,10 @@
       {
         "ts": "2026-05-22 05:55:03",
         "msg": "Order submit: long theoretical=87.41 sl=87.29 lev=100x qty=$0.68 ticker_before=87.38"
+      },
+      {
+        "ts": "2026-05-22 05:55:06",
+        "msg": "Order instant-filled & confirmed: long theoretical=87.41 actual=87.38 sl=87.29 ticker_before=87.38"
       }
     ],
     "errors": [
@@ -178,7 +178,7 @@
       "opened_ts": "2026-05-21T21:40:00+00:00"
     },
     "pending": null,
-    "last_bar_ts": "2026-05-22 05:45:00",
+    "last_bar_ts": "2026-05-22 05:50:00",
     "recent_trades": [
       {
         "ts": "2026-05-21T18:10:00+00:00",
@@ -277,8 +277,13 @@
     "peak_equity": 33.38030279254974,
     "max_dd_pct": 3.540088046986168,
     "position": null,
-    "pending": null,
-    "last_bar_ts": "2026-05-22 05:45:00",
+    "pending": {
+      "dir": "long",
+      "entry": 87.41,
+      "sl": 87.29,
+      "placed_ts": "2026-05-21T21:50:00+00:00"
+    },
+    "last_bar_ts": "2026-05-22 05:50:00",
     "recent_trades": [
       {
         "ts": "2026-05-21T16:10:00+00:00",
@@ -370,12 +375,12 @@
     },
     {
       "date": "2026-05-22",
-      "equity": 22.62075889
+      "equity": 22.61375889
     }
   ],
   "status": {
     "online": true,
     "last_tick": "2026-05-22 05:55:02",
-    "last_tick_age_sec": 3
+    "last_tick_age_sec": 37
   }
 }
