@@ -49,7 +49,7 @@
     background-color: #0a0500;
   }
 
-  /* CORKBOARD — positioned to overlay the bulletin board in bg.jpg */
+  /* CORKBOARD — overlays the bulletin board in bg.jpg, hides original pinned notes */
   .corkboard {
     position: absolute;
     /* From find_corkboard.html: */
@@ -62,6 +62,12 @@
     overflow: hidden;
     /* container queries so child text scales with corkboard size */
     container-type: inline-size;
+    /* Clean cork texture overlay (covers existing notes/pins in bg.jpg) */
+    background: url('cork.jpg') repeat;
+    background-size: 240px 240px;    /* tile size — adjust if seams visible */
+    box-shadow:
+      inset 0 0 30px rgba(0,0,0,0.45),
+      inset 0 0 80px rgba(0,0,0,0.25);
   }
 
   /* TAB BAR — paper strips clipped to top edge */
