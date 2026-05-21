@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-22 00:29:35",
-  "updated_at_iso": "2026-05-22T00:29:35.690358+08:00",
+  "updated_at": "2026-05-22 00:30:10",
+  "updated_at_iso": "2026-05-22T00:30:10.139773+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
@@ -9,10 +9,10 @@
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-21T16:29:35.684308+00:00"
+    "fetched_at": "2026-05-21T16:30:10.131321+00:00"
   },
   "log": {
-    "last_tick": "2026-05-22 00:25:02",
+    "last_tick": "2026-05-22 00:30:02",
     "events": [
       {
         "ts": "2026-05-21 22:30:10",
@@ -148,32 +148,19 @@
     "label": "V0 (no filter)",
     "available": true,
     "initial": 30.0,
-    "equity": 34.43186633425279,
-    "pnl": 4.4318663342527875,
-    "roi_pct": 14.772887780842625,
-    "trades": 147,
+    "equity": 34.324042118174745,
+    "pnl": 4.324042118174748,
+    "roi_pct": 14.413473727249148,
+    "trades": 148,
     "wins": 67,
-    "losses": 80,
-    "win_rate": 45.57823129251701,
+    "losses": 81,
+    "win_rate": 45.27027027027027,
     "peak_equity": 34.61180274323876,
     "max_dd_pct": 6.191187652848704,
     "position": null,
-    "pending": {
-      "dir": "long",
-      "entry": 86.34,
-      "sl": 86.13,
-      "placed_ts": "2026-05-21T16:20:00+00:00"
-    },
-    "last_bar_ts": "2026-05-22 00:20:00",
+    "pending": null,
+    "last_bar_ts": "2026-05-22 00:25:00",
     "recent_trades": [
-      {
-        "ts": "2026-05-21T12:30:00+00:00",
-        "dir": "short",
-        "ep": 85.5,
-        "xp": 85.65,
-        "pnl": -0.17508456301993916,
-        "exit": "SL_SAMEBAR"
-      },
       {
         "ts": "2026-05-21T13:00:00+00:00",
         "dir": "short",
@@ -244,6 +231,14 @@
         "ep": 86.52,
         "xp": 86.55,
         "pnl": -0.035854078098841474,
+        "exit": "SL_SAMEBAR"
+      },
+      {
+        "ts": "2026-05-21T16:25:00+00:00",
+        "dir": "long",
+        "ep": 86.22,
+        "xp": 86.13,
+        "pnl": -0.10782421607803995,
         "exit": "SL_SAMEBAR"
       }
     ],
@@ -367,7 +362,7 @@
   ],
   "status": {
     "online": true,
-    "last_tick": "2026-05-22 00:25:02",
-    "last_tick_age_sec": 273
+    "last_tick": "2026-05-22 00:30:02",
+    "last_tick_age_sec": 8
   }
 }
