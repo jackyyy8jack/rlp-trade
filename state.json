@@ -1,23 +1,32 @@
 {
-  "updated_at": "2026-05-21 21:49:31",
-  "updated_at_iso": "2026-05-21T21:49:31.712721+08:00",
+  "updated_at": "2026-05-21 21:50:05",
+  "updated_at_iso": "2026-05-21T21:50:05.818502+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
-    "equity": 22.73900457,
-    "available": 22.73900457351,
-    "position": null,
+    "equity": 22.73200457,
+    "available": 22.14085457351,
+    "position": {
+      "direction": "long",
+      "size": 7.0,
+      "entry": 85.45,
+      "pnl": 0.0,
+      "leverage": 100
+    },
     "plan_orders": [],
-    "stop_orders": [],
-    "fetched_at": "2026-05-21T13:49:31.704015+00:00"
+    "stop_orders": [
+      {
+        "id": 515334375,
+        "sl": 85.28,
+        "tp": 0.0,
+        "vol": 7.0
+      }
+    ],
+    "fetched_at": "2026-05-21T13:50:05.811165+00:00"
   },
   "log": {
-    "last_tick": "2026-05-21 21:45:02",
+    "last_tick": "2026-05-21 21:50:02",
     "events": [
-      {
-        "ts": "2026-05-21 19:50:02",
-        "msg": "SL hit: {'direction': 'long', 'entry': 85.71, 'sl': 85.65, 'qty': 7.0, 'leverage': 100}"
-      },
       {
         "ts": "2026-05-21 19:50:03",
         "msg": "Order submit: short theoretical=85.67 sl=85.79 lev=100x qty=$0.69 ticker_before=85.65"
@@ -133,6 +142,10 @@
       {
         "ts": "2026-05-21 21:30:02",
         "msg": "V1_FILTER skip SHORT at ts=2026-05-21 13:25:00 confirm l=85.9400 >= pivot l=85.8400"
+      },
+      {
+        "ts": "2026-05-21 21:50:03",
+        "msg": "Order submit: long theoretical=85.63 sl=85.28 lev=100x qty=$0.68 ticker_before=85.42"
       }
     ],
     "errors": [
@@ -352,7 +365,7 @@
   },
   "status": {
     "online": true,
-    "last_tick": "2026-05-21 21:45:02",
-    "last_tick_age_sec": 269
+    "last_tick": "2026-05-21 21:50:02",
+    "last_tick_age_sec": 3
   }
 }
