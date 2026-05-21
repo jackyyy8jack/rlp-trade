@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-22 04:00:06",
-  "updated_at_iso": "2026-05-22T04:00:06.701904+08:00",
+  "updated_at": "2026-05-22 04:00:40",
+  "updated_at_iso": "2026-05-22T04:00:40.944110+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
@@ -9,7 +9,7 @@
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-21T20:00:06.694785+00:00"
+    "fetched_at": "2026-05-21T20:00:40.933568+00:00"
   },
   "log": {
     "last_tick": "2026-05-22 04:00:02",
@@ -157,14 +157,15 @@
     "win_rate": 44.871794871794876,
     "peak_equity": 34.61180274323876,
     "max_dd_pct": 6.191187652848704,
-    "position": null,
-    "pending": {
+    "position": {
       "dir": "long",
-      "entry": 87.62,
+      "ep": 87.62,
       "sl": 87.47,
-      "placed_ts": "2026-05-21T19:50:00+00:00"
+      "size": 1.1631379995050497,
+      "opened_ts": "2026-05-21T19:55:00+00:00"
     },
-    "last_bar_ts": "2026-05-22 03:50:00",
+    "pending": null,
+    "last_bar_ts": "2026-05-22 03:55:00",
     "recent_trades": [
       {
         "ts": "2026-05-21T16:10:00+00:00",
@@ -262,14 +263,15 @@
     "win_rate": 52.68817204301075,
     "peak_equity": 33.38030279254974,
     "max_dd_pct": 3.540088046986168,
-    "position": null,
-    "pending": {
+    "position": {
       "dir": "long",
-      "entry": 87.62,
+      "ep": 87.62,
       "sl": 87.47,
-      "placed_ts": "2026-05-21T19:50:00+00:00"
+      "size": 1.126172133075283,
+      "opened_ts": "2026-05-21T19:55:00+00:00"
     },
-    "last_bar_ts": "2026-05-22 03:50:00",
+    "pending": null,
+    "last_bar_ts": "2026-05-22 03:55:00",
     "recent_trades": [
       {
         "ts": "2026-05-21T14:25:00+00:00",
@@ -367,6 +369,6 @@
   "status": {
     "online": true,
     "last_tick": "2026-05-22 04:00:02",
-    "last_tick_age_sec": 4
+    "last_tick_age_sec": 38
   }
 }
