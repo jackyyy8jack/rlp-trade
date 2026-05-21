@@ -1,27 +1,19 @@
 {
-  "updated_at": "2026-05-21 16:59:37",
-  "updated_at_iso": "2026-05-21T16:59:37.305511+08:00",
+  "updated_at": "2026-05-21 17:00:11",
+  "updated_at_iso": "2026-05-21T17:00:11.200449+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
     "equity": 23.12200457,
-    "available": 23.12200457351,
+    "available": 22.51482457351,
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-21T08:59:37.298117+00:00"
+    "fetched_at": "2026-05-21T09:00:11.194821+00:00"
   },
   "log": {
-    "last_tick": "2026-05-21 16:55:02",
+    "last_tick": "2026-05-21 17:00:02",
     "events": [
-      {
-        "ts": "2026-05-21 13:05:06",
-        "msg": "All pending orders cancelled [verified]"
-      },
-      {
-        "ts": "2026-05-21 13:05:08",
-        "msg": "Flash close click: direction=long ticker_before=87.05 click_ts=2026-05-21T05:05:08.909136+00:00"
-      },
       {
         "ts": "2026-05-21 13:05:12",
         "msg": "Order submit: short theoretical=86.94 sl=87.16 lev=100x qty=$0.66 ticker_before=87.04"
@@ -133,6 +125,14 @@
       {
         "ts": "2026-05-21 16:45:11",
         "msg": "V1_FILTER skip LONG at ts=2026-05-21 08:40:00 confirm h=86.8200 <= pivot h=86.8800"
+      },
+      {
+        "ts": "2026-05-21 17:00:03",
+        "msg": "Order submit: long theoretical=86.74 sl=86.64 lev=100x qty=$0.69 ticker_before=86.78"
+      },
+      {
+        "ts": "2026-05-21 17:00:05",
+        "msg": "Order submitted & verified: long price=86.74 sl=86.64 lev=100x qty=$0.69"
       }
     ],
     "errors": [],
@@ -152,8 +152,13 @@
     "peak_equity": 33.244272681990736,
     "max_dd_pct": 6.191187652848704,
     "position": null,
-    "pending": null,
-    "last_bar_ts": "2026-05-21 16:50:00",
+    "pending": {
+      "dir": "long",
+      "entry": 86.74,
+      "sl": 86.64,
+      "placed_ts": "2026-05-21T08:55:00+00:00"
+    },
+    "last_bar_ts": "2026-05-21 16:55:00",
     "recent_trades": [
       {
         "ts": "2026-05-21T05:45:00+00:00",
@@ -340,7 +345,7 @@
   },
   "status": {
     "online": true,
-    "last_tick": "2026-05-21 16:55:02",
-    "last_tick_age_sec": 275
+    "last_tick": "2026-05-21 17:00:02",
+    "last_tick_age_sec": 9
   }
 }
