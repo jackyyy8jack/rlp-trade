@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-22 06:20:07",
-  "updated_at_iso": "2026-05-22T06:20:07.576956+08:00",
+  "updated_at": "2026-05-22 06:20:41",
+  "updated_at_iso": "2026-05-22T06:20:41.803972+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
@@ -9,7 +9,7 @@
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-21T22:20:07.569243+00:00"
+    "fetched_at": "2026-05-21T22:20:41.790106+00:00"
   },
   "log": {
     "last_tick": "2026-05-22 06:20:02",
@@ -148,33 +148,19 @@
     "label": "V0 (no filter)",
     "available": true,
     "initial": 30.0,
-    "equity": 34.4243165695011,
-    "pnl": 4.424316569501107,
-    "roi_pct": 14.747721898336996,
-    "trades": 163,
+    "equity": 34.16439151589316,
+    "pnl": 4.16439151589316,
+    "roi_pct": 13.8813050529772,
+    "trades": 164,
     "wins": 74,
-    "losses": 89,
-    "win_rate": 45.39877300613497,
+    "losses": 90,
+    "win_rate": 45.1219512195122,
     "peak_equity": 34.66191890677052,
     "max_dd_pct": 6.191187652848704,
-    "position": {
-      "dir": "long",
-      "ep": 87.41,
-      "sl": 87.19,
-      "size": 1.181477516399763,
-      "opened_ts": "2026-05-21T22:10:00+00:00"
-    },
+    "position": null,
     "pending": null,
-    "last_bar_ts": "2026-05-22 06:10:00",
+    "last_bar_ts": "2026-05-22 06:15:00",
     "recent_trades": [
-      {
-        "ts": "2026-05-21T18:45:00+00:00",
-        "dir": "long",
-        "ep": 87.52,
-        "xp": 87.48,
-        "pnl": -0.04680336142435037,
-        "exit": "SL"
-      },
       {
         "ts": "2026-05-21T19:40:00+00:00",
         "dir": "long",
@@ -246,6 +232,14 @@
         "xp": 87.41,
         "pnl": -0.10677272227186273,
         "exit": "FLIP"
+      },
+      {
+        "ts": "2026-05-21T22:15:00+00:00",
+        "dir": "long",
+        "ep": 87.41,
+        "xp": 87.19,
+        "pnl": -0.25992505360794654,
+        "exit": "SL"
       }
     ],
     "n_filtered": 0
@@ -265,7 +259,7 @@
     "max_dd_pct": 3.540088046986168,
     "position": null,
     "pending": null,
-    "last_bar_ts": "2026-05-22 06:10:00",
+    "last_bar_ts": "2026-05-22 06:15:00",
     "recent_trades": [
       {
         "ts": "2026-05-21T16:30:00+00:00",
@@ -363,6 +357,6 @@
   "status": {
     "online": true,
     "last_tick": "2026-05-22 06:20:02",
-    "last_tick_age_sec": 5
+    "last_tick_age_sec": 39
   }
 }
