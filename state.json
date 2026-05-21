@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-05-21 11:04:47",
-  "updated_at_iso": "2026-05-21T11:04:47.511205+08:00",
+  "updated_at": "2026-05-21 11:05:20",
+  "updated_at_iso": "2026-05-21T11:05:20.534974+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
-    "equity": 22.74400457,
+    "equity": 22.75800457,
     "available": 22.09587457351,
     "position": {
       "direction": "short",
@@ -22,15 +22,11 @@
         "vol": 7.0
       }
     ],
-    "fetched_at": "2026-05-21T03:04:47.503277+00:00"
+    "fetched_at": "2026-05-21T03:05:20.530894+00:00"
   },
   "log": {
-    "last_tick": "2026-05-21 11:00:02",
+    "last_tick": "2026-05-21 11:05:02",
     "events": [
-      {
-        "ts": "2026-05-21 09:15:03",
-        "msg": "Order submit: long theoretical=86.66 sl=86.45 lev=100x qty=$0.69 ticker_before=86.82"
-      },
       {
         "ts": "2026-05-21 09:15:05",
         "msg": "Order submitted & verified: long price=86.66 sl=86.45 lev=100x qty=$0.69"
@@ -146,6 +142,10 @@
       {
         "ts": "2026-05-21 11:00:05",
         "msg": "Order submitted & verified: short price=86.59 sl=86.72 lev=100x qty=$0.68"
+      },
+      {
+        "ts": "2026-05-21 11:05:02",
+        "msg": "Filled: short @ 86.59"
       }
     ],
     "errors": [],
@@ -172,7 +172,7 @@
       "opened_ts": "2026-05-21T02:45:00+00:00"
     },
     "pending": null,
-    "last_bar_ts": "2026-05-21 10:55:00",
+    "last_bar_ts": "2026-05-21 11:00:00",
     "recent_trades": [
       {
         "ts": "2026-05-20T23:45:00+00:00",
@@ -270,14 +270,15 @@
     "win_rate": 52.38095238095239,
     "peak_equity": 32.161301417192774,
     "max_dd_pct": 3.540088046986168,
-    "position": null,
-    "pending": {
+    "position": {
       "dir": "short",
-      "entry": 86.59,
+      "ep": 86.59,
       "sl": 86.72,
-      "placed_ts": "2026-05-21T02:55:00+00:00"
+      "size": 1.0956782011156,
+      "opened_ts": "2026-05-21T03:00:00+00:00"
     },
-    "last_bar_ts": "2026-05-21 10:55:00",
+    "pending": null,
+    "last_bar_ts": "2026-05-21 11:00:00",
     "recent_trades": [
       {
         "ts": "2026-05-20T21:55:00+00:00",
@@ -364,7 +365,7 @@
   },
   "status": {
     "online": true,
-    "last_tick": "2026-05-21 11:00:02",
-    "last_tick_age_sec": 285
+    "last_tick": "2026-05-21 11:05:02",
+    "last_tick_age_sec": 18
   }
 }
