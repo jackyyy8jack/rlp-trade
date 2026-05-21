@@ -1,44 +1,19 @@
 {
-  "updated_at": "2026-05-22 06:09:53",
-  "updated_at_iso": "2026-05-22T06:09:53.597171+08:00",
+  "updated_at": "2026-05-22 06:10:28",
+  "updated_at_iso": "2026-05-22T06:10:28.065889+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
-    "equity": 22.49475889,
-    "available": 21.93244889951,
-    "position": {
-      "direction": "short",
-      "size": 7.0,
-      "entry": 87.33,
-      "pnl": 0.0,
-      "leverage": 100
-    },
+    "equity": 22.50175889,
+    "available": 22.50175889951,
+    "position": null,
     "plan_orders": [],
-    "stop_orders": [
-      {
-        "id": 515531917,
-        "sl": 87.49,
-        "tp": 0.0,
-        "vol": 7.0
-      }
-    ],
-    "fetched_at": "2026-05-21T22:09:53.591091+00:00"
+    "stop_orders": [],
+    "fetched_at": "2026-05-21T22:10:28.056917+00:00"
   },
   "log": {
-    "last_tick": "2026-05-22 06:05:02",
+    "last_tick": "2026-05-22 06:10:03",
     "events": [
-      {
-        "ts": "2026-05-22 03:35:06",
-        "msg": "All pending orders cancelled [verified]"
-      },
-      {
-        "ts": "2026-05-22 03:35:09",
-        "msg": "Flash close click: direction=short ticker_before=87.59 click_ts=2026-05-21T19:35:09.194997+00:00"
-      },
-      {
-        "ts": "2026-05-22 03:35:09",
-        "msg": "V1_FILTER skip LONG at ts=2026-05-21 19:30:00 confirm h=87.5000 <= pivot h=87.5200"
-      },
       {
         "ts": "2026-05-22 03:45:03",
         "msg": "V1_FILTER skip SHORT at ts=2026-05-21 19:40:00 confirm l=87.4800 >= pivot l=87.4700"
@@ -146,6 +121,18 @@
       {
         "ts": "2026-05-22 06:00:07",
         "msg": "Order instant-filled & confirmed: short theoretical=87.32 actual=87.33 sl=87.49 ticker_before=87.34"
+      },
+      {
+        "ts": "2026-05-22 06:10:07",
+        "msg": "All pending orders cancelled [verified]"
+      },
+      {
+        "ts": "2026-05-22 06:10:10",
+        "msg": "Flash close click: direction=short ticker_before=87.39 click_ts=2026-05-21T22:10:10.393344+00:00"
+      },
+      {
+        "ts": "2026-05-22 06:10:12",
+        "msg": "V1_FILTER skip LONG at ts=2026-05-21 22:05:00 confirm h=87.4600 <= pivot h=87.4600"
       }
     ],
     "errors": [
@@ -161,33 +148,24 @@
     "label": "V0 (no filter)",
     "available": true,
     "initial": 30.0,
-    "equity": 34.531089291772965,
-    "pnl": 4.53108929177297,
-    "roi_pct": 15.103630972576543,
-    "trades": 162,
+    "equity": 34.4243165695011,
+    "pnl": 4.424316569501107,
+    "roi_pct": 14.747721898336996,
+    "trades": 163,
     "wins": 74,
-    "losses": 88,
-    "win_rate": 45.67901234567901,
+    "losses": 89,
+    "win_rate": 45.39877300613497,
     "peak_equity": 34.66191890677052,
     "max_dd_pct": 6.191187652848704,
-    "position": {
-      "dir": "short",
-      "ep": 87.32,
-      "sl": 87.49,
-      "size": 1.1863635807984299,
-      "opened_ts": "2026-05-21T22:00:00+00:00"
+    "position": null,
+    "pending": {
+      "dir": "long",
+      "entry": 87.46,
+      "sl": 87.19,
+      "placed_ts": "2026-05-21T22:05:00+00:00"
     },
-    "pending": null,
-    "last_bar_ts": "2026-05-22 06:00:00",
+    "last_bar_ts": "2026-05-22 06:05:00",
     "recent_trades": [
-      {
-        "ts": "2026-05-21T18:30:00+00:00",
-        "dir": "long",
-        "ep": 87.5,
-        "xp": 87.59,
-        "pnl": 0.10500761002261885,
-        "exit": "FLIP"
-      },
       {
         "ts": "2026-05-21T18:45:00+00:00",
         "dir": "long",
@@ -259,6 +237,14 @@
         "xp": 87.32,
         "pnl": -0.13082961499754875,
         "exit": "FLIP"
+      },
+      {
+        "ts": "2026-05-21T22:05:00+00:00",
+        "dir": "short",
+        "ep": 87.32,
+        "xp": 87.41,
+        "pnl": -0.10677272227186273,
+        "exit": "FLIP"
       }
     ],
     "n_filtered": 0
@@ -267,33 +253,19 @@
     "label": "V1 (strict)",
     "available": true,
     "initial": 30.0,
-    "equity": 33.3664154612943,
-    "pnl": 3.3664154612942805,
-    "roi_pct": 11.22138487098101,
-    "trades": 95,
+    "equity": 33.26324399800353,
+    "pnl": 3.2632439980035133,
+    "roi_pct": 10.877479993345096,
+    "trades": 96,
     "wins": 51,
-    "losses": 44,
-    "win_rate": 53.68421052631579,
+    "losses": 45,
+    "win_rate": 53.125,
     "peak_equity": 33.38030279254974,
     "max_dd_pct": 3.540088046986168,
-    "position": {
-      "dir": "short",
-      "ep": 87.32,
-      "sl": 87.49,
-      "size": 1.1463495921195936,
-      "opened_ts": "2026-05-21T22:00:00+00:00"
-    },
+    "position": null,
     "pending": null,
-    "last_bar_ts": "2026-05-22 06:00:00",
+    "last_bar_ts": "2026-05-22 06:05:00",
     "recent_trades": [
-      {
-        "ts": "2026-05-21T16:10:00+00:00",
-        "dir": "long",
-        "ep": 86.42,
-        "xp": 86.25,
-        "pnl": -0.19699090979172112,
-        "exit": "SL"
-      },
       {
         "ts": "2026-05-21T16:30:00+00:00",
         "dir": "short",
@@ -365,9 +337,17 @@
         "xp": 87.43,
         "pnl": 0.20440004933747236,
         "exit": "FLIP"
+      },
+      {
+        "ts": "2026-05-21T22:05:00+00:00",
+        "dir": "short",
+        "ep": 87.32,
+        "xp": 87.41,
+        "pnl": -0.10317146329076733,
+        "exit": "FLIP"
       }
     ],
-    "n_filtered": 103
+    "n_filtered": 104
   },
   "equity_history": [
     {
@@ -376,12 +356,12 @@
     },
     {
       "date": "2026-05-22",
-      "equity": 22.49475889
+      "equity": 22.50175889
     }
   ],
   "status": {
     "online": true,
-    "last_tick": "2026-05-22 06:05:02",
-    "last_tick_age_sec": 291
+    "last_tick": "2026-05-22 06:10:03",
+    "last_tick_age_sec": 25
   }
 }
