@@ -1,0 +1,18 @@
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor temp
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# State backup
+state.json.tmp
+*.bak
+
+# Logs (if any)
+*.log

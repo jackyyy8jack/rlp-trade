@@ -1,0 +1,167 @@
+{
+  "updated_at": "2026-05-21 09:47:18",
+  "updated_at_iso": "2026-05-21T09:47:18.452051+08:00",
+  "log_file": "0520logs2.txt",
+  "live": {
+    "ok": true,
+    "equity": 22.94000457,
+    "available": 22.23664457351,
+    "position": {
+      "direction": "long",
+      "size": 7.0,
+      "entry": 86.48,
+      "pnl": 0.0,
+      "leverage": 100
+    },
+    "plan_orders": [],
+    "stop_orders": [
+      {
+        "id": 515101643,
+        "sl": 86.4,
+        "tp": 0.0,
+        "vol": 7.0
+      }
+    ],
+    "fetched_at": "2026-05-21T01:47:18.436917+00:00"
+  },
+  "log": {
+    "last_tick": "2026-05-21 08:45:02",
+    "events": [
+      {
+        "ts": "2026-05-21 05:25:02",
+        "msg": "Filled: short @ 86.13"
+      },
+      {
+        "ts": "2026-05-21 05:40:05",
+        "msg": "All pending orders cancelled [verified]"
+      },
+      {
+        "ts": "2026-05-21 05:40:08",
+        "msg": "Flash close click: direction=short ticker_before=86.07 click_ts=2026-05-20T21:40:08.441102+00:00"
+      },
+      {
+        "ts": "2026-05-21 05:40:12",
+        "msg": "Order submit: long theoretical=86.02 sl=85.92 lev=100x qty=$0.67 ticker_before=86.06"
+      },
+      {
+        "ts": "2026-05-21 05:40:14",
+        "msg": "Order submitted & verified: long price=86.02 sl=85.92 lev=100x qty=$0.67"
+      },
+      {
+        "ts": "2026-05-21 05:55:02",
+        "msg": "V1_FILTER skip SHORT at ts=2026-05-20 21:50:00 confirm l=86.0800 >= pivot l=86.0700"
+      },
+      {
+        "ts": "2026-05-21 06:30:03",
+        "msg": "Order submit: long theoretical=85.85 sl=85.55 lev=100x qty=$0.69 ticker_before=86.12"
+      },
+      {
+        "ts": "2026-05-21 06:30:05",
+        "msg": "Order submitted & verified: long price=85.85 sl=85.55 lev=100x qty=$0.69"
+      },
+      {
+        "ts": "2026-05-21 06:40:03",
+        "msg": "All pending orders cancelled [verified]"
+      },
+      {
+        "ts": "2026-05-21 06:40:06",
+        "msg": "Order submit: short theoretical=86.03 sl=86.17 lev=100x qty=$0.67 ticker_before=85.88"
+      },
+      {
+        "ts": "2026-05-21 06:40:08",
+        "msg": "Order submitted & verified: short price=86.03 sl=86.17 lev=100x qty=$0.67"
+      },
+      {
+        "ts": "2026-05-21 06:50:02",
+        "msg": "Filled: short @ 86.03"
+      },
+      {
+        "ts": "2026-05-21 07:00:05",
+        "msg": "All pending orders cancelled [verified]"
+      },
+      {
+        "ts": "2026-05-21 07:00:08",
+        "msg": "Flash close click: direction=short ticker_before=85.92 click_ts=2026-05-20T23:00:08.490173+00:00"
+      },
+      {
+        "ts": "2026-05-21 07:00:10",
+        "msg": "V1_FILTER skip LONG at ts=2026-05-20 22:55:00 confirm h=86.0400 <= pivot h=86.1000"
+      },
+      {
+        "ts": "2026-05-21 07:10:03",
+        "msg": "Order submit: long theoretical=85.99 sl=85.85 lev=100x qty=$0.69 ticker_before=85.94"
+      },
+      {
+        "ts": "2026-05-21 07:10:06",
+        "msg": "Order instant-filled & confirmed: long theoretical=85.99 actual=85.95 sl=85.85 ticker_before=85.94"
+      },
+      {
+        "ts": "2026-05-21 07:15:09",
+        "msg": "All pending orders cancelled [verified]"
+      },
+      {
+        "ts": "2026-05-21 07:15:12",
+        "msg": "Flash close click: direction=long ticker_before=85.92 click_ts=2026-05-20T23:15:12.528150+00:00"
+      },
+      {
+        "ts": "2026-05-21 07:15:14",
+        "msg": "V1_FILTER skip SHORT at ts=2026-05-20 23:10:00 confirm l=85.8600 >= pivot l=85.8600"
+      },
+      {
+        "ts": "2026-05-21 07:30:02",
+        "msg": "V1_FILTER skip LONG at ts=2026-05-20 23:25:00 confirm h=85.9300 <= pivot h=85.9500"
+      },
+      {
+        "ts": "2026-05-21 07:45:02",
+        "msg": "V1_FILTER skip SHORT at ts=2026-05-20 23:40:00 confirm l=85.9300 >= pivot l=85.9000"
+      },
+      {
+        "ts": "2026-05-21 07:55:02",
+        "msg": "V1_FILTER skip SHORT at ts=2026-05-20 23:50:00 confirm l=85.9700 >= pivot l=85.9400"
+      },
+      {
+        "ts": "2026-05-21 08:25:03",
+        "msg": "Order submit: short theoretical=86.16 sl=86.41 lev=100x qty=$0.69 ticker_before=86.28"
+      },
+      {
+        "ts": "2026-05-21 08:25:06",
+        "msg": "Order instant-filled & confirmed: short theoretical=86.16 actual=86.27 sl=86.41 ticker_before=86.28"
+      },
+      {
+        "ts": "2026-05-21 08:30:06",
+        "msg": "All pending orders cancelled [verified]"
+      },
+      {
+        "ts": "2026-05-21 08:30:09",
+        "msg": "Flash close click: direction=short ticker_before=86.31 click_ts=2026-05-21T00:30:09.139889+00:00"
+      },
+      {
+        "ts": "2026-05-21 08:30:12",
+        "msg": "Order submit: long theoretical=86.28 sl=86.14 lev=100x qty=$0.67 ticker_before=86.31"
+      },
+      {
+        "ts": "2026-05-21 08:30:14",
+        "msg": "Order submitted & verified: long price=86.28 sl=86.14 lev=100x qty=$0.67"
+      },
+      {
+        "ts": "2026-05-21 08:35:02",
+        "msg": "Filled: long @ 86.28"
+      }
+    ],
+    "errors": [],
+    "error_count_1h": 0
+  },
+  "v0": {
+    "label": "V0 (no filter)",
+    "available": false
+  },
+  "v1": {
+    "label": "V1 (strict)",
+    "available": false
+  },
+  "status": {
+    "online": false,
+    "last_tick": "2026-05-21 08:45:02",
+    "last_tick_age_sec": 3736
+  }
+}
