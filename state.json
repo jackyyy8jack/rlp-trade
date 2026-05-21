@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-05-22 02:10:04",
-  "updated_at_iso": "2026-05-22T02:10:04.845085+08:00",
+  "updated_at": "2026-05-22 02:10:39",
+  "updated_at_iso": "2026-05-22T02:10:39.098871+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
-    "equity": 22.76775889,
+    "equity": 22.77475889,
     "available": 22.12690889951,
     "position": {
       "direction": "short",
@@ -22,7 +22,7 @@
         "vol": 7.0
       }
     ],
-    "fetched_at": "2026-05-21T18:10:04.837419+00:00"
+    "fetched_at": "2026-05-21T18:10:39.091782+00:00"
   },
   "log": {
     "last_tick": "2026-05-22 02:10:02",
@@ -170,14 +170,15 @@
     "win_rate": 44.370860927152314,
     "peak_equity": 34.61180274323876,
     "max_dd_pct": 6.191187652848704,
-    "position": null,
-    "pending": {
+    "position": {
       "dir": "short",
-      "entry": 87.55,
+      "ep": 87.55,
       "sl": 87.96,
-      "placed_ts": "2026-05-21T18:00:00+00:00"
+      "size": 1.1640904443150641,
+      "opened_ts": "2026-05-21T18:05:00+00:00"
     },
-    "last_bar_ts": "2026-05-22 02:00:00",
+    "pending": null,
+    "last_bar_ts": "2026-05-22 02:05:00",
     "recent_trades": [
       {
         "ts": "2026-05-21T14:05:00+00:00",
@@ -275,14 +276,15 @@
     "win_rate": 52.22222222222223,
     "peak_equity": 33.38030279254974,
     "max_dd_pct": 3.540088046986168,
-    "position": null,
-    "pending": {
+    "position": {
       "dir": "short",
-      "entry": 87.55,
+      "ep": 87.55,
       "sl": 87.96,
-      "placed_ts": "2026-05-21T18:00:00+00:00"
+      "size": 1.1141680537210696,
+      "opened_ts": "2026-05-21T18:05:00+00:00"
     },
-    "last_bar_ts": "2026-05-22 02:00:00",
+    "pending": null,
+    "last_bar_ts": "2026-05-22 02:05:00",
     "recent_trades": [
       {
         "ts": "2026-05-21T13:15:00+00:00",
@@ -374,12 +376,12 @@
     },
     {
       "date": "2026-05-22",
-      "equity": 22.76775889
+      "equity": 22.77475889
     }
   ],
   "status": {
     "online": true,
     "last_tick": "2026-05-22 02:10:02",
-    "last_tick_age_sec": 2
+    "last_tick_age_sec": 37
   }
 }
