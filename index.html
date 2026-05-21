@@ -44,17 +44,105 @@
   .scene {
     position: absolute;
     inset: 0;
+    background: url('bg.jpg') no-repeat center center;
+    background-size: contain;
     background-color: #0a0500;
   }
-  .bg-video {
+
+  /* Bartender clickable hotspot */
+  .bartender-area {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    z-index: 0;
-    pointer-events: none;
+    left: 70%;
+    top: 18%;
+    width: 28%;
+    height: 73%;
+    cursor: pointer;
+    z-index: 5;
+    transition: filter 0.25s;
   }
+  .bartender-area:hover {
+    filter: drop-shadow(0 0 14px rgba(255, 200, 100, 0.6));
+  }
+  .bartender-area::after {
+    content: '💬 點我聊聊';
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(40,25,10,0.85);
+    color: #f0e0bb;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid #8b6914;
+    font-family: var(--f-hand);
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.25s;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .bartender-area:hover::after { opacity: 1; }
+
+  /* RPG-style dialog box */
+  .dialog-box {
+    position: absolute;
+    bottom: 4%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    max-width: 720px;
+    background:
+      linear-gradient(180deg, rgba(40,25,10,0.96), rgba(28,16,6,0.96));
+    border: 3px solid #8b6914;
+    border-radius: 6px;
+    padding: 14px 22px 18px;
+    color: #f0e0bb;
+    font-family: var(--f-hand);
+    font-size: 17px;
+    z-index: 50;
+    box-shadow:
+      0 8px 28px rgba(0,0,0,0.8),
+      inset 0 1px 0 rgba(232,168,56,0.3),
+      inset 0 0 30px rgba(0,0,0,0.4);
+    display: none;
+    line-height: 1.55;
+    cursor: pointer;
+  }
+  .dialog-box.visible {
+    display: block;
+    animation: fadeIn 0.3s ease-out;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translate(-50%, 20px); } to { opacity: 1; transform: translate(-50%, 0); } }
+  .dialog-header {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid #8b6914;
+    padding-bottom: 5px; margin-bottom: 8px;
+    font-family: var(--f-display);
+    font-size: 14px; letter-spacing: 1.5px;
+    color: #d4af37;
+  }
+  .dialog-close {
+    cursor: pointer; padding: 0 6px;
+    font-size: 20px; color: #d4af37;
+    line-height: 1;
+  }
+  .dialog-close:hover { color: #fff; }
+  .dialog-text {
+    min-height: 1.5em;
+  }
+  .dialog-hint {
+    text-align: right;
+    font-size: 11px;
+    color: rgba(212,175,55,0.5);
+    margin-top: 6px;
+    font-family: var(--f-sans);
+  }
+  .dialog-hint::after {
+    content: ' ▼';
+    animation: bounce 1.2s infinite;
+    display: inline-block;
+  }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(3px)} }
 
   /* CORKBOARD — overlays the bulletin board in bg.jpg, hides original pinned notes */
   .corkboard {
@@ -287,9 +375,19 @@
 <body>
 
 <div class="scene">
-  <video class="bg-video" autoplay muted loop playsinline preload="auto" poster="bg.jpg">
-    <source src="bg.mp4" type="video/mp4">
-  </video>
+  <!-- Clickable bartender -->
+  <div class="bartender-area" id="bartender"></div>
+
+  <!-- RPG dialog box -->
+  <div class="dialog-box" id="dialog">
+    <div class="dialog-header">
+      <span>🍺 Bartender · Driftwood Tavern</span>
+      <span class="dialog-close" id="dialog-close">×</span>
+    </div>
+    <div class="dialog-text" id="dialog-text"></div>
+    <div class="dialog-hint">點擊繼續</div>
+  </div>
+
   <div class="corkboard">
     <!-- Tabs -->
     <div class="tabs">
@@ -541,6 +639,89 @@ function render(s) {
 
 refresh();
 setInterval(refresh, 5000);
+
+/* ============================================================
+   Bartender Dialog - RPG style
+   ============================================================ */
+const bartenderQuotes = [
+  "歡迎來到 Driftwood Tavern，旅人。坐下喝一杯吧。",
+  "今晚特調 — Old Fashioned，$8。",
+  "你看起來像剛被市場狠狠教訓過... 來杯威士忌？",
+  "Soup of the Day: WHISKEY. 我推這個。",
+  "PF 1.5 不錯，但你的 Max Drawdown 是多少？",
+  "100x 槓桿... 你是來賭命的還是來交易的？",
+  "Cut losses fast, let profits run. — 我祖父說的。",
+  "心情不好就喝一杯。但別把 Stop Loss 也喝掉了。",
+  "別交易了，喝酒就好。",
+  "你的 bot 真的有 edge 嗎？我有點懷疑。",
+  "Tips make me do a happy dance.",
+  "看你的 PnL... 我不予置評。",
+  "市場像酒，淺嘗即可，喝太多會吐。",
+  "我以前也是交易員，後來開了這間酒吧。",
+  "聽說有人用 RLP V1 過濾賺錢，你信嗎？",
+  "Wi-Fi password: driftwood87",
+  "We don't work during drinking hours.",
+  "Be kind, tip well, come back soon.",
+  "Good Times. Great People. 我們的座右銘。",
+  "你的 V1 過濾真的比 V0 好嗎？資料說的算。",
+  "我看過太多人凌晨四點還在盯圖。別熬夜。",
+  "酒保的智慧：永遠別 all in。",
+  "BEER is proof that GOD loves us, and wants us to be happy.",
+  "Please don't feed the bartender. 但 tip 我歡迎。",
+  "我不收 SOL，只收美金跟笑容。",
+  "你今天虧了多少？... 不，別告訴我。我猜。",
+  "回測 100 倍報酬，實盤 -30% — 你應該很熟悉吧？",
+  "聽我的，先去睡覺，bot 它自己會跑。",
+  "Bar Rules: 1. Be nice. 2. Get drinks. 3. Have fun.",
+  "你還在這？回家陪老婆／男朋友啦。",
+];
+
+const dialog = document.getElementById('dialog');
+const dialogText = document.getElementById('dialog-text');
+const dialogClose = document.getElementById('dialog-close');
+const bartender = document.getElementById('bartender');
+let lastQuote = -1;
+
+function nextQuote() {
+  let idx;
+  do { idx = Math.floor(Math.random() * bartenderQuotes.length); }
+  while (idx === lastQuote && bartenderQuotes.length > 1);
+  lastQuote = idx;
+  typeWriter(bartenderQuotes[idx]);
+}
+
+let typeTimer = null;
+function typeWriter(text) {
+  if (typeTimer) clearInterval(typeTimer);
+  dialogText.textContent = '';
+  let i = 0;
+  typeTimer = setInterval(() => {
+    if (i >= text.length) { clearInterval(typeTimer); typeTimer = null; return; }
+    dialogText.textContent += text[i++];
+  }, 28);
+}
+
+bartender.addEventListener('click', (e) => {
+  e.stopPropagation();
+  dialog.classList.add('visible');
+  nextQuote();
+});
+
+dialog.addEventListener('click', (e) => {
+  if (e.target === dialogClose) return;
+  // If still typing, skip to end
+  if (typeTimer) {
+    clearInterval(typeTimer); typeTimer = null;
+    dialogText.textContent = bartenderQuotes[lastQuote];
+  } else {
+    nextQuote();
+  }
+});
+
+dialogClose.addEventListener('click', (e) => {
+  e.stopPropagation();
+  dialog.classList.remove('visible');
+});
 </script>
 </body>
 </html>
