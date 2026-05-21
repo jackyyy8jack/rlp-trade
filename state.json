@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-05-22 05:05:01",
-  "updated_at_iso": "2026-05-22T05:05:01.743348+08:00",
+  "updated_at": "2026-05-22 05:05:36",
+  "updated_at_iso": "2026-05-22T05:05:36.102368+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
-    "equity": 22.50175889,
+    "equity": 22.48775889,
     "available": 21.84648889951,
     "position": {
       "direction": "short",
@@ -22,15 +22,11 @@
         "vol": 7.0
       }
     ],
-    "fetched_at": "2026-05-21T21:05:01.736488+00:00"
+    "fetched_at": "2026-05-21T21:05:36.093618+00:00"
   },
   "log": {
-    "last_tick": "2026-05-22 05:00:03",
+    "last_tick": "2026-05-22 05:05:13",
     "events": [
-      {
-        "ts": "2026-05-22 03:20:06",
-        "msg": "Order submit: short theoretical=87.39 sl=87.55 lev=100x qty=$0.67 ticker_before=87.53"
-      },
       {
         "ts": "2026-05-22 03:20:09",
         "msg": "Order instant-filled & confirmed: short theoretical=87.39 actual=87.5 sl=87.55 ticker_before=87.53"
@@ -146,6 +142,10 @@
       {
         "ts": "2026-05-22 05:00:03",
         "msg": "V1_FILTER skip LONG at ts=2026-05-21 20:55:00 confirm h=87.5400 <= pivot h=87.7300"
+      },
+      {
+        "ts": "2026-05-22 05:05:13",
+        "msg": "Filled: short @ 87.61"
       }
     ],
     "errors": [
@@ -275,14 +275,15 @@
     "win_rate": 53.191489361702125,
     "peak_equity": 33.38030279254974,
     "max_dd_pct": 3.540088046986168,
-    "position": null,
-    "pending": {
+    "position": {
       "dir": "short",
-      "entry": 87.61,
+      "ep": 87.61,
       "sl": 87.78,
-      "placed_ts": "2026-05-21T20:50:00+00:00"
+      "size": 1.1355558296526709,
+      "opened_ts": "2026-05-21T21:00:00+00:00"
     },
-    "last_bar_ts": "2026-05-22 04:55:00",
+    "pending": null,
+    "last_bar_ts": "2026-05-22 05:00:00",
     "recent_trades": [
       {
         "ts": "2026-05-21T16:00:00+00:00",
@@ -374,12 +375,12 @@
     },
     {
       "date": "2026-05-22",
-      "equity": 22.50175889
+      "equity": 22.48775889
     }
   ],
   "status": {
     "online": true,
-    "last_tick": "2026-05-22 05:00:03",
-    "last_tick_age_sec": 298
+    "last_tick": "2026-05-22 05:05:13",
+    "last_tick_age_sec": 23
   }
 }
