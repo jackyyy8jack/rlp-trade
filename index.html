@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=Cinzel:wght@500;700&family=Special+Elite&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   :root {
     /* Paper notes — aged kraft / manila */
@@ -394,6 +395,7 @@
     <!-- Tabs -->
     <div class="tabs">
       <div class="tab active" data-tab="overview">Overview</div>
+      <div class="tab" data-tab="equity">Equity</div>
       <div class="tab" data-tab="trades">Trades</div>
       <div class="tab" data-tab="errors">Errors</div>
       <div class="tab" data-tab="about">About</div>
@@ -464,6 +466,38 @@
         <div class="note wide pin-green">
           <h3>📜 最近活動</h3>
           <div class="event-log" id="event-log"><span class="pnl-neutral">Loading…</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EQUITY PANEL -->
+    <div class="panel" id="panel-equity">
+      <div class="notes" style="grid-template-columns: 1fr;">
+        <div class="note pin-yellow" style="display:flex; flex-direction:column; min-height:0;">
+          <h3>📈 每日資產曲線</h3>
+          <div style="position:relative; height:42cqi; width:100%;">
+            <canvas id="equity-chart"></canvas>
+          </div>
+        </div>
+        <div class="note pin-green">
+          <h3>📊 今日 vs 昨日</h3>
+          <div class="compare-grid">
+            <div class="compare-cell">
+              <div class="label">今日資產</div>
+              <div class="val" id="today-equity">—</div>
+              <div class="sub" id="today-date">—</div>
+            </div>
+            <div class="compare-cell">
+              <div class="label">昨日收盤</div>
+              <div class="val" id="yesterday-equity">—</div>
+              <div class="sub" id="yesterday-date">—</div>
+            </div>
+            <div class="compare-cell">
+              <div class="label">日內變化</div>
+              <div class="val" id="equity-change">—</div>
+              <div class="sub" id="equity-change-pct">—</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -637,10 +671,131 @@ function render(s) {
   errLog.innerHTML = errs.length
     ? errs.slice().reverse().map(e => `<div class="e-row"><span class="ts">${e.ts}</span> <span class="sl">${e.level}</span><br><span style="color:var(--ink-dim);font-size:1.6cqi">${e.msg.substring(0,250)}</span></div>`).join('')
     : '<span class="pnl-pos">✓ 無錯誤紀錄</span>';
+
+  // Equity chart
+  if (s.equity_history) {
+    renderEquityChart(s.equity_history);
+    updateEquityComparison(s.equity_history);
+  }
 }
 
 refresh();
 setInterval(refresh, 5000);
+
+/* ============================================================
+   Equity History Chart
+   ============================================================ */
+let equityChart = null;
+
+function renderEquityChart(history) {
+  const canvas = document.getElementById('equity-chart');
+  if (!canvas || !history || history.length === 0) return;
+
+  const labels = history.map(h => h.date.slice(5));    // 05-21 format
+  const values = history.map(h => h.equity);
+
+  if (equityChart) {
+    equityChart.data.labels = labels;
+    equityChart.data.datasets[0].data = values;
+    equityChart.update('none');
+    return;
+  }
+
+  equityChart = new Chart(canvas.getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Equity ($)',
+        data: values,
+        borderColor: '#d4af37',
+        backgroundColor: (ctx) => {
+          const c = ctx.chart.ctx;
+          const g = c.createLinearGradient(0, 0, 0, 300);
+          g.addColorStop(0, 'rgba(212,175,55,0.35)');
+          g.addColorStop(1, 'rgba(212,175,55,0.02)');
+          return g;
+        },
+        borderWidth: 2.5,
+        tension: 0.25,
+        fill: true,
+        pointBackgroundColor: '#f0e0bb',
+        pointBorderColor: '#8b6914',
+        pointBorderWidth: 1.5,
+        pointRadius: 4,
+        pointHoverRadius: 7,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 300 },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(40,25,10,0.95)',
+          borderColor: '#8b6914',
+          borderWidth: 1,
+          titleColor: '#d4af37',
+          bodyColor: '#f0e0bb',
+          titleFont: { family: 'Special Elite', size: 13 },
+          bodyFont: { family: 'JetBrains Mono', size: 13 },
+          callbacks: {
+            label: (ctx) => '$' + ctx.parsed.y.toFixed(4),
+          },
+        },
+      },
+      scales: {
+        x: {
+          ticks: { color: '#5a3d20', font: { family: 'JetBrains Mono', size: 11 } },
+          grid: { color: 'rgba(110,84,48,0.2)' },
+        },
+        y: {
+          ticks: {
+            color: '#5a3d20',
+            font: { family: 'JetBrains Mono', size: 11 },
+            callback: (v) => '$' + v.toFixed(2),
+          },
+          grid: { color: 'rgba(110,84,48,0.2)' },
+        },
+      },
+    },
+  });
+}
+
+function updateEquityComparison(history) {
+  if (!history || history.length === 0) {
+    document.getElementById('today-equity').textContent = '—';
+    document.getElementById('yesterday-equity').textContent = '—';
+    document.getElementById('equity-change').textContent = '—';
+    return;
+  }
+  const today = history[history.length - 1];
+  const yesterday = history.length >= 2 ? history[history.length - 2] : null;
+
+  document.getElementById('today-equity').textContent = '$' + today.equity.toFixed(2);
+  document.getElementById('today-date').textContent = today.date;
+
+  if (yesterday) {
+    document.getElementById('yesterday-equity').textContent = '$' + yesterday.equity.toFixed(2);
+    document.getElementById('yesterday-date').textContent = yesterday.date;
+    const diff = today.equity - yesterday.equity;
+    const pct = (diff / yesterday.equity) * 100;
+    const cls = pnlClass(diff);
+    const sign = diff >= 0 ? '+' : '';
+    const ce = document.getElementById('equity-change');
+    const cp = document.getElementById('equity-change-pct');
+    ce.textContent = sign + '$' + diff.toFixed(4);
+    ce.className = 'val ' + cls;
+    cp.textContent = sign + pct.toFixed(2) + '%';
+    cp.className = 'sub ' + cls;
+  } else {
+    document.getElementById('yesterday-equity').textContent = '—';
+    document.getElementById('yesterday-date').textContent = '尚無數據';
+    document.getElementById('equity-change').textContent = '—';
+    document.getElementById('equity-change-pct').textContent = '需要 2 天以上資料';
+  }
+}
 
 /* ============================================================
    Bartender Dialog - RPG style
