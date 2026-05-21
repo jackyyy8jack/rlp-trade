@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-22 04:34:51",
-  "updated_at_iso": "2026-05-22T04:34:51.702871+08:00",
+  "updated_at": "2026-05-22 04:35:25",
+  "updated_at_iso": "2026-05-22T04:35:25.722777+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
@@ -9,15 +9,11 @@
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-21T20:34:51.696570+00:00"
+    "fetched_at": "2026-05-21T20:35:25.715714+00:00"
   },
   "log": {
-    "last_tick": "2026-05-22 04:30:02",
+    "last_tick": "2026-05-22 04:35:02",
     "events": [
-      {
-        "ts": "2026-05-22 02:15:11",
-        "msg": "V1_FILTER skip LONG at ts=2026-05-21 18:10:00 confirm h=87.5300 <= pivot h=87.5700"
-      },
       {
         "ts": "2026-05-22 02:35:03",
         "msg": "Order submit: short theoretical=87.53 sl=87.76 lev=100x qty=$0.68 ticker_before=87.57"
@@ -133,6 +129,10 @@
       {
         "ts": "2026-05-22 04:25:02",
         "msg": "V1_FILTER skip LONG at ts=2026-05-21 20:20:00 confirm h=87.7600 <= pivot h=87.8200"
+      },
+      {
+        "ts": "2026-05-22 04:35:02",
+        "msg": "OUTSIDE_BAR at ts=2026-05-21 20:30:00 O=87.73 pivot=BOTH �X skipping ambiguous signal"
       }
     ],
     "errors": [
@@ -142,7 +142,7 @@
         "msg": "2026-05-22 03:35:09,221 ERROR: Flash close button not found"
       }
     ],
-    "error_count_1h": 1
+    "error_count_1h": 0
   },
   "v0": {
     "label": "V0 (no filter)",
@@ -159,7 +159,7 @@
     "max_dd_pct": 6.191187652848704,
     "position": null,
     "pending": null,
-    "last_bar_ts": "2026-05-22 04:25:00",
+    "last_bar_ts": "2026-05-22 04:30:00",
     "recent_trades": [
       {
         "ts": "2026-05-21T17:40:00+00:00",
@@ -259,7 +259,7 @@
     "max_dd_pct": 3.540088046986168,
     "position": null,
     "pending": null,
-    "last_bar_ts": "2026-05-22 04:25:00",
+    "last_bar_ts": "2026-05-22 04:30:00",
     "recent_trades": [
       {
         "ts": "2026-05-21T16:00:00+00:00",
@@ -356,7 +356,7 @@
   ],
   "status": {
     "online": true,
-    "last_tick": "2026-05-22 04:30:02",
-    "last_tick_age_sec": 289
+    "last_tick": "2026-05-22 04:35:02",
+    "last_tick_age_sec": 23
   }
 }
