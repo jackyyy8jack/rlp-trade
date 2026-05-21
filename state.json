@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-21 13:54:48",
-  "updated_at_iso": "2026-05-21T13:54:48.807751+08:00",
+  "updated_at": "2026-05-21 13:55:22",
+  "updated_at_iso": "2026-05-21T13:55:22.636564+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
@@ -9,15 +9,11 @@
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-21T05:54:48.798260+00:00"
+    "fetched_at": "2026-05-21T05:55:22.630927+00:00"
   },
   "log": {
-    "last_tick": "2026-05-21 13:50:02",
+    "last_tick": "2026-05-21 13:55:02",
     "events": [
-      {
-        "ts": "2026-05-21 11:05:02",
-        "msg": "Filled: short @ 86.59"
-      },
       {
         "ts": "2026-05-21 11:15:06",
         "msg": "All pending orders cancelled [verified]"
@@ -133,6 +129,10 @@
       {
         "ts": "2026-05-21 13:40:12",
         "msg": "V1_FILTER skip LONG at ts=2026-05-21 05:35:00 confirm h=86.6500 <= pivot h=86.6500"
+      },
+      {
+        "ts": "2026-05-21 13:55:02",
+        "msg": "V1_FILTER skip LONG at ts=2026-05-21 05:50:00 confirm h=86.5400 <= pivot h=86.5900"
       }
     ],
     "errors": [],
@@ -152,8 +152,13 @@
     "peak_equity": 33.244272681990736,
     "max_dd_pct": 6.191187652848704,
     "position": null,
-    "pending": null,
-    "last_bar_ts": "2026-05-21 13:45:00",
+    "pending": {
+      "dir": "long",
+      "entry": 86.59,
+      "sl": 86.3,
+      "placed_ts": "2026-05-21T05:50:00+00:00"
+    },
+    "last_bar_ts": "2026-05-21 13:50:00",
     "recent_trades": [
       {
         "ts": "2026-05-21T01:50:00+00:00",
@@ -253,7 +258,7 @@
     "max_dd_pct": 3.540088046986168,
     "position": null,
     "pending": null,
-    "last_bar_ts": "2026-05-21 13:45:00",
+    "last_bar_ts": "2026-05-21 13:50:00",
     "recent_trades": [
       {
         "ts": "2026-05-21T01:10:00+00:00",
@@ -336,11 +341,11 @@
         "exit": "FLIP"
       }
     ],
-    "n_filtered": 75
+    "n_filtered": 76
   },
   "status": {
     "online": true,
-    "last_tick": "2026-05-21 13:50:02",
-    "last_tick_age_sec": 286
+    "last_tick": "2026-05-21 13:55:02",
+    "last_tick_age_sec": 20
   }
 }
