@@ -1,23 +1,32 @@
 {
-  "updated_at": "2026-05-23 00:10:14",
-  "updated_at_iso": "2026-05-23T00:10:14.419024+08:00",
+  "updated_at": "2026-05-23 00:10:48",
+  "updated_at_iso": "2026-05-23T00:10:48.560655+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
-    "equity": 21.84381961,
+    "equity": 21.82281961,
     "available": 21.23691961051,
-    "position": null,
+    "position": {
+      "direction": "short",
+      "size": 7.0,
+      "entry": 86.7,
+      "pnl": 0.0,
+      "leverage": 100
+    },
     "plan_orders": [],
-    "stop_orders": [],
-    "fetched_at": "2026-05-22T16:10:14.388701+00:00"
+    "stop_orders": [
+      {
+        "id": 515882765,
+        "sl": 86.9,
+        "tp": 0.0,
+        "vol": 7.0
+      }
+    ],
+    "fetched_at": "2026-05-22T16:10:48.530445+00:00"
   },
   "log": {
     "last_tick": "2026-05-23 00:10:02",
     "events": [
-      {
-        "ts": "2026-05-22 21:20:14",
-        "msg": "Order submitted & verified: short price=87.63 sl=87.89 lev=100x qty=$0.64"
-      },
       {
         "ts": "2026-05-22 21:40:02",
         "msg": "OUTSIDE_BAR at ts=2026-05-22 13:35:00 O=87.38 pivot=BOTH �X skipping ambiguous signal"
@@ -133,6 +142,10 @@
       {
         "ts": "2026-05-23 00:10:12",
         "msg": "Order submit: short theoretical=86.7 sl=86.9 lev=100x qty=$0.64 ticker_before=86.69"
+      },
+      {
+        "ts": "2026-05-23 00:10:14",
+        "msg": "Order submitted & verified: short price=86.7 sl=86.9 lev=100x qty=$0.64"
       }
     ],
     "errors": [
@@ -4290,6 +4303,10 @@
     {
       "ts": "2026-05-23T00:10:14.395985+08:00",
       "equity": 21.84381961
+    },
+    {
+      "ts": "2026-05-23T00:10:48.539116+08:00",
+      "equity": 21.82281961
     }
   ],
   "equity_daily": [
@@ -4303,7 +4320,7 @@
     },
     {
       "date": "2026-05-23",
-      "equity": 21.84381961
+      "equity": 21.82281961
     }
   ],
   "equity_per_trade": [
@@ -6241,6 +6258,6 @@
   "status": {
     "online": true,
     "last_tick": "2026-05-23 00:10:02",
-    "last_tick_age_sec": 12
+    "last_tick_age_sec": 46
   }
 }
