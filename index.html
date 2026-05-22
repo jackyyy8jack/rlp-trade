@@ -457,8 +457,10 @@
   .trade-table .reason {
     font-family: var(--f-hand); color: var(--ink-dim); font-size: 1.5cqi;
   }
-  .trade-table::-webkit-scrollbar { width: 6px; }
-  .trade-table::-webkit-scrollbar-thumb { background: var(--paper-edge); }
+  .trade-table-wrap::-webkit-scrollbar { width: 10px; }
+  .trade-table-wrap::-webkit-scrollbar-track { background: rgba(0,0,0,0.4); }
+  .trade-table-wrap::-webkit-scrollbar-thumb { background: #6b4a20; border-radius: 5px; border: 2px solid rgba(0,0,0,0.3); }
+  .trade-table-wrap::-webkit-scrollbar-thumb:hover { background: #8b6614; }
 
   .pagination {
     display: flex; gap: 3px; justify-content: center;
