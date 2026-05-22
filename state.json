@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-22 08:02:52",
-  "updated_at_iso": "2026-05-22T08:02:52.202500+08:00",
+  "updated_at": "2026-05-22 08:03:26",
+  "updated_at_iso": "2026-05-22T08:03:26.191380+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
@@ -9,7 +9,7 @@
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-22T00:02:52.193833+00:00"
+    "fetched_at": "2026-05-22T00:03:26.185638+00:00"
   },
   "log": {
     "last_tick": "2026-05-22 08:00:04",
@@ -357,6 +357,6 @@
   "status": {
     "online": true,
     "last_tick": "2026-05-22 08:00:04",
-    "last_tick_age_sec": 168
+    "last_tick_age_sec": 202
   }
 }
