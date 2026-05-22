@@ -389,6 +389,97 @@
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
   }
 
+  /* TRADES PANEL */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.8%;
+    margin-bottom: 1.2%;
+  }
+  .stat-note {
+    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-dark) 100%);
+    border: 1px solid var(--paper-edge);
+    padding: 5px 4px 7px;
+    text-align: center;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4), inset 0 1px 0 rgba(0,0,0,0.05);
+    position: relative;
+  }
+  .stat-note::before {
+    content: '';
+    position: absolute; top: 3px; left: 50%; transform: translateX(-50%);
+    width: 6px; height: 6px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #ffd97a, #d4a418 70%);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  }
+  .stat-label {
+    font-family: var(--f-hand); font-size: 1.4cqi; color: var(--ink-dim);
+    letter-spacing: 0.5px; margin-top: 8px;
+  }
+  .stat-value {
+    font-family: var(--f-mono); font-size: 2.4cqi; font-weight: 600;
+    color: var(--ink); margin-top: 2px;
+  }
+
+  .trades-note { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+  .trade-table-wrap {
+    flex: 1; min-height: 0; overflow-y: auto; overflow-x: auto;
+    border: 1px solid var(--paper-edge);
+    border-radius: 2px;
+    background: rgba(255,250,235,0.4);
+  }
+  .trade-table {
+    width: 100%; border-collapse: collapse;
+    font-family: var(--f-mono); font-size: 1.65cqi;
+  }
+  .trade-table th {
+    position: sticky; top: 0;
+    background: var(--paper-edge);
+    color: var(--ink);
+    padding: 5px 6px; text-align: left;
+    font-family: var(--f-hand); font-weight: 500;
+    font-size: 1.6cqi; letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--ink-dim);
+  }
+  .trade-table td {
+    padding: 3px 6px;
+    border-bottom: 1px dashed rgba(110,84,48,0.3);
+    color: var(--ink);
+  }
+  .trade-table tbody tr:nth-child(even) td {
+    background: rgba(196,169,107,0.12);
+  }
+  .trade-table tbody tr:hover td {
+    background: rgba(196,169,107,0.3);
+  }
+  .trade-table .dir-long { color: #2d5020; font-weight: 600; }
+  .trade-table .dir-short { color: #8b1e1e; font-weight: 600; }
+  .trade-table .reason {
+    font-family: var(--f-hand); color: var(--ink-dim); font-size: 1.5cqi;
+  }
+  .trade-table::-webkit-scrollbar { width: 6px; }
+  .trade-table::-webkit-scrollbar-thumb { background: var(--paper-edge); }
+
+  .pagination {
+    display: flex; gap: 3px; justify-content: center;
+    padding: 6px 0 2px;
+    flex-wrap: wrap;
+  }
+  .pg-btn {
+    background: rgba(110,84,48,0.18); color: var(--ink-dim);
+    border: 1px solid var(--paper-edge);
+    padding: 2px 9px;
+    font-family: var(--f-hand); font-size: 1.7cqi;
+    cursor: pointer; border-radius: 2px;
+    min-width: 22px;
+  }
+  .pg-btn:hover { background: rgba(110,84,48,0.35); color: var(--ink); }
+  .pg-btn.active {
+    background: #6e5430; color: #f0e0bb; border-color: #4a341c;
+  }
+  .pg-btn.dots { background: none; border: none; cursor: default; padding: 2px 4px; }
+  .pg-info { font-family: var(--f-hand); color: var(--ink-dim); font-size: 1.6cqi; margin-left: 8px; }
+
   /* Coming soon */
   .stub {
     flex: 1; display: flex; align-items: center; justify-content: center;
@@ -541,7 +632,36 @@
 
     <!-- TRADES PANEL -->
     <div class="panel" id="panel-trades">
-      <div class="stub">📜 完整交易紀錄 (Coming Soon)</div>
+      <div class="stats-row">
+        <div class="stat-note"><div class="stat-label">Total Trades</div><div class="stat-value" id="ts-total">—</div></div>
+        <div class="stat-note"><div class="stat-label">Win Rate</div><div class="stat-value" id="ts-winrate">—</div></div>
+        <div class="stat-note"><div class="stat-label">Avg Win</div><div class="stat-value pnl-pos" id="ts-avg-win">—</div></div>
+        <div class="stat-note"><div class="stat-label">Avg Loss</div><div class="stat-value pnl-neg" id="ts-avg-loss">—</div></div>
+        <div class="stat-note"><div class="stat-label">Biggest Win</div><div class="stat-value pnl-pos" id="ts-big-win">—</div></div>
+        <div class="stat-note"><div class="stat-label">Biggest Loss</div><div class="stat-value pnl-neg" id="ts-big-loss">—</div></div>
+      </div>
+      <div class="note pin-blue trades-note">
+        <h3>📜 Trade Log</h3>
+        <div class="trade-table-wrap">
+          <table class="trade-table">
+            <thead>
+              <tr>
+                <th>Time (TPE)</th>
+                <th>Dir</th>
+                <th>Entry</th>
+                <th>Exit</th>
+                <th>P&amp;L $</th>
+                <th>P&amp;L %</th>
+                <th>Reason</th>
+              </tr>
+            </thead>
+            <tbody id="trade-table-body">
+              <tr><td colspan="7" style="text-align:center;color:var(--ink-dim);">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination" id="trade-pagination"></div>
+      </div>
     </div>
 
     <!-- ERRORS PANEL -->
@@ -715,6 +835,9 @@ function render(s) {
   lastEquityPerTrade = s.equity_per_trade || [];
   renderEquityChart(currentInterval);
   updateEquityComparison(lastEquityDaily);
+
+  // Trade log
+  renderTradeLog(s.trade_log || {});
 }
 
 refresh();
@@ -926,6 +1049,92 @@ function updateEquityComparison(daily) {
     document.getElementById('equity-change').textContent = '—';
     document.getElementById('equity-change-pct').textContent = '需要 2 天以上資料';
   }
+}
+
+/* ============================================================
+   Trade Log Table - pagination + render
+   ============================================================ */
+let tradeLogData = [];
+let tradePage = 1;
+const TRADES_PER_PAGE = 20;
+
+function renderTradeLog(tl) {
+  const summary = tl.summary;
+  if (summary) {
+    document.getElementById('ts-total').textContent = summary.total;
+    document.getElementById('ts-winrate').textContent = summary.win_rate.toFixed(1) + '%';
+    document.getElementById('ts-avg-win').textContent = '+$' + summary.avg_win.toFixed(2);
+    document.getElementById('ts-avg-loss').textContent = '$' + summary.avg_loss.toFixed(2);
+    document.getElementById('ts-big-win').textContent = '+$' + summary.biggest_win.toFixed(2);
+    document.getElementById('ts-big-loss').textContent = '$' + summary.biggest_loss.toFixed(2);
+  } else {
+    ['ts-total','ts-winrate','ts-avg-win','ts-avg-loss','ts-big-win','ts-big-loss'].forEach(id => {
+      document.getElementById(id).textContent = '—';
+    });
+  }
+  tradeLogData = (tl.trades || []).slice().reverse();    // newest first
+  renderTradePage();
+}
+
+function renderTradePage() {
+  const body = document.getElementById('trade-table-body');
+  if (tradeLogData.length === 0) {
+    body.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--ink-dim);">尚無交易紀錄</td></tr>';
+    document.getElementById('trade-pagination').innerHTML = '';
+    return;
+  }
+  const totalPages = Math.ceil(tradeLogData.length / TRADES_PER_PAGE);
+  if (tradePage > totalPages) tradePage = totalPages;
+  if (tradePage < 1) tradePage = 1;
+  const start = (tradePage - 1) * TRADES_PER_PAGE;
+  const slice = tradeLogData.slice(start, start + TRADES_PER_PAGE);
+  body.innerHTML = slice.map(t => {
+    const dir = (t.direction || '').toLowerCase();
+    const dirCls = dir === 'long' ? 'dir-long' : 'dir-short';
+    const pnlCls = t.profit > 0 ? 'pnl-pos' : (t.profit < 0 ? 'pnl-neg' : '');
+    const profitSign = t.profit >= 0 ? '+' : '';
+    const pctSign = t.profit_pct >= 0 ? '+' : '';
+    let ts = '—';
+    try {
+      const d = new Date(t.time);
+      ts = d.toLocaleString('zh-TW', {timeZone:'Asia/Taipei', hour12:false}).replace(',', '');
+    } catch(e) {}
+    return `<tr>
+      <td>${ts}</td>
+      <td><span class="${dirCls}">${dir.toUpperCase()}</span></td>
+      <td>${Number(t.entry).toFixed(2)}</td>
+      <td>${Number(t.exit).toFixed(2)}</td>
+      <td class="${pnlCls}">${profitSign}$${Number(t.profit).toFixed(4)}</td>
+      <td class="${pnlCls}">${pctSign}${Number(t.profit_pct).toFixed(2)}%</td>
+      <td class="reason">${t.exit_reason || ''}</td>
+    </tr>`;
+  }).join('');
+
+  // Pagination
+  const pg = document.getElementById('trade-pagination');
+  const pageButtons = [];
+  function btn(n, label) {
+    return `<button class="pg-btn ${n === tradePage ? 'active' : ''}" data-page="${n}">${label || n}</button>`;
+  }
+  function dots() { return `<span class="pg-btn dots">…</span>`; }
+  if (tradePage > 1) pageButtons.push(`<button class="pg-btn" data-page="${tradePage-1}">‹</button>`);
+  // Always show first
+  pageButtons.push(btn(1));
+  if (tradePage > 4) pageButtons.push(dots());
+  for (let i = Math.max(2, tradePage - 2); i <= Math.min(totalPages - 1, tradePage + 2); i++) {
+    pageButtons.push(btn(i));
+  }
+  if (tradePage < totalPages - 3) pageButtons.push(dots());
+  if (totalPages > 1) pageButtons.push(btn(totalPages));
+  if (tradePage < totalPages) pageButtons.push(`<button class="pg-btn" data-page="${tradePage+1}">›</button>`);
+  pageButtons.push(`<span class="pg-info">${tradeLogData.length} trades</span>`);
+  pg.innerHTML = pageButtons.join('');
+  pg.querySelectorAll('button[data-page]').forEach(b => {
+    b.addEventListener('click', () => {
+      tradePage = parseInt(b.dataset.page);
+      renderTradePage();
+    });
+  });
 }
 
 /* ============================================================
