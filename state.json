@@ -1,23 +1,32 @@
 {
-  "updated_at": "2026-05-22 18:49:32",
-  "updated_at_iso": "2026-05-22T18:49:32.187006+08:00",
+  "updated_at": "2026-05-22 18:50:06",
+  "updated_at_iso": "2026-05-22T18:50:06.093919+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
-    "equity": 21.71775889,
-    "available": 21.71775889951,
-    "position": null,
+    "equity": 21.72475889,
+    "available": 21.10868889951,
+    "position": {
+      "direction": "short",
+      "size": 7.0,
+      "entry": 87.01,
+      "pnl": 0.0,
+      "leverage": 100
+    },
     "plan_orders": [],
-    "stop_orders": [],
-    "fetched_at": "2026-05-22T10:49:32.152638+00:00"
+    "stop_orders": [
+      {
+        "id": 515727972,
+        "sl": 87.08,
+        "tp": 0.0,
+        "vol": 7.0
+      }
+    ],
+    "fetched_at": "2026-05-22T10:50:06.059659+00:00"
   },
   "log": {
-    "last_tick": "2026-05-22 18:45:02",
+    "last_tick": "2026-05-22 18:50:03",
     "events": [
-      {
-        "ts": "2026-05-22 16:45:11",
-        "msg": "V1_FILTER skip LONG at ts=2026-05-22 08:40:00 confirm h=87.1500 <= pivot h=87.1600"
-      },
       {
         "ts": "2026-05-22 17:00:03",
         "msg": "Order submit: long theoretical=87.15 sl=86.99 lev=100x qty=$0.66 ticker_before=87.06"
@@ -133,6 +142,10 @@
       {
         "ts": "2026-05-22 18:40:02",
         "msg": "V1_FILTER skip SHORT at ts=2026-05-22 10:35:00 confirm l=86.9300 >= pivot l=86.9300"
+      },
+      {
+        "ts": "2026-05-22 18:50:04",
+        "msg": "Order submit: short theoretical=87.01 sl=87.08 lev=100x qty=$0.65 ticker_before=87.0"
       }
     ],
     "errors": [
@@ -2024,6 +2037,10 @@
     {
       "ts": "2026-05-22T18:49:32.160315+08:00",
       "equity": 21.71775889
+    },
+    {
+      "ts": "2026-05-22T18:50:06.067262+08:00",
+      "equity": 21.72475889
     }
   ],
   "equity_daily": [
@@ -2033,7 +2050,7 @@
     },
     {
       "date": "2026-05-22",
-      "equity": 21.71775889
+      "equity": 21.72475889
     }
   ],
   "equity_per_trade": [
@@ -7625,7 +7642,7 @@
   },
   "status": {
     "online": true,
-    "last_tick": "2026-05-22 18:45:02",
-    "last_tick_age_sec": 270
+    "last_tick": "2026-05-22 18:50:03",
+    "last_tick_age_sec": 3
   }
 }
