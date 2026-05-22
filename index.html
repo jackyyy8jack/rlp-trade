@@ -505,7 +505,7 @@
         <div class="note pin-yellow" style="display:flex; flex-direction:column; min-height:0;">
           <h3>📈 資產曲線</h3>
           <div class="interval-bar" id="interval-bar">
-            <button class="iv-btn" data-iv="1m">1m</button>
+            <button class="iv-btn" data-iv="trade">Trade</button>
             <button class="iv-btn" data-iv="1h">1h</button>
             <button class="iv-btn" data-iv="4h">4h</button>
             <button class="iv-btn active" data-iv="1d">1d</button>
@@ -709,9 +709,10 @@ function render(s) {
     ? errs.slice().reverse().map(e => `<div class="e-row"><span class="ts">${e.ts}</span> <span class="sl">${e.level}</span><br><span style="color:var(--ink-dim);font-size:1.6cqi">${e.msg.substring(0,250)}</span></div>`).join('')
     : '<span class="pnl-pos">✓ 無錯誤紀錄</span>';
 
-  // Equity chart (fine + daily series)
+  // Equity chart (fine + daily + per-trade series)
   lastEquityFine = s.equity_history || [];
   lastEquityDaily = s.equity_daily || [];
+  lastEquityPerTrade = s.equity_per_trade || [];
   renderEquityChart(currentInterval);
   updateEquityComparison(lastEquityDaily);
 }
@@ -726,14 +727,15 @@ let equityChart = null;
 let currentInterval = '1d';
 let lastEquityFine = [];
 let lastEquityDaily = [];
+let lastEquityPerTrade = [];
 
 const INTERVAL_CONFIG = {
-  '1m':  { ms: 60_000,         src: 'fine',  fmt: 'HH:mm',     maxBuckets: 240 },
-  '1h':  { ms: 3_600_000,      src: 'fine',  fmt: 'MM-DD HH:00', maxBuckets: 168 },
-  '4h':  { ms: 14_400_000,     src: 'fine',  fmt: 'MM-DD HH:00', maxBuckets: 180 },
-  '1d':  { ms: 86_400_000,     src: 'daily', fmt: 'MM-DD',     maxBuckets: 90 },
-  '1w':  { ms: 604_800_000,    src: 'daily', fmt: 'MM-DD',     maxBuckets: 52 },
-  '1M':  { ms: 2_592_000_000,  src: 'daily', fmt: 'YYYY-MM',   maxBuckets: 24 },
+  'trade': { src: 'trade', maxBuckets: 300 },                                    // per-trade
+  '1h':    { ms: 3_600_000,      src: 'fine',  fmt: 'MM-DD HH:00', maxBuckets: 168 },
+  '4h':    { ms: 14_400_000,     src: 'fine',  fmt: 'MM-DD HH:00', maxBuckets: 180 },
+  '1d':    { ms: 86_400_000,     src: 'daily', fmt: 'MM-DD',     maxBuckets: 90 },
+  '1w':    { ms: 604_800_000,    src: 'daily', fmt: 'MM-DD',     maxBuckets: 52 },
+  '1M':    { ms: 2_592_000_000,  src: 'daily', fmt: 'YYYY-MM',   maxBuckets: 24 },
 };
 
 function parseTs(entry) {
@@ -778,6 +780,17 @@ function bucketize(entries, intervalMs) {
 function buildChartData(interval) {
   const cfg = INTERVAL_CONFIG[interval];
   if (!cfg) return { labels: [], values: [] };
+
+  // Per-trade mode: no bucketing, plot each trade as one point
+  if (cfg.src === 'trade') {
+    let trades = lastEquityPerTrade || [];
+    if (trades.length > cfg.maxBuckets) trades = trades.slice(-cfg.maxBuckets);
+    return {
+      labels: trades.map(t => '#' + t.trade_idx),
+      values: trades.map(t => t.equity),
+    };
+  }
+
   const src = cfg.src === 'daily' ? lastEquityDaily : lastEquityFine;
   if (!src || src.length === 0) return { labels: [], values: [] };
   let buckets = bucketize(src, cfg.ms);
