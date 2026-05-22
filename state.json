@@ -1,27 +1,32 @@
 {
-  "updated_at": "2026-05-22 21:04:36",
-  "updated_at_iso": "2026-05-22T21:04:36.283350+08:00",
+  "updated_at": "2026-05-22 21:05:10",
+  "updated_at_iso": "2026-05-22T21:05:10.316498+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
-    "equity": 22.05375889,
-    "available": 22.05375889951,
-    "position": null,
+    "equity": 22.06075889,
+    "available": 21.44027889951,
+    "position": {
+      "direction": "long",
+      "size": 7.0,
+      "entry": 87.64,
+      "pnl": 0.0,
+      "leverage": 100
+    },
     "plan_orders": [],
-    "stop_orders": [],
-    "fetched_at": "2026-05-22T13:04:36.234960+00:00"
+    "stop_orders": [
+      {
+        "id": 515781832,
+        "sl": 87.54,
+        "tp": 0.0,
+        "vol": 7.0
+      }
+    ],
+    "fetched_at": "2026-05-22T13:05:10.270540+00:00"
   },
   "log": {
-    "last_tick": "2026-05-22 21:00:02",
+    "last_tick": "2026-05-22 21:05:02",
     "events": [
-      {
-        "ts": "2026-05-22 17:50:14",
-        "msg": "All pending orders cancelled [verified]"
-      },
-      {
-        "ts": "2026-05-22 17:50:17",
-        "msg": "Flash close click: direction=long ticker_before=87.2 click_ts=2026-05-22T09:50:17.684310+00:00"
-      },
       {
         "ts": "2026-05-22 17:50:20",
         "msg": "Order submit: short theoretical=87.19 sl=87.36 lev=100x qty=$0.64 ticker_before=87.21"
@@ -133,14 +138,17 @@
       {
         "ts": "2026-05-22 21:00:18",
         "msg": "[WARN] Order instant-filled but position NOT confirmed after retries: short theoretical=87.6 ticker_before=87.74"
+      },
+      {
+        "ts": "2026-05-22 21:05:03",
+        "msg": "Order submit: long theoretical=87.74 sl=87.54 lev=100x qty=$0.66 ticker_before=87.63"
+      },
+      {
+        "ts": "2026-05-22 21:05:06",
+        "msg": "Order instant-filled & confirmed: long theoretical=87.74 actual=87.64 sl=87.54 ticker_before=87.63"
       }
     ],
     "errors": [
-      {
-        "ts": "2026-05-22 14:16:15",
-        "level": "ERROR",
-        "msg": "2026-05-22 14:16:15,169 ERROR: Browser init failed: Message: session not created: Chrome instance exited. Examine ChromeDriver verbose log to determine the cause.; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception"
-      },
       {
         "ts": "2026-05-22 21:00:18",
         "level": "WARN",
@@ -164,12 +172,12 @@
     "max_dd_pct": 6.191187652848704,
     "position": null,
     "pending": {
-      "dir": "short",
-      "entry": 87.6,
-      "sl": 87.75,
-      "placed_ts": "2026-05-22T12:55:00+00:00"
+      "dir": "long",
+      "entry": 87.74,
+      "sl": 87.54,
+      "placed_ts": "2026-05-22T13:00:00+00:00"
     },
-    "last_bar_ts": "2026-05-22 20:55:00",
+    "last_bar_ts": "2026-05-22 21:00:00",
     "recent_trades": [
       {
         "ts": "2026-05-22T09:15:00+00:00",
@@ -2991,6 +2999,10 @@
     {
       "ts": "2026-05-22T21:04:36.242087+08:00",
       "equity": 22.05375889
+    },
+    {
+      "ts": "2026-05-22T21:05:10.275116+08:00",
+      "equity": 22.06075889
     }
   ],
   "equity_daily": [
@@ -3000,7 +3012,7 @@
     },
     {
       "date": "2026-05-22",
-      "equity": 22.05375889
+      "equity": 22.06075889
     }
   ],
   "equity_per_trade": [
@@ -8613,7 +8625,7 @@
   },
   "status": {
     "online": true,
-    "last_tick": "2026-05-22 21:00:02",
-    "last_tick_age_sec": 274
+    "last_tick": "2026-05-22 21:05:02",
+    "last_tick_age_sec": 8
   }
 }
