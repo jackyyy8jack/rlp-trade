@@ -1,27 +1,19 @@
 {
-  "updated_at": "2026-05-23 06:49:50",
-  "updated_at_iso": "2026-05-23T06:49:50.857487+08:00",
+  "updated_at": "2026-05-23 06:50:24",
+  "updated_at_iso": "2026-05-23T06:50:24.762373+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
     "equity": 21.84381961,
-    "available": 21.84381961051,
+    "available": 21.24937961051,
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-22T22:49:50.815511+00:00"
+    "fetched_at": "2026-05-22T22:50:24.721870+00:00"
   },
   "log": {
-    "last_tick": "2026-05-23 06:45:03",
+    "last_tick": "2026-05-23 06:50:02",
     "events": [
-      {
-        "ts": "2026-05-23 04:40:09",
-        "msg": "Flash close click: direction=short ticker_before=84.8 click_ts=2026-05-22T20:40:09.913365+00:00"
-      },
-      {
-        "ts": "2026-05-23 04:40:12",
-        "msg": "V1_FILTER skip LONG at ts=2026-05-22 20:35:00 confirm h=84.8200 <= pivot h=84.8200"
-      },
       {
         "ts": "2026-05-23 04:55:03",
         "msg": "Order submit: long theoretical=84.95 sl=84.71 lev=100x qty=$0.65 ticker_before=84.99"
@@ -133,6 +125,14 @@
       {
         "ts": "2026-05-23 06:40:11",
         "msg": "OUTSIDE_BAR at ts=2026-05-22 22:35:00 O=84.94 pivot=BOTH �X skipping ambiguous signal"
+      },
+      {
+        "ts": "2026-05-23 06:50:03",
+        "msg": "Order submit: long theoretical=84.92 sl=84.72 lev=100x qty=$0.66 ticker_before=84.94"
+      },
+      {
+        "ts": "2026-05-23 06:50:05",
+        "msg": "Order submitted & verified: long price=84.92 sl=84.72 lev=100x qty=$0.66"
       }
     ],
     "errors": [],
@@ -152,8 +152,13 @@
     "peak_equity": 34.66191890677052,
     "max_dd_pct": 8.045204901850305,
     "position": null,
-    "pending": null,
-    "last_bar_ts": "2026-05-23 06:40:00",
+    "pending": {
+      "dir": "long",
+      "entry": 84.92,
+      "sl": 84.72,
+      "placed_ts": "2026-05-22T22:45:00+00:00"
+    },
+    "last_bar_ts": "2026-05-23 06:45:00",
     "recent_trades": [
       {
         "ts": "2026-05-22T19:25:00+00:00",
@@ -252,8 +257,13 @@
     "peak_equity": 33.42885209647664,
     "max_dd_pct": 3.540088046986168,
     "position": null,
-    "pending": null,
-    "last_bar_ts": "2026-05-23 06:40:00",
+    "pending": {
+      "dir": "long",
+      "entry": 84.92,
+      "sl": 84.72,
+      "placed_ts": "2026-05-22T22:45:00+00:00"
+    },
+    "last_bar_ts": "2026-05-23 06:45:00",
     "recent_trades": [
       {
         "ts": "2026-05-22T17:00:00+00:00",
@@ -7094,6 +7104,10 @@
     {
       "ts": "2026-05-23T06:49:50.823327+08:00",
       "equity": 21.84381961
+    },
+    {
+      "ts": "2026-05-23T06:50:24.727083+08:00",
+      "equity": 21.84381961
     }
   ],
   "equity_daily": [
@@ -9368,7 +9382,7 @@
   },
   "status": {
     "online": true,
-    "last_tick": "2026-05-23 06:45:03",
-    "last_tick_age_sec": 287
+    "last_tick": "2026-05-23 06:50:02",
+    "last_tick_age_sec": 22
   }
 }
