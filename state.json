@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-22 10:54:35",
-  "updated_at_iso": "2026-05-22T10:54:35.068965+08:00",
+  "updated_at": "2026-05-22 10:55:08",
+  "updated_at_iso": "2026-05-22T10:55:08.945760+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
@@ -22,15 +22,11 @@
         "vol": 7.0
       }
     ],
-    "fetched_at": "2026-05-22T02:54:35.061761+00:00"
+    "fetched_at": "2026-05-22T02:55:08.939192+00:00"
   },
   "log": {
-    "last_tick": "2026-05-22 10:50:07",
+    "last_tick": "2026-05-22 10:55:03",
     "events": [
-      {
-        "ts": "2026-05-22 08:50:14",
-        "msg": "Order instant-filled & confirmed: long theoretical=86.98 actual=86.92 sl=86.84 ticker_before=86.92"
-      },
       {
         "ts": "2026-05-22 08:55:02",
         "msg": "SL hit: {'direction': 'long', 'entry': 86.92, 'sl': 86.84, 'qty': 7.0, 'leverage': 100}"
@@ -146,15 +142,13 @@
       {
         "ts": "2026-05-22 10:45:06",
         "msg": "Order instant-filled & confirmed: long theoretical=87.03 actual=87.01 sl=86.94 ticker_before=87.0"
-      }
-    ],
-    "errors": [
+      },
       {
-        "ts": "2026-05-22 03:35:09",
-        "level": "ERROR",
-        "msg": "2026-05-22 03:35:09,221 ERROR: Flash close button not found"
+        "ts": "2026-05-22 10:55:07",
+        "msg": "All pending orders cancelled [verified]"
       }
     ],
+    "errors": [],
     "error_count_1h": 0
   },
   "v0": {
@@ -381,7 +375,7 @@
   ],
   "status": {
     "online": true,
-    "last_tick": "2026-05-22 10:50:07",
-    "last_tick_age_sec": 268
+    "last_tick": "2026-05-22 10:55:03",
+    "last_tick_age_sec": 5
   }
 }
