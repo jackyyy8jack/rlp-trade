@@ -360,6 +360,35 @@
   .position-pill.long { color: var(--green); background: rgba(74,112,56,0.15); }
   .position-pill.short { color: var(--red); background: rgba(161,49,40,0.15); }
 
+  /* Chart interval selector */
+  .interval-bar {
+    display: flex; gap: 4px; margin: 4px 0 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .iv-btn {
+    background: rgba(110,84,48,0.18);
+    color: var(--ink-dim);
+    border: 1px solid var(--paper-edge);
+    padding: 3px 12px;
+    font-family: var(--f-hand);
+    font-size: 1.9cqi;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.15s;
+    letter-spacing: 0.5px;
+  }
+  .iv-btn:hover {
+    background: rgba(110,84,48,0.35);
+    color: var(--ink);
+  }
+  .iv-btn.active {
+    background: #6e5430;
+    color: #f0e0bb;
+    border-color: #4a341c;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+  }
+
   /* Coming soon */
   .stub {
     flex: 1; display: flex; align-items: center; justify-content: center;
@@ -474,8 +503,16 @@
     <div class="panel" id="panel-equity">
       <div class="notes" style="grid-template-columns: 1fr;">
         <div class="note pin-yellow" style="display:flex; flex-direction:column; min-height:0;">
-          <h3>📈 每日資產曲線</h3>
-          <div style="position:relative; height:42cqi; width:100%;">
+          <h3>📈 資產曲線</h3>
+          <div class="interval-bar" id="interval-bar">
+            <button class="iv-btn" data-iv="1m">1m</button>
+            <button class="iv-btn" data-iv="1h">1h</button>
+            <button class="iv-btn" data-iv="4h">4h</button>
+            <button class="iv-btn active" data-iv="1d">1d</button>
+            <button class="iv-btn" data-iv="1w">1w</button>
+            <button class="iv-btn" data-iv="1M">1M</button>
+          </div>
+          <div style="position:relative; height:38cqi; width:100%;">
             <canvas id="equity-chart"></canvas>
           </div>
         </div>
@@ -672,27 +709,90 @@ function render(s) {
     ? errs.slice().reverse().map(e => `<div class="e-row"><span class="ts">${e.ts}</span> <span class="sl">${e.level}</span><br><span style="color:var(--ink-dim);font-size:1.6cqi">${e.msg.substring(0,250)}</span></div>`).join('')
     : '<span class="pnl-pos">✓ 無錯誤紀錄</span>';
 
-  // Equity chart
-  if (s.equity_history) {
-    renderEquityChart(s.equity_history);
-    updateEquityComparison(s.equity_history);
-  }
+  // Equity chart (fine + daily series)
+  lastEquityFine = s.equity_history || [];
+  lastEquityDaily = s.equity_daily || [];
+  renderEquityChart(currentInterval);
+  updateEquityComparison(lastEquityDaily);
 }
 
 refresh();
 setInterval(refresh, 5000);
 
 /* ============================================================
-   Equity History Chart
+   Equity Chart - multi-interval bucketing
    ============================================================ */
 let equityChart = null;
+let currentInterval = '1d';
+let lastEquityFine = [];
+let lastEquityDaily = [];
 
-function renderEquityChart(history) {
+const INTERVAL_CONFIG = {
+  '1m':  { ms: 60_000,         src: 'fine',  fmt: 'HH:mm',     maxBuckets: 240 },
+  '1h':  { ms: 3_600_000,      src: 'fine',  fmt: 'MM-DD HH:00', maxBuckets: 168 },
+  '4h':  { ms: 14_400_000,     src: 'fine',  fmt: 'MM-DD HH:00', maxBuckets: 180 },
+  '1d':  { ms: 86_400_000,     src: 'daily', fmt: 'MM-DD',     maxBuckets: 90 },
+  '1w':  { ms: 604_800_000,    src: 'daily', fmt: 'MM-DD',     maxBuckets: 52 },
+  '1M':  { ms: 2_592_000_000,  src: 'daily', fmt: 'YYYY-MM',   maxBuckets: 24 },
+};
+
+function parseTs(entry) {
+  if (entry.ts) return new Date(entry.ts).getTime();
+  if (entry.date) return new Date(entry.date + 'T23:59:59+08:00').getTime();
+  return 0;
+}
+
+function formatBucket(timestamp, fmt) {
+  const d = new Date(timestamp);
+  const yyyy = d.getFullYear();
+  const MM = String(d.getMonth() + 1).padStart(2, '0');
+  const DD = String(d.getDate()).padStart(2, '0');
+  const HH = String(d.getHours()).padStart(2, '0');
+  const mm = String(d.getMinutes()).padStart(2, '0');
+  switch (fmt) {
+    case 'HH:mm':       return `${HH}:${mm}`;
+    case 'MM-DD HH:00': return `${MM}-${DD} ${HH}:00`;
+    case 'MM-DD':       return `${MM}-${DD}`;
+    case 'YYYY-MM':     return `${yyyy}-${MM}`;
+    default:            return `${MM}-${DD}`;
+  }
+}
+
+function bucketize(entries, intervalMs) {
+  // Group entries by bucket; take the LATEST value within each bucket
+  const buckets = new Map();
+  for (const e of entries) {
+    const t = parseTs(e);
+    if (!t) continue;
+    const start = Math.floor(t / intervalMs) * intervalMs;
+    const existing = buckets.get(start);
+    if (!existing || existing.t < t) {
+      buckets.set(start, { t, equity: e.equity });
+    }
+  }
+  return Array.from(buckets.entries())
+    .map(([start, v]) => ({ start, equity: v.equity }))
+    .sort((a, b) => a.start - b.start);
+}
+
+function buildChartData(interval) {
+  const cfg = INTERVAL_CONFIG[interval];
+  if (!cfg) return { labels: [], values: [] };
+  const src = cfg.src === 'daily' ? lastEquityDaily : lastEquityFine;
+  if (!src || src.length === 0) return { labels: [], values: [] };
+  let buckets = bucketize(src, cfg.ms);
+  if (buckets.length > cfg.maxBuckets) buckets = buckets.slice(-cfg.maxBuckets);
+  return {
+    labels: buckets.map(b => formatBucket(b.start, cfg.fmt)),
+    values: buckets.map(b => b.equity),
+  };
+}
+
+function renderEquityChart(interval) {
   const canvas = document.getElementById('equity-chart');
-  if (!canvas || !history || history.length === 0) return;
-
-  const labels = history.map(h => h.date.slice(5));    // 05-21 format
-  const values = history.map(h => h.equity);
+  if (!canvas) return;
+  const { labels, values } = buildChartData(interval);
+  if (labels.length === 0) return;
 
   if (equityChart) {
     equityChart.data.labels = labels;
@@ -722,14 +822,14 @@ function renderEquityChart(history) {
         pointBackgroundColor: '#f0e0bb',
         pointBorderColor: '#8b6914',
         pointBorderWidth: 1.5,
-        pointRadius: 4,
+        pointRadius: 3,
         pointHoverRadius: 7,
       }],
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      animation: { duration: 300 },
+      animation: { duration: 200 },
       plugins: {
         legend: { display: false },
         tooltip: {
@@ -747,13 +847,19 @@ function renderEquityChart(history) {
       },
       scales: {
         x: {
-          ticks: { color: '#5a3d20', font: { family: 'JetBrains Mono', size: 11 } },
+          ticks: {
+            color: '#5a3d20',
+            font: { family: 'JetBrains Mono', size: 10 },
+            maxRotation: 0,
+            autoSkip: true,
+            maxTicksLimit: 12,
+          },
           grid: { color: 'rgba(110,84,48,0.2)' },
         },
         y: {
           ticks: {
             color: '#5a3d20',
-            font: { family: 'JetBrains Mono', size: 11 },
+            font: { family: 'JetBrains Mono', size: 10 },
             callback: (v) => '$' + v.toFixed(2),
           },
           grid: { color: 'rgba(110,84,48,0.2)' },
@@ -763,15 +869,27 @@ function renderEquityChart(history) {
   });
 }
 
-function updateEquityComparison(history) {
-  if (!history || history.length === 0) {
+// Interval button click handlers
+document.querySelectorAll('.iv-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.iv-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentInterval = btn.dataset.iv;
+    // Force chart rebuild (since labels changed)
+    if (equityChart) { equityChart.destroy(); equityChart = null; }
+    renderEquityChart(currentInterval);
+  });
+});
+
+function updateEquityComparison(daily) {
+  if (!daily || daily.length === 0) {
     document.getElementById('today-equity').textContent = '—';
     document.getElementById('yesterday-equity').textContent = '—';
     document.getElementById('equity-change').textContent = '—';
     return;
   }
-  const today = history[history.length - 1];
-  const yesterday = history.length >= 2 ? history[history.length - 2] : null;
+  const today = daily[daily.length - 1];
+  const yesterday = daily.length >= 2 ? daily[daily.length - 2] : null;
 
   document.getElementById('today-equity').textContent = '$' + today.equity.toFixed(2);
   document.getElementById('today-date').textContent = today.date;
