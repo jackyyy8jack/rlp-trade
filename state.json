@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-24 00:49:17",
-  "updated_at_iso": "2026-05-24T00:49:17.916878+08:00",
+  "updated_at": "2026-05-24 00:49:51",
+  "updated_at_iso": "2026-05-24T00:49:51.852832+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
@@ -9,7 +9,7 @@
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-23T16:49:17.831570+00:00"
+    "fetched_at": "2026-05-23T16:49:51.764976+00:00"
   },
   "log": {
     "last_tick": "2026-05-24 00:45:02",
@@ -152,7 +152,7 @@
         "msg": "2026-05-23 23:49:36,436 ERROR: Browser init failed: Message: session not created: Chrome instance exited. Examine ChromeDriver verbose log to determine the cause.; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception"
       }
     ],
-    "error_count_1h": 2
+    "error_count_1h": 0
   },
   "v0": {
     "label": "V0 (no filter)",
@@ -3107,6 +3107,10 @@
     {
       "ts": "2026-05-24T00:49:17.907765+08:00",
       "equity": 21.66181961
+    },
+    {
+      "ts": "2026-05-24T00:49:51.846382+08:00",
+      "equity": 21.66181961
     }
   ],
   "equity_daily": [
@@ -3219,6 +3223,6 @@
   "status": {
     "online": true,
     "last_tick": "2026-05-24 00:45:02",
-    "last_tick_age_sec": 255
+    "last_tick_age_sec": 289
   }
 }
