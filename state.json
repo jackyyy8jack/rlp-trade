@@ -1,27 +1,32 @@
 {
-  "updated_at": "2026-05-23 19:35:00",
-  "updated_at_iso": "2026-05-23T19:35:00.377461+08:00",
+  "updated_at": "2026-05-23 19:35:35",
+  "updated_at_iso": "2026-05-23T19:35:35.119837+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
-    "equity": 21.26981961,
-    "available": 21.26981961051,
-    "position": null,
+    "equity": 21.27681961,
+    "available": 20.69329961051,
+    "position": {
+      "direction": "short",
+      "size": 7.0,
+      "entry": 82.36,
+      "pnl": 0.0,
+      "leverage": 100
+    },
     "plan_orders": [],
-    "stop_orders": [],
-    "fetched_at": "2026-05-23T11:35:00.300342+00:00"
+    "stop_orders": [
+      {
+        "id": 516246595,
+        "sl": 82.4,
+        "tp": 0.0,
+        "vol": 7.0
+      }
+    ],
+    "fetched_at": "2026-05-23T11:35:35.039051+00:00"
   },
   "log": {
-    "last_tick": "2026-05-23 19:30:05",
+    "last_tick": "2026-05-23 19:35:08",
     "events": [
-      {
-        "ts": "2026-05-23 16:50:08",
-        "msg": "Flash close click: direction=short ticker_before=81.99 click_ts=2026-05-23T08:50:08.868376+00:00"
-      },
-      {
-        "ts": "2026-05-23 16:50:12",
-        "msg": "Order submit: long theoretical=81.83 sl=81.61 lev=100x qty=$0.63 ticker_before=82.0"
-      },
       {
         "ts": "2026-05-23 16:50:14",
         "msg": "Order submitted & verified: long price=81.83 sl=81.61 lev=100x qty=$0.63"
@@ -133,6 +138,14 @@
       {
         "ts": "2026-05-23 19:15:02",
         "msg": "V1_FILTER skip LONG at ts=2026-05-23 11:10:00 confirm h=82.3000 <= pivot h=82.3000"
+      },
+      {
+        "ts": "2026-05-23 19:35:10",
+        "msg": "Order submit: short theoretical=82.33 sl=82.4 lev=100x qty=$0.64 ticker_before=82.37"
+      },
+      {
+        "ts": "2026-05-23 19:35:12",
+        "msg": "Order instant-filled & confirmed: short theoretical=82.33 actual=82.36 sl=82.4 ticker_before=82.37"
       }
     ],
     "errors": [
@@ -153,25 +166,33 @@
     "label": "V0 (no filter)",
     "available": true,
     "initial": 30.0,
-    "equity": 30.0,
-    "pnl": 0.0,
-    "roi_pct": 0.0,
-    "trades": 0,
-    "wins": 0,
+    "equity": 30.098456302418867,
+    "pnl": 0.09845630241886845,
+    "roi_pct": 0.328187674729552,
+    "trades": 1,
+    "wins": 1,
     "losses": 0,
-    "win_rate": 0.0,
-    "peak_equity": 30.0,
+    "win_rate": 100.0,
+    "peak_equity": 30.098456302418867,
     "max_dd_pct": 0.0,
-    "position": {
-      "dir": "long",
-      "ep": 82.27,
-      "sl": 82.14,
-      "size": 1.0939589157651635,
-      "opened_ts": "2026-05-23T11:15:00+00:00"
+    "position": null,
+    "pending": {
+      "dir": "short",
+      "entry": 82.33,
+      "sl": 82.4,
+      "placed_ts": "2026-05-23T11:30:00+00:00"
     },
-    "pending": null,
-    "last_bar_ts": "2026-05-23 19:25:00",
-    "recent_trades": [],
+    "last_bar_ts": "2026-05-23 19:30:00",
+    "recent_trades": [
+      {
+        "ts": "2026-05-23T11:30:00+00:00",
+        "dir": "long",
+        "ep": 82.27,
+        "xp": 82.36,
+        "pnl": 0.09845630241886845,
+        "exit": "FLIP"
+      }
+    ],
     "n_filtered": 0
   },
   "v1": {
@@ -188,8 +209,13 @@
     "peak_equity": 30.0,
     "max_dd_pct": 0.0,
     "position": null,
-    "pending": null,
-    "last_bar_ts": "2026-05-23 19:25:00",
+    "pending": {
+      "dir": "short",
+      "entry": 82.33,
+      "sl": 82.4,
+      "placed_ts": "2026-05-23T11:30:00+00:00"
+    },
+    "last_bar_ts": "2026-05-23 19:30:00",
     "recent_trades": [],
     "n_filtered": 1
   },
@@ -745,6 +771,10 @@
     {
       "ts": "2026-05-23T19:35:00.373150+08:00",
       "equity": 21.26981961
+    },
+    {
+      "ts": "2026-05-23T19:35:35.116845+08:00",
+      "equity": 21.27681961
     }
   ],
   "equity_daily": [
@@ -758,7 +788,7 @@
     },
     {
       "date": "2026-05-23",
-      "equity": 21.26981961
+      "equity": 21.27681961
     }
   ],
   "equity_per_trade": [],
@@ -768,7 +798,7 @@
   },
   "status": {
     "online": true,
-    "last_tick": "2026-05-23 19:30:05",
-    "last_tick_age_sec": 295
+    "last_tick": "2026-05-23 19:35:08",
+    "last_tick_age_sec": 27
   }
 }
