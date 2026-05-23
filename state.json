@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-23 09:19:34",
-  "updated_at_iso": "2026-05-23T09:19:34.470428+08:00",
+  "updated_at": "2026-05-23 09:20:08",
+  "updated_at_iso": "2026-05-23T09:20:08.563802+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
@@ -9,15 +9,11 @@
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-23T01:19:34.459503+00:00"
+    "fetched_at": "2026-05-23T01:20:08.553601+00:00"
   },
   "log": {
-    "last_tick": "2026-05-23 09:15:02",
+    "last_tick": "2026-05-23 09:20:02",
     "events": [
-      {
-        "ts": "2026-05-23 06:05:02",
-        "msg": "Filled: short @ 85.15"
-      },
       {
         "ts": "2026-05-23 06:40:06",
         "msg": "All pending orders cancelled [verified]"
@@ -133,6 +129,10 @@
       {
         "ts": "2026-05-23 09:10:11",
         "msg": "V1_FILTER skip SHORT at ts=2026-05-23 01:05:00 confirm l=84.4700 >= pivot l=84.3900"
+      },
+      {
+        "ts": "2026-05-23 09:20:02",
+        "msg": "V1_FILTER skip LONG at ts=2026-05-23 01:15:00 confirm h=84.4000 <= pivot h=84.5300"
       }
     ],
     "errors": [],
@@ -387,6 +387,10 @@
     },
     {
       "ts": "2026-05-23T09:19:34.465184+08:00",
+      "equity": 21.62681961
+    },
+    {
+      "ts": "2026-05-23T09:20:08.559267+08:00",
       "equity": 21.62681961
     }
   ],
@@ -2468,7 +2472,7 @@
   },
   "status": {
     "online": true,
-    "last_tick": "2026-05-23 09:15:02",
-    "last_tick_age_sec": 272
+    "last_tick": "2026-05-23 09:20:02",
+    "last_tick_age_sec": 6
   }
 }
