@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-23 19:34:26",
-  "updated_at_iso": "2026-05-23T19:34:26.648232+08:00",
+  "updated_at": "2026-05-23 19:35:00",
+  "updated_at_iso": "2026-05-23T19:35:00.377461+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
@@ -9,7 +9,7 @@
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-23T11:34:26.567831+00:00"
+    "fetched_at": "2026-05-23T11:35:00.300342+00:00"
   },
   "log": {
     "last_tick": "2026-05-23 19:30:05",
@@ -741,6 +741,10 @@
     {
       "ts": "2026-05-23T19:34:26.644092+08:00",
       "equity": 21.26981961
+    },
+    {
+      "ts": "2026-05-23T19:35:00.373150+08:00",
+      "equity": 21.26981961
     }
   ],
   "equity_daily": [
@@ -765,6 +769,6 @@
   "status": {
     "online": true,
     "last_tick": "2026-05-23 19:30:05",
-    "last_tick_age_sec": 261
+    "last_tick_age_sec": 295
   }
 }
