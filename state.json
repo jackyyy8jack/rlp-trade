@@ -1,40 +1,19 @@
 {
-  "updated_at": "2026-05-23 09:09:36",
-  "updated_at_iso": "2026-05-23T09:09:36.441882+08:00",
+  "updated_at": "2026-05-23 09:10:10",
+  "updated_at_iso": "2026-05-23T09:10:10.334796+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
-    "equity": 21.66881961,
-    "available": 20.91092961051,
-    "position": {
-      "direction": "long",
-      "size": 7.0,
-      "entry": 84.27,
-      "pnl": 0.0,
-      "leverage": 100
-    },
+    "equity": 21.62681961,
+    "available": 21.62681961051,
+    "position": null,
     "plan_orders": [],
-    "stop_orders": [
-      {
-        "id": 516073750,
-        "sl": 84.01,
-        "tp": 0.0,
-        "vol": 7.0
-      }
-    ],
-    "fetched_at": "2026-05-23T01:09:36.395481+00:00"
+    "stop_orders": [],
+    "fetched_at": "2026-05-23T01:10:10.286567+00:00"
   },
   "log": {
-    "last_tick": "2026-05-23 09:05:02",
+    "last_tick": "2026-05-23 09:10:02",
     "events": [
-      {
-        "ts": "2026-05-23 06:00:08",
-        "msg": "Flash close click: direction=long ticker_before=85.11 click_ts=2026-05-22T22:00:08.979417+00:00"
-      },
-      {
-        "ts": "2026-05-23 06:00:12",
-        "msg": "Order submit: short theoretical=85.15 sl=85.26 lev=100x qty=$0.63 ticker_before=85.11"
-      },
       {
         "ts": "2026-05-23 06:00:14",
         "msg": "Order submitted & verified: short price=85.15 sl=85.26 lev=100x qty=$0.63"
@@ -146,6 +125,14 @@
       {
         "ts": "2026-05-23 08:55:02",
         "msg": "Filled: long @ 84.27"
+      },
+      {
+        "ts": "2026-05-23 09:10:06",
+        "msg": "All pending orders cancelled [verified]"
+      },
+      {
+        "ts": "2026-05-23 09:10:09",
+        "msg": "Flash close click: direction=long ticker_before=84.48 click_ts=2026-05-23T01:10:09.031760+00:00"
       }
     ],
     "errors": [],
@@ -155,33 +142,24 @@
     "label": "V0 (no filter)",
     "available": true,
     "initial": 30.0,
-    "equity": 32.64279090776476,
-    "pnl": 2.6427909077647604,
-    "roi_pct": 8.809303025882542,
-    "trades": 232,
-    "wins": 99,
+    "equity": 32.910069010605135,
+    "pnl": 2.9100690106051315,
+    "roi_pct": 9.700230035350454,
+    "trades": 233,
+    "wins": 100,
     "losses": 133,
-    "win_rate": 42.672413793103445,
+    "win_rate": 42.91845493562232,
     "peak_equity": 34.66191890677052,
     "max_dd_pct": 8.045204901850305,
-    "position": {
-      "dir": "long",
-      "ep": 84.27,
-      "sl": 84.01,
-      "size": 1.1620787080015935,
-      "opened_ts": "2026-05-23T00:50:00+00:00"
+    "position": null,
+    "pending": {
+      "dir": "short",
+      "entry": 84.39,
+      "sl": 84.6,
+      "placed_ts": "2026-05-23T01:05:00+00:00"
     },
-    "pending": null,
-    "last_bar_ts": "2026-05-23 09:00:00",
+    "last_bar_ts": "2026-05-23 09:05:00",
     "recent_trades": [
-      {
-        "ts": "2026-05-22T20:25:00+00:00",
-        "dir": "short",
-        "ep": 84.81,
-        "xp": 84.82,
-        "pnl": -0.011507508395824621,
-        "exit": "FLIP"
-      },
       {
         "ts": "2026-05-22T20:55:00+00:00",
         "dir": "long",
@@ -252,6 +230,14 @@
         "ep": 84.23,
         "xp": 84.25,
         "pnl": 0.023236059490633485,
+        "exit": "FLIP"
+      },
+      {
+        "ts": "2026-05-23T01:05:00+00:00",
+        "dir": "long",
+        "ep": 84.27,
+        "xp": 84.5,
+        "pnl": 0.2672781028403711,
         "exit": "FLIP"
       }
     ],
@@ -8107,6 +8093,10 @@
     {
       "ts": "2026-05-23T09:09:36.401791+08:00",
       "equity": 21.66881961
+    },
+    {
+      "ts": "2026-05-23T09:10:10.294505+08:00",
+      "equity": 21.62681961
     }
   ],
   "equity_daily": [
@@ -8120,7 +8110,7 @@
     },
     {
       "date": "2026-05-23",
-      "equity": 21.66881961
+      "equity": 21.62681961
     }
   ],
   "equity_per_trade": [
@@ -10435,7 +10425,7 @@
   },
   "status": {
     "online": true,
-    "last_tick": "2026-05-23 09:05:02",
-    "last_tick_age_sec": 274
+    "last_tick": "2026-05-23 09:10:02",
+    "last_tick_age_sec": 8
   }
 }
