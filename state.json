@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-23 20:55:03",
-  "updated_at_iso": "2026-05-23T20:55:03.560516+08:00",
+  "updated_at": "2026-05-23 20:55:37",
+  "updated_at_iso": "2026-05-23T20:55:37.392260+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
@@ -9,7 +9,7 @@
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-23T12:55:03.480646+00:00"
+    "fetched_at": "2026-05-23T12:55:37.306650+00:00"
   },
   "log": {
     "last_tick": "2026-05-23 20:55:02",
@@ -162,14 +162,15 @@
     "win_rate": 50.0,
     "peak_equity": 30.208091281665165,
     "max_dd_pct": 0.7649451515330234,
-    "position": null,
-    "pending": {
+    "position": {
       "dir": "long",
-      "entry": 82.32,
+      "ep": 82.32,
       "sl": 82.23,
-      "placed_ts": "2026-05-23T12:45:00+00:00"
+      "size": 1.0924568495639724,
+      "opened_ts": "2026-05-23T12:50:00+00:00"
     },
-    "last_bar_ts": "2026-05-23 20:45:00",
+    "pending": null,
+    "last_bar_ts": "2026-05-23 20:50:00",
     "recent_trades": [
       {
         "ts": "2026-05-23T11:30:00+00:00",
@@ -219,14 +220,15 @@
     "win_rate": 50.0,
     "peak_equity": 30.109276347741616,
     "max_dd_pct": 0.4376367614879872,
-    "position": null,
-    "pending": {
+    "position": {
       "dir": "long",
-      "entry": 82.32,
+      "ep": 82.32,
       "sl": 82.23,
-      "placed_ts": "2026-05-23T12:45:00+00:00"
+      "size": 1.092474748025725,
+      "opened_ts": "2026-05-23T12:50:00+00:00"
     },
-    "last_bar_ts": "2026-05-23 20:45:00",
+    "pending": null,
+    "last_bar_ts": "2026-05-23 20:50:00",
     "recent_trades": [
       {
         "ts": "2026-05-23T12:05:00+00:00",
@@ -1367,6 +1369,10 @@
     {
       "ts": "2026-05-23T20:55:03.556527+08:00",
       "equity": 21.30481961
+    },
+    {
+      "ts": "2026-05-23T20:55:37.389001+08:00",
+      "equity": 21.30481961
     }
   ],
   "equity_daily": [
@@ -1439,6 +1445,6 @@
   "status": {
     "online": true,
     "last_tick": "2026-05-23 20:55:02",
-    "last_tick_age_sec": 1
+    "last_tick_age_sec": 35
   }
 }
