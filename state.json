@@ -1,40 +1,19 @@
 {
-  "updated_at": "2026-05-23 12:49:35",
-  "updated_at_iso": "2026-05-23T12:49:35.527138+08:00",
+  "updated_at": "2026-05-23 12:50:09",
+  "updated_at_iso": "2026-05-23T12:50:09.680715+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
-    "equity": 21.73881961,
+    "equity": 21.74581961,
     "available": 21.00661961051,
-    "position": {
-      "direction": "short",
-      "size": 7.0,
-      "entry": 84.6,
-      "pnl": 0.0,
-      "leverage": 100
-    },
+    "position": null,
     "plan_orders": [],
-    "stop_orders": [
-      {
-        "id": 516119167,
-        "sl": 84.65,
-        "tp": 0.0,
-        "vol": 7.0
-      }
-    ],
-    "fetched_at": "2026-05-23T04:49:35.509183+00:00"
+    "stop_orders": [],
+    "fetched_at": "2026-05-23T04:50:09.664852+00:00"
   },
   "log": {
-    "last_tick": "2026-05-23 12:45:02",
+    "last_tick": "2026-05-23 12:50:02",
     "events": [
-      {
-        "ts": "2026-05-23 08:40:05",
-        "msg": "All pending orders cancelled [verified]"
-      },
-      {
-        "ts": "2026-05-23 08:40:08",
-        "msg": "Flash close click: direction=short ticker_before=84.24 click_ts=2026-05-23T00:40:08.451785+00:00"
-      },
       {
         "ts": "2026-05-23 08:40:10",
         "msg": "OUTSIDE_BAR at ts=2026-05-23 00:35:00 O=84.36 pivot=BOTH �X skipping ambiguous signal"
@@ -146,6 +125,14 @@
       {
         "ts": "2026-05-23 12:35:02",
         "msg": "Filled: short @ 84.6"
+      },
+      {
+        "ts": "2026-05-23 12:50:06",
+        "msg": "All pending orders cancelled [verified]"
+      },
+      {
+        "ts": "2026-05-23 12:50:08",
+        "msg": "Flash close click: direction=short ticker_before=84.38 click_ts=2026-05-23T04:50:08.991469+00:00"
       }
     ],
     "errors": [],
@@ -166,12 +153,12 @@
     "max_dd_pct": 8.045204901850305,
     "position": null,
     "pending": {
-      "dir": "short",
-      "entry": 84.48,
-      "sl": 84.61,
-      "placed_ts": "2026-05-23T04:35:00+00:00"
+      "dir": "long",
+      "entry": 84.42,
+      "sl": 84.28,
+      "placed_ts": "2026-05-23T04:45:00+00:00"
     },
-    "last_bar_ts": "2026-05-23 12:40:00",
+    "last_bar_ts": "2026-05-23 12:45:00",
     "recent_trades": [
       {
         "ts": "2026-05-23T00:10:00+00:00",
@@ -1890,6 +1877,10 @@
     {
       "ts": "2026-05-23T12:49:35.519021+08:00",
       "equity": 21.73881961
+    },
+    {
+      "ts": "2026-05-23T12:50:09.670916+08:00",
+      "equity": 21.74581961
     }
   ],
   "equity_daily": [
@@ -1903,7 +1894,7 @@
     },
     {
       "date": "2026-05-23",
-      "equity": 21.73881961
+      "equity": 21.74581961
     }
   ],
   "equity_per_trade": [
@@ -3584,7 +3575,7 @@
   },
   "status": {
     "online": true,
-    "last_tick": "2026-05-23 12:45:02",
-    "last_tick_age_sec": 273
+    "last_tick": "2026-05-23 12:50:02",
+    "last_tick_age_sec": 7
   }
 }
