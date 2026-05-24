@@ -1,27 +1,23 @@
 {
-  "updated_at": "2026-05-24 12:29:35",
-  "updated_at_iso": "2026-05-24T12:29:35.811280+08:00",
+  "updated_at": "2026-05-24 12:30:10",
+  "updated_at_iso": "2026-05-24T12:30:10.068898+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
     "equity": 20.69839918,
-    "available": 20.09863918051,
+    "available": 20.69839918051,
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-24T04:29:35.702512+00:00"
+    "fetched_at": "2026-05-24T04:30:09.949397+00:00"
   },
   "live_stats": {
     "max_dd_pct": 5.576265475725048,
     "n_filtered": 184
   },
   "log": {
-    "last_tick": "2026-05-24 12:25:02",
+    "last_tick": "2026-05-24 12:30:02",
     "events": [
-      {
-        "ts": "2026-05-24 09:45:07",
-        "msg": "All pending orders cancelled [verified]"
-      },
       {
         "ts": "2026-05-24 09:45:10",
         "msg": "Flash close click: direction=long ticker_before=86.03 click_ts=2026-05-24T01:45:10.314359+00:00"
@@ -137,6 +133,10 @@
       {
         "ts": "2026-05-24 12:20:02",
         "msg": "OUTSIDE_BAR at ts=2026-05-24 04:15:00 O=85.77 pivot=BOTH �X skipping ambiguous signal"
+      },
+      {
+        "ts": "2026-05-24 12:30:03",
+        "msg": "All pending orders cancelled [verified]"
       }
     ],
     "errors": [
@@ -172,8 +172,13 @@
     "peak_equity": 30.178425655976678,
     "max_dd_pct": 1.0106951147247827,
     "position": null,
-    "pending": null,
-    "last_bar_ts": "2026-05-24 12:20:00",
+    "pending": {
+      "dir": "short",
+      "entry": 85.97,
+      "sl": 86.05,
+      "placed_ts": "2026-05-24T04:25:00+00:00"
+    },
+    "last_bar_ts": "2026-05-24 12:25:00",
     "recent_trades": [
       {
         "ts": "2026-05-24T02:55:00+00:00",
@@ -1074,6 +1079,10 @@
     {
       "ts": "2026-05-24T12:29:35.800743+08:00",
       "equity": 20.69839918
+    },
+    {
+      "ts": "2026-05-24T12:30:10.059601+08:00",
+      "equity": 20.69839918
     }
   ],
   "equity_daily": [
@@ -1145,7 +1154,7 @@
   },
   "status": {
     "online": true,
-    "last_tick": "2026-05-24 12:25:02",
-    "last_tick_age_sec": 273
+    "last_tick": "2026-05-24 12:30:02",
+    "last_tick_age_sec": 8
   }
 }
