@@ -3,181 +3,696 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MSS Bot Dashboard</title>
+<title>The Bot Saloon</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=Cinzel:wght@500;700&family=Special+Elite&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   :root {
-    --bg: #0d1117;
-    --card: #161b22;
-    --card2: #1c2230;
-    --border: #30363d;
-    --text: #e6edf3;
-    --dim: #8b949e;
-    --green: #3fb950;
-    --red: #f85149;
-    --yellow: #d29922;
-    --blue: #58a6ff;
-    --purple: #a371f7;
+    /* Paper notes — aged kraft / manila */
+    --paper:        #c9a771;
+    --paper-dark:   #a88555;
+    --paper-edge:   #6e5430;
+    --ink:          #1f1408;
+    --ink-dim:      #4a341c;
+    --pin-red:      #b8302a;
+    --pin-blue:     #2a5c8b;
+    --pin-yellow:   #d4a418;
+    --pin-green:    #4a7038;
+    /* Status colors (slightly muted for warm look) */
+    --green:        #4a7038;
+    --red:          #a13128;
+    --yellow:       #b07820;
+    --gold:         #b88838;
+    /* Fonts */
+    --f-sans: 'Inter','Noto Sans TC',-apple-system,system-ui,sans-serif;
+    --f-display: 'Cinzel','Noto Sans TC',serif;
+    --f-mono: 'JetBrains Mono',ui-monospace,Consolas,monospace;
+    --f-hand: 'Special Elite','Courier New',monospace;
   }
   * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
   body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
-    margin: 0;
-    padding: 16px;
-    font-size: 14px;
+    background: #0a0500;
+    color: #fff;
+    font-family: var(--f-sans);
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
   }
-  h1 { font-size: 20px; margin: 0; }
-  h2 { font-size: 14px; margin: 0 0 12px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.5px; }
-  .header {
-    display: flex; align-items: center; gap: 16px;
-    padding-bottom: 12px; border-bottom: 1px solid var(--border); margin-bottom: 16px;
+
+  /* SCENE — 16:9 box that fits viewport, centered */
+  .scene {
+    position: absolute;
+    inset: 0;
+    background: url('bg.jpg') no-repeat center center;
+    background-size: contain;
+    background-color: #0a0500;
+  }
+
+  /* Bartender clickable hotspot */
+  .bartender-area {
+    position: absolute;
+    left: 70%;
+    top: 18%;
+    width: 28%;
+    height: 73%;
+    cursor: pointer;
+    z-index: 5;
+    transition: filter 0.25s;
+  }
+  .bartender-area:hover {
+    filter: drop-shadow(0 0 14px rgba(255, 200, 100, 0.6));
+  }
+  .bartender-area::after {
+    content: '💬 點我聊聊';
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(40,25,10,0.85);
+    color: #f0e0bb;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid #8b6914;
+    font-family: var(--f-hand);
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.25s;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .bartender-area:hover::after { opacity: 1; }
+
+  /* RPG-style dialog box */
+  .dialog-box {
+    position: absolute;
+    bottom: 4%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    max-width: 720px;
+    background:
+      linear-gradient(180deg, rgba(40,25,10,0.96), rgba(28,16,6,0.96));
+    border: 3px solid #8b6914;
+    border-radius: 6px;
+    padding: 14px 22px 18px;
+    color: #f0e0bb;
+    font-family: var(--f-hand);
+    font-size: 17px;
+    z-index: 50;
+    box-shadow:
+      0 8px 28px rgba(0,0,0,0.8),
+      inset 0 1px 0 rgba(232,168,56,0.3),
+      inset 0 0 30px rgba(0,0,0,0.4);
+    display: none;
+    line-height: 1.55;
+    cursor: pointer;
+  }
+  .dialog-box.visible {
+    display: block;
+    animation: fadeIn 0.3s ease-out;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translate(-50%, 20px); } to { opacity: 1; transform: translate(-50%, 0); } }
+  .dialog-header {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid #8b6914;
+    padding-bottom: 5px; margin-bottom: 8px;
+    font-family: var(--f-display);
+    font-size: 14px; letter-spacing: 1.5px;
+    color: #d4af37;
+  }
+  .dialog-close {
+    cursor: pointer; padding: 0 6px;
+    font-size: 20px; color: #d4af37;
+    line-height: 1;
+  }
+  .dialog-close:hover { color: #fff; }
+  .dialog-text {
+    min-height: 1.5em;
+  }
+  .dialog-hint {
+    text-align: right;
+    font-size: 11px;
+    color: rgba(212,175,55,0.5);
+    margin-top: 6px;
+    font-family: var(--f-sans);
+  }
+  .dialog-hint::after {
+    content: ' ▼';
+    animation: bounce 1.2s infinite;
+    display: inline-block;
+  }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(3px)} }
+
+  /* CORKBOARD — overlays the bulletin board in bg.jpg, hides original pinned notes */
+  .corkboard {
+    position: absolute;
+    /* From find_corkboard.html: */
+    left:   4.39%;
+    top:    9.20%;
+    width:  57.91%;
+    height: 65.10%;
+    padding: 0.8% 1.2% 1.2%;
+    display: flex; flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* container queries so child text scales with corkboard size */
+    container-type: inline-size;
+    /* Clean cork texture overlay (covers existing notes/pins in bg.jpg) */
+    background:
+      linear-gradient(rgba(20,8,2,0.55), rgba(20,8,2,0.55)),
+      url('cork.jpg') repeat;
+    background-size: 100% 100%, 240px 240px;
+    box-shadow:
+      inset 0 0 50px rgba(0,0,0,0.6),
+      inset 0 0 120px rgba(0,0,0,0.4);
+  }
+
+  /* TAB BAR — paper strips clipped to top edge */
+  .tabs {
+    display: flex; gap: 6px;
+    margin-bottom: 1.5%;
+    z-index: 10;
+  }
+  .tab {
+    background: var(--paper-dark);
+    color: var(--ink);
+    border: 1px solid var(--paper-edge);
+    border-bottom: none;
+    padding: 4px 10px;
+    font-family: var(--f-hand);
+    font-size: 2.2cqi;
+    cursor: pointer;
+    border-radius: 3px 3px 0 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    transform-origin: top center;
+    transition: transform 0.15s;
+  }
+  .tab:hover { transform: translateY(-2px); }
+  .tab.active {
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.4);
+    border-bottom: 2px solid var(--paper);
+    margin-bottom: -2px;
+  }
+
+  /* TAB PANELS */
+  .panel { display: none; flex: 1; min-height: 0; }
+  .panel.active { display: flex; flex-direction: column; }
+
+  /* TOP STATUS STRIP */
+  .status-strip {
+    display: flex; align-items: center; gap: 10px;
+    padding: 5px 10px;
+    background: rgba(240,224,187,0.92);
+    border: 1px solid var(--paper-edge);
+    border-radius: 3px;
+    font-family: var(--f-hand);
+    font-size: 2.1cqi;
+    color: var(--ink);
+    margin-bottom: 1.5%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
   }
   .status-pill {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 4px 12px; border-radius: 999px; font-size: 13px; font-weight: 600;
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 2px 9px; border-radius: 999px;
+    font-weight: 600; font-size: 2cqi; letter-spacing: 0.5px;
   }
-  .status-pill.online { background: rgba(63,185,80,0.15); color: var(--green); }
-  .status-pill.offline { background: rgba(248,81,73,0.15); color: var(--red); }
-  .status-pill .dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  .status-pill.online .dot { background: var(--green); }
-  .status-pill.offline .dot { background: var(--red); }
-  @keyframes pulse { 0%,100% { opacity: 1 } 50% { opacity: 0.3 } }
+  .status-pill.online { background: var(--pin-green); color: #fff; }
+  .status-pill.offline { background: var(--pin-red); color: #fff; }
+  .status-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: #fff;
+    animation: pulse 2s infinite; box-shadow: 0 0 6px rgba(255,255,255,0.8); }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .status-strip .spacer { flex: 1; }
+  .status-strip .dim { color: var(--ink-dim); font-size: 1.9cqi; }
 
-  .bot-state-pill {
-    display: inline-block; padding: 4px 12px; border-radius: 4px;
-    font-family: ui-monospace, monospace; font-weight: 700; font-size: 13px;
-  }
-  .bot-state-pill.NO_ORDER       { background: rgba(139,148,158,0.2); color: var(--dim); }
-  .bot-state-pill.PENDING_ORDER  { background: rgba(210,153,34,0.2);  color: var(--yellow); }
-  .bot-state-pill.IN_POSITION    { background: rgba(63,185,80,0.2);   color: var(--green); }
-  .bot-state-pill.EXIT_PENDING   { background: rgba(88,166,255,0.2);  color: var(--blue); }
-  .bot-state-pill.RECONCILING    { background: rgba(248,81,73,0.2);   color: var(--red); }
-  .bot-state-pill.UNKNOWN        { background: rgba(139,148,158,0.2); color: var(--dim); }
-
+  /* ERROR BANNER */
   .error-banner {
-    background: rgba(248,81,73,0.12);
-    border-left: 4px solid var(--red);
-    padding: 14px 16px;
-    border-radius: 6px;
-    margin-bottom: 16px;
-    font-family: ui-monospace, monospace;
-    font-size: 13px;
+    background: rgba(184,48,42,0.95);
+    color: #fff;
+    border: 1px solid #6e1d18;
+    padding: 6px 10px;
+    border-radius: 3px;
+    font-family: var(--f-hand);
+    font-size: 2cqi;
+    margin-bottom: 1.5%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5);
   }
-  .error-banner .title { color: var(--red); font-weight: 700; margin-bottom: 6px; }
-  .error-banner .ts { color: var(--dim); font-size: 12px; }
+  .error-banner .title { font-weight: 700; margin-bottom: 2px; }
 
-  .grid {
+  /* NOTE GRID — paper notes pinned to the cork */
+  .notes {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 16px;
-    margin-bottom: 16px;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4%;
+    grid-auto-rows: min-content;
   }
-  .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 16px;
+  /* Corkboard scrollbar matching theme */
+  .corkboard::-webkit-scrollbar { width: 10px; }
+  .corkboard::-webkit-scrollbar-track { background: rgba(0,0,0,0.4); }
+  .corkboard::-webkit-scrollbar-thumb { background: #6b4a20; border-radius: 5px; border: 2px solid rgba(0,0,0,0.3); }
+  .corkboard::-webkit-scrollbar-thumb:hover { background: #8b6614; }
+  .note {
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.04) 0%, transparent 6%),
+      linear-gradient(180deg, var(--paper) 0%, var(--paper-dark) 100%);
+    color: var(--ink);
+    padding: 8px 12px 10px;
+    border-radius: 2px;
+    box-shadow:
+      inset 0 0 18px rgba(196,169,107,0.4),
+      0 3px 8px rgba(0,0,0,0.5),
+      0 1px 2px rgba(0,0,0,0.3);
+    position: relative;
+    overflow: hidden;
+    font-size: 2.1cqi;
+    transform-origin: center top;
   }
-  .card-title { font-size: 11px; color: var(--dim); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
-  .big { font-size: 28px; font-weight: 700; }
-  .row { display: flex; justify-content: space-between; padding: 4px 0; }
-  .row .k { color: var(--dim); }
-  .row .v { font-family: ui-monospace, monospace; }
+  /* Slight random rotations */
+  .note:nth-child(1) { transform: rotate(-0.6deg); }
+  .note:nth-child(2) { transform: rotate(0.8deg); }
+  .note:nth-child(3) { transform: rotate(-0.4deg); }
+  .note:nth-child(4) { transform: rotate(0.5deg); }
+  .note:nth-child(5) { transform: rotate(-0.7deg); }
+  .note.wide { grid-column: 1 / -1; }
+  .note.tall { grid-row: span 2; }
 
+  /* Pushpin */
+  .note::before {
+    content: '';
+    position: absolute; top: 5px; left: 50%; transform: translateX(-50%);
+    width: 10px; height: 10px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #ff6b6b, #b8302a 70%, #6e1d18);
+    box-shadow: 0 2px 3px rgba(0,0,0,0.6), inset -1px -1px 2px rgba(0,0,0,0.4);
+    z-index: 2;
+  }
+  .note.pin-blue::before {
+    background: radial-gradient(circle at 30% 30%, #5a9cd1, #2a5c8b 70%, #1a3c5a);
+  }
+  .note.pin-yellow::before {
+    background: radial-gradient(circle at 30% 30%, #ffd97a, #d4a418 70%, #8b6614);
+  }
+  .note.pin-green::before {
+    background: radial-gradient(circle at 30% 30%, #8bc06a, #4a7038 70%, #2a4520);
+  }
+
+  .note h3 {
+    margin: 8px 0 6px;
+    font-family: var(--f-hand);
+    font-size: 2.4cqi;
+    color: var(--ink);
+    text-align: center;
+    letter-spacing: 0.5px;
+    border-bottom: 1px dashed var(--paper-edge);
+    padding-bottom: 4px;
+  }
+  .row { display: flex; justify-content: space-between; padding: 2px 0; font-family: var(--f-mono); }
+  .row .k { color: var(--ink-dim); font-family: var(--f-sans); font-size: 1.9cqi; }
+  .row .v { color: var(--ink); font-weight: 500; font-size: 2cqi; }
+
+  .big {
+    font-family: var(--f-mono); font-weight: 600;
+    font-size: 3.6cqi; color: var(--ink); text-align: center;
+    margin: 4px 0;
+  }
   .pnl-pos { color: var(--green); }
   .pnl-neg { color: var(--red); }
-  .pnl-neutral { color: var(--dim); }
+  .pnl-neutral { color: var(--ink-dim); }
 
-  table { width: 100%; border-collapse: collapse; font-family: ui-monospace, monospace; font-size: 12px; }
-  th, td { padding: 6px 8px; text-align: left; border-bottom: 1px solid var(--border); }
-  th { color: var(--dim); font-weight: 600; font-size: 11px; text-transform: uppercase; }
-  tr:last-child td { border-bottom: none; }
+  /* COMPARE — 3 columns */
+  .compare-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 4px; }
+  .compare-cell { background: rgba(196,169,107,0.18); border: 1px solid var(--paper-edge);
+    border-radius: 3px; padding: 6px 4px; text-align: center; }
+  .compare-cell .label { font-family: var(--f-hand); font-size: 1.7cqi; color: var(--ink-dim); }
+  .compare-cell .val { font-family: var(--f-mono); font-size: 2.6cqi; font-weight: 600; margin-top: 2px; }
+  .compare-cell .sub { font-size: 1.6cqi; color: var(--ink-dim); }
+  table { width: 100%; border-collapse: collapse; font-family: var(--f-mono); font-size: 1.8cqi; }
+  th, td { padding: 2px 4px; text-align: left; }
+  th { color: var(--ink-dim); font-family: var(--f-hand); font-weight: 400; }
+  tr td:first-child, tr th:first-child { color: var(--ink-dim); font-family: var(--f-sans); }
 
-  .event-log { max-height: 480px; overflow-y: auto; font-family: ui-monospace, monospace; font-size: 12px; }
-  .event-log .row { padding: 4px 0; border-bottom: 1px solid var(--border); display: block; }
-  .event-log .ts { color: var(--dim); margin-right: 8px; }
-  .event-log .kind { display: inline-block; min-width: 90px; font-weight: 700; }
-  .event-log .kind.SIGNAL    { color: var(--purple); }
-  .event-log .kind.ORDER     { color: var(--green); }
-  .event-log .kind.CLOSE     { color: var(--blue); }
-  .event-log .kind.EXIT      { color: var(--blue); }
-  .event-log .kind.CANCEL    { color: var(--yellow); }
-  .event-log .kind.PIVOT-EXIT { color: var(--purple); }
-  .event-log .kind.BARS      { color: var(--dim); }
-  .event-log .kind.RECONCILE { color: var(--yellow); }
-  .event-log .kind.HALT      { color: var(--red); }
-  .event-log .kind.HARD-STOP { color: var(--red); }
-  .event-log .kind.SHOT      { color: var(--yellow); }
-
-  .footer { color: var(--dim); font-size: 11px; text-align: center; margin-top: 20px; padding: 12px; }
-  .position-pill {
-    display: inline-block; padding: 2px 8px; border-radius: 4px; font-weight: 600; font-size: 11px;
+  /* EVENT LOG */
+  .event-log {
+    flex: 1; min-height: 0; overflow-y: auto;
+    font-family: var(--f-mono); font-size: 1.85cqi;
+    padding-right: 4px;
   }
-  .position-pill.long { background: rgba(63,185,80,0.2); color: var(--green); }
-  .position-pill.short { background: rgba(248,81,73,0.2); color: var(--red); }
+  .event-log .e-row { padding: 2px 0; border-bottom: 1px dashed rgba(196,169,107,0.4); }
+  .event-log .ts { color: var(--ink-dim); margin-right: 6px; }
+  .event-log .filter { color: #7c2d10; font-weight: 600; }
+  .event-log .sl { color: #8b1e1e; font-weight: 600; }
+  .event-log .flip { color: #1e3a5f; font-weight: 600; }
+  .event-log .order { color: #2d5020; font-weight: 600; }
+  .event-log::-webkit-scrollbar { width: 6px; }
+  .event-log::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
+  .event-log::-webkit-scrollbar-thumb { background: var(--paper-edge); border-radius: 3px; }
+
+  /* Position pill */
+  .position-pill {
+    display: inline-block; padding: 2px 8px; border-radius: 2px;
+    font-weight: 600; font-size: 1.9cqi; letter-spacing: 1px;
+    border: 1px solid currentColor;
+  }
+  .position-pill.long { color: var(--green); background: rgba(74,112,56,0.15); }
+  .position-pill.short { color: var(--red); background: rgba(161,49,40,0.15); }
+
+  /* Chart interval selector */
+  .interval-bar {
+    display: flex; gap: 4px; margin: 4px 0 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .iv-btn {
+    background: rgba(110,84,48,0.18);
+    color: var(--ink-dim);
+    border: 1px solid var(--paper-edge);
+    padding: 3px 12px;
+    font-family: var(--f-hand);
+    font-size: 1.9cqi;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.15s;
+    letter-spacing: 0.5px;
+  }
+  .iv-btn:hover {
+    background: rgba(110,84,48,0.35);
+    color: var(--ink);
+  }
+  .iv-btn.active {
+    background: #6e5430;
+    color: #f0e0bb;
+    border-color: #4a341c;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+  }
+
+  /* TRADES PANEL */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.8%;
+    margin-bottom: 1.2%;
+  }
+  .stat-note {
+    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-dark) 100%);
+    border: 1px solid var(--paper-edge);
+    padding: 5px 4px 7px;
+    text-align: center;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4), inset 0 1px 0 rgba(0,0,0,0.05);
+    position: relative;
+  }
+  .stat-note::before {
+    content: '';
+    position: absolute; top: 3px; left: 50%; transform: translateX(-50%);
+    width: 6px; height: 6px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #ffd97a, #d4a418 70%);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  }
+  .stat-label {
+    font-family: var(--f-hand); font-size: 1.4cqi; color: var(--ink-dim);
+    letter-spacing: 0.5px; margin-top: 8px;
+  }
+  .stat-value {
+    font-family: var(--f-mono); font-size: 2.4cqi; font-weight: 600;
+    color: var(--ink); margin-top: 2px;
+  }
+
+  .trades-note { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+  .trade-table-wrap {
+    flex: 1; min-height: 0; overflow-y: auto; overflow-x: auto;
+    border: 1px solid var(--paper-edge);
+    border-radius: 2px;
+    background: rgba(255,250,235,0.4);
+  }
+  .trade-table {
+    width: 100%; border-collapse: collapse;
+    font-family: var(--f-mono); font-size: 1.65cqi;
+  }
+  .trade-table th {
+    position: sticky; top: 0;
+    background: var(--paper-edge);
+    color: var(--ink);
+    padding: 5px 6px; text-align: left;
+    font-family: var(--f-hand); font-weight: 500;
+    font-size: 1.6cqi; letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--ink-dim);
+  }
+  .trade-table td {
+    padding: 3px 6px;
+    border-bottom: 1px dashed rgba(110,84,48,0.3);
+    color: var(--ink);
+  }
+  .trade-table tbody tr:nth-child(even) td {
+    background: rgba(196,169,107,0.12);
+  }
+  .trade-table tbody tr:hover td {
+    background: rgba(196,169,107,0.3);
+  }
+  .trade-table .dir-long { color: #2d5020; font-weight: 600; }
+  .trade-table .dir-short { color: #8b1e1e; font-weight: 600; }
+  .trade-table .reason {
+    font-family: var(--f-hand); color: var(--ink-dim); font-size: 1.5cqi;
+  }
+  .trade-table-wrap::-webkit-scrollbar { width: 10px; }
+  .trade-table-wrap::-webkit-scrollbar-track { background: rgba(0,0,0,0.4); }
+  .trade-table-wrap::-webkit-scrollbar-thumb { background: #6b4a20; border-radius: 5px; border: 2px solid rgba(0,0,0,0.3); }
+  .trade-table-wrap::-webkit-scrollbar-thumb:hover { background: #8b6614; }
+
+  .pagination {
+    display: flex; gap: 3px; justify-content: center;
+    padding: 6px 0 2px;
+    flex-wrap: wrap;
+  }
+  .pg-btn {
+    background: rgba(110,84,48,0.18); color: var(--ink-dim);
+    border: 1px solid var(--paper-edge);
+    padding: 2px 9px;
+    font-family: var(--f-hand); font-size: 1.7cqi;
+    cursor: pointer; border-radius: 2px;
+    min-width: 22px;
+  }
+  .pg-btn:hover { background: rgba(110,84,48,0.35); color: var(--ink); }
+  .pg-btn.active {
+    background: #6e5430; color: #f0e0bb; border-color: #4a341c;
+  }
+  .pg-btn.dots { background: none; border: none; cursor: default; padding: 2px 4px; }
+  .pg-info { font-family: var(--f-hand); color: var(--ink-dim); font-size: 1.6cqi; margin-left: 8px; }
+
+  /* Coming soon */
+  .stub {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    color: var(--paper-dark); font-family: var(--f-hand);
+    font-size: 3cqi; text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  }
+
+  /* Small overlays for debug */
+  .meta {
+    position: absolute; bottom: 4px; right: 10px;
+    color: rgba(240,224,187,0.5); font-size: 11px; font-family: var(--f-mono);
+    z-index: 1;
+  }
+
+  /* Bot state machine pill colors */
+  .bot-state-NO_ORDER      { color: var(--ink-dim); }
+  .bot-state-PENDING_ORDER { color: var(--pin-yellow); }
+  .bot-state-IN_POSITION   { color: var(--pin-green); }
+  .bot-state-EXIT_PENDING  { color: var(--pin-blue); }
+  .bot-state-RECONCILING   { color: var(--pin-red); }
+  .bot-state-UNKNOWN       { color: var(--ink-dim); }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>📊 MSS Bot Dashboard</h1>
-  <span id="status-pill" class="status-pill offline">
-    <span class="dot"></span>
-    <span id="status-text">Loading...</span>
-  </span>
-  <span style="color: var(--dim); font-size: 12px;" id="last-tick"></span>
-  <span style="margin-left: auto; color: var(--dim); font-size: 12px;" id="updated-at"></span>
-</div>
+<div class="scene">
+  <!-- Clickable bartender -->
+  <div class="bartender-area" id="bartender"></div>
 
-<div id="error-banner" style="display:none"></div>
-
-<!-- Live capital + bot state + position + pending -->
-<div class="grid">
-  <div class="card">
-    <div class="card-title">總權益（即時）</div>
-    <div class="big" id="live-equity">—</div>
-    <div class="row"><span class="k">Available</span><span class="v" id="live-avail">—</span></div>
-    <div class="row"><span class="k">Max DD</span><span class="v" id="live-dd">—</span></div>
-    <div class="row"><span class="k">過去 1h errors</span><span class="v" id="errors-1h">—</span></div>
+  <!-- RPG dialog box -->
+  <div class="dialog-box" id="dialog">
+    <div class="dialog-header">
+      <span>🍺 Bartender · Driftwood Tavern</span>
+      <span class="dialog-close" id="dialog-close">×</span>
+    </div>
+    <div class="dialog-text" id="dialog-text"></div>
+    <div class="dialog-hint">點擊繼續</div>
   </div>
 
-  <div class="card">
-    <div class="card-title">Bot 狀態</div>
-    <div class="big"><span id="bot-state" class="bot-state-pill UNKNOWN">UNKNOWN</span></div>
-    <div class="row"><span class="k">最後 5m tick</span><span class="v" id="last-bar">—</span></div>
-    <div class="row"><span class="k">State 更新時間</span><span class="v" id="bot-state-ts">—</span></div>
-    <div class="row"><span class="k">迴圈次數</span><span class="v" id="bot-iter">—</span></div>
+  <div class="corkboard">
+    <!-- Tabs -->
+    <div class="tabs">
+      <div class="tab active" data-tab="overview">Overview</div>
+      <div class="tab" data-tab="equity">Equity</div>
+      <div class="tab" data-tab="trades">Trades</div>
+      <div class="tab" data-tab="errors">Errors</div>
+      <div class="tab" data-tab="about">About</div>
+    </div>
+
+    <!-- OVERVIEW PANEL -->
+    <div class="panel active" id="panel-overview">
+      <div class="status-strip">
+        <span id="status-pill" class="status-pill offline"><span class="dot"></span><span id="status-text">Loading…</span></span>
+        <span id="last-tick" class="dim">—</span>
+        <span class="spacer"></span>
+        <span id="updated-at" class="dim">—</span>
+      </div>
+
+      <div id="error-banner" class="error-banner" style="display:none"></div>
+
+      <div class="notes">
+        <!-- Equity / Position -->
+        <div class="note">
+          <h3>💰 Equity & Position</h3>
+          <div class="big" id="live-equity">—</div>
+          <div class="row"><span class="k">Available</span><span class="v" id="live-avail">—</span></div>
+          <div class="row"><span class="k">Last bar</span><span class="v" id="last-bar">—</span></div>
+          <div class="row"><span class="k">Errors / 1h</span><span class="v" id="errors-1h">—</span></div>
+          <div style="margin-top:6px; padding-top:5px; border-top:1px dashed var(--paper-edge);">
+            <div id="position-content" style="font-size:2cqi"><span class="pnl-neutral">無持倉</span></div>
+          </div>
+        </div>
+
+        <!-- Pending -->
+        <div class="note pin-yellow">
+          <h3>📋 Pending</h3>
+          <div id="pending-content" style="font-size:2cqi"><span class="pnl-neutral">無掛單</span></div>
+        </div>
+
+        <!-- Bot State -->
+        <div class="note wide pin-blue">
+          <h3>🎯 Bot 狀態</h3>
+          <div class="compare-grid">
+            <div class="compare-cell">
+              <div class="label">State Machine</div>
+              <div class="val" id="bot-state">—</div>
+              <div class="sub" id="bot-state-ts">—</div>
+            </div>
+            <div class="compare-cell">
+              <div class="label">Max DD (帳戶)</div>
+              <div class="val" id="live-max-dd">—</div>
+              <div class="sub">since dashboard start</div>
+            </div>
+            <div class="compare-cell">
+              <div class="label">迴圈次數</div>
+              <div class="val" id="bot-iter">—</div>
+              <div class="sub" id="bot-last-bar">—</div>
+            </div>
+          </div>
+          <table style="margin-top:6px;">
+            <thead><tr><th>策略</th><th colspan="3">SOL/USDT · MEXC · MSS 5m · pct=3% · lev=100x</th></tr></thead>
+            <tbody>
+              <tr><td>Pending</td><td colspan="3" id="bot-pending-row">—</td></tr>
+              <tr><td>Position</td><td colspan="3" id="bot-position-row">—</td></tr>
+              <tr><td>Last signal</td><td colspan="3" id="bot-last-signal">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Recent activity -->
+        <div class="note wide pin-green">
+          <h3>📜 最近活動</h3>
+          <div class="event-log" id="event-log"><span class="pnl-neutral">Loading…</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EQUITY PANEL -->
+    <div class="panel" id="panel-equity">
+      <div class="notes" style="grid-template-columns: 1fr;">
+        <div class="note pin-yellow" style="display:flex; flex-direction:column; min-height:0;">
+          <h3>📈 資產曲線</h3>
+          <div class="interval-bar" id="interval-bar">
+            <button class="iv-btn" data-iv="trade">Trade</button>
+            <button class="iv-btn" data-iv="1h">1h</button>
+            <button class="iv-btn" data-iv="4h">4h</button>
+            <button class="iv-btn active" data-iv="1d">1d</button>
+            <button class="iv-btn" data-iv="1w">1w</button>
+            <button class="iv-btn" data-iv="1M">1M</button>
+          </div>
+          <div style="position:relative; height:38cqi; width:100%;">
+            <canvas id="equity-chart"></canvas>
+          </div>
+        </div>
+        <div class="note pin-green">
+          <h3>📊 今日 vs 昨日</h3>
+          <div class="compare-grid">
+            <div class="compare-cell">
+              <div class="label">今日資產</div>
+              <div class="val" id="today-equity">—</div>
+              <div class="sub" id="today-date">—</div>
+            </div>
+            <div class="compare-cell">
+              <div class="label">昨日收盤</div>
+              <div class="val" id="yesterday-equity">—</div>
+              <div class="sub" id="yesterday-date">—</div>
+            </div>
+            <div class="compare-cell">
+              <div class="label">日內變化</div>
+              <div class="val" id="equity-change">—</div>
+              <div class="sub" id="equity-change-pct">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRADES PANEL -->
+    <div class="panel" id="panel-trades">
+      <div class="stats-row">
+        <div class="stat-note"><div class="stat-label">Total Trades</div><div class="stat-value" id="ts-total">—</div></div>
+        <div class="stat-note"><div class="stat-label">Win Rate</div><div class="stat-value" id="ts-winrate">—</div></div>
+        <div class="stat-note"><div class="stat-label">Avg Win</div><div class="stat-value pnl-pos" id="ts-avg-win">—</div></div>
+        <div class="stat-note"><div class="stat-label">Avg Loss</div><div class="stat-value pnl-neg" id="ts-avg-loss">—</div></div>
+        <div class="stat-note"><div class="stat-label">Biggest Win</div><div class="stat-value pnl-pos" id="ts-big-win">—</div></div>
+        <div class="stat-note"><div class="stat-label">Biggest Loss</div><div class="stat-value pnl-neg" id="ts-big-loss">—</div></div>
+      </div>
+      <div class="note pin-blue trades-note">
+        <h3>📜 Trade Log</h3>
+        <div class="trade-table-wrap">
+          <table class="trade-table">
+            <thead>
+              <tr>
+                <th>Time (TPE)</th>
+                <th>Dir</th>
+                <th>Entry</th>
+                <th>Exit</th>
+                <th>P&amp;L $</th>
+                <th>P&amp;L %</th>
+                <th>Reason</th>
+              </tr>
+            </thead>
+            <tbody id="trade-table-body">
+              <tr><td colspan="7" style="text-align:center;color:var(--ink-dim);">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination" id="trade-pagination"></div>
+      </div>
+    </div>
+
+    <!-- ERRORS PANEL -->
+    <div class="panel" id="panel-errors">
+      <div class="notes" style="grid-template-rows:1fr;">
+        <div class="note wide tall">
+          <h3>⚠️ Error Log</h3>
+          <div class="event-log" id="error-log"><span class="pnl-pos">✓ 無錯誤紀錄</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT PANEL -->
+    <div class="panel" id="panel-about">
+      <div class="stub" style="flex-direction:column; gap:1cqi;">
+        <div>🍺 The Bot Saloon</div>
+        <div style="font-size:1.8cqi; color: var(--paper-edge);">SOL/USDT · MEXC · MSS 5m · HLH overwrite · pct=3% · lev=100x</div>
+      </div>
+    </div>
   </div>
 
-  <div class="card">
-    <div class="card-title">目前持倉</div>
-    <div id="position-content"><span class="pnl-neutral">無持倉</span></div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">掛單中</div>
-    <div id="pending-content"><span class="pnl-neutral">無掛單</span></div>
-  </div>
-</div>
-
-<!-- Recent activity log -->
-<div class="grid" style="grid-template-columns: 1fr 1fr;">
-  <div class="card">
-    <h2>📜 最近活動（SIGNAL / ORDER / CLOSE / EXIT / CANCEL / PIVOT-EXIT / RECONCILE）</h2>
-    <div class="event-log" id="event-log"><span class="pnl-neutral">Loading...</span></div>
-  </div>
-  <div class="card">
-    <h2>⚠️ 最近錯誤（24h）</h2>
-    <div class="event-log" id="error-log"><span class="pnl-neutral">無錯誤紀錄</span></div>
-  </div>
-</div>
-
-<div class="footer">
-  Updates every 5 seconds · Data from state.json · <span id="data-source">—</span>
+  <div class="meta" id="data-source">—</div>
 </div>
 
 <script>
@@ -187,15 +702,40 @@ const STATE_URL = (() => {
   return 'state.json';
 })();
 
+// Tabs
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('panel-' + t.dataset.tab).classList.add('active');
+  });
+});
+
 function fmtMoney(n) {
   if (n === null || n === undefined || isNaN(n)) return '—';
   const sign = n >= 0 ? '+' : '';
   return sign + '$' + Number(n).toFixed(4);
 }
+function fmtPct(n) {
+  if (n === null || n === undefined || isNaN(n)) return '—';
+  const sign = n >= 0 ? '+' : '';
+  return sign + Number(n).toFixed(2) + '%';
+}
 function pnlClass(n) {
   if (n > 0.001) return 'pnl-pos';
   if (n < -0.001) return 'pnl-neg';
   return 'pnl-neutral';
+}
+function eventClass(msg) {
+  if (msg.includes('[SIGNAL]'))     return 'flip';     // purple-ish
+  if (msg.includes('[ORDER]'))      return 'order';    // green
+  if (msg.includes('[CLOSE]') || msg.includes('[EXIT]')) return 'order';
+  if (msg.includes('[CANCEL]'))     return 'filter';   // yellow
+  if (msg.includes('[PIVOT-EXIT]')) return 'flip';
+  if (msg.includes('[HALT]') || msg.includes('[HARD-STOP]')) return 'sl';
+  if (msg.includes('[RECONCILE]'))  return 'filter';
+  return '';
 }
 function ageString(sec) {
   if (sec === null || sec === undefined) return '—';
@@ -219,122 +759,493 @@ async function refresh() {
 }
 
 function render(s) {
-  // Status pill
   const stat = s.status || {};
   const pill = document.getElementById('status-pill');
   const text = document.getElementById('status-text');
-  if (stat.online) {
-    pill.className = 'status-pill online';
-    text.textContent = 'LIVE';
-  } else {
-    pill.className = 'status-pill offline';
-    text.textContent = 'OFFLINE';
-  }
+  if (stat.online) { pill.className = 'status-pill online'; text.textContent = 'LIVE'; }
+  else { pill.className = 'status-pill offline'; text.textContent = 'OFFLINE'; }
   document.getElementById('last-tick').textContent = stat.last_tick
-    ? `最後 tick: ${stat.last_tick} (${ageString(stat.last_tick_age_sec)})`
-    : '';
-  document.getElementById('updated-at').textContent = `Updated: ${s.updated_at || '—'}`;
-  document.getElementById('data-source').textContent = s.log_file || 'mss_bot.log';
+    ? `${stat.last_tick} (${ageString(stat.last_tick_age_sec)})` : '—';
+  document.getElementById('updated-at').textContent = s.updated_at ? `↻ ${s.updated_at}` : '—';
+  document.getElementById('data-source').textContent = s.log_file || '';
 
-  // Error banner
   const eb = document.getElementById('error-banner');
   const errs = (s.log && s.log.errors) || [];
   if (errs.length && s.log.error_count_1h > 0) {
     const latest = errs[errs.length - 1];
     eb.style.display = 'block';
-    eb.className = 'error-banner';
-    eb.innerHTML = `
-      <div class="title">🔴 ${latest.level}  ·  過去 1 小時 ${s.log.error_count_1h} 個錯誤</div>
-      <div class="ts">${latest.ts}</div>
-      <div style="margin-top:6px">${latest.msg.substring(0,300)}</div>
-    `;
-  } else {
-    eb.style.display = 'none';
-  }
+    eb.innerHTML = `<div class="title">🔴 ${latest.level} · 過去 1 小時 ${s.log.error_count_1h} 個錯誤</div>
+      <div>${latest.ts} — ${latest.msg.substring(0, 200)}</div>`;
+  } else { eb.style.display = 'none'; }
   document.getElementById('errors-1h').textContent = (s.log && s.log.error_count_1h) || 0;
 
-  // Live equity
   const live = s.live || {};
   if (live.ok) {
     document.getElementById('live-equity').textContent = '$' + Number(live.equity).toFixed(2);
     document.getElementById('live-avail').textContent = '$' + Number(live.available).toFixed(2);
   } else {
-    document.getElementById('live-equity').textContent = live.error || 'N/A';
+    document.getElementById('live-equity').textContent = live.error ? 'API ERR' : 'N/A';
     document.getElementById('live-avail').textContent = '—';
   }
-  const ls = s.live_stats || {};
-  document.getElementById('live-dd').textContent = ls.max_dd_pct ? ls.max_dd_pct.toFixed(2) + '%' : '0%';
-
-  // Bot state
-  const bot = s.bot || {};
-  const botStateEl = document.getElementById('bot-state');
-  const stateName = bot.state || 'UNKNOWN';
-  botStateEl.textContent = stateName;
-  botStateEl.className = 'bot-state-pill ' + stateName;
   document.getElementById('last-bar').textContent = stat.last_tick || '—';
-  document.getElementById('bot-state-ts').textContent = bot.ts_tpe || '—';
-  document.getElementById('bot-iter').textContent = (bot.extra && bot.extra.iter) || '—';
 
-  // Position (from live MEXC)
   const pos = live.position || null;
   const posEl = document.getElementById('position-content');
   if (pos) {
     const dir = (pos.direction || pos.dir || '').toLowerCase();
     const cls = dir === 'long' ? 'long' : 'short';
     posEl.innerHTML = `
-      <div class="big" style="font-size:22px;">
-        <span class="position-pill ${cls}">${dir.toUpperCase()}</span>
-        ${pos.size || pos.qty || '—'} SOL
-      </div>
-      <div class="row"><span class="k">Entry</span><span class="v">$${pos.entry || pos.avg_price || '—'}</span></div>
-      <div class="row"><span class="k">Unrealized PnL</span><span class="v ${pnlClass(pos.unrealized_pnl || pos.PnL || pos.pnl || 0)}">${fmtMoney(pos.unrealized_pnl || pos.PnL || pos.pnl || 0)}</span></div>
-    `;
-  } else {
-    posEl.innerHTML = '<span class="pnl-neutral">無持倉</span>';
-  }
+      <span class="position-pill ${cls}">${dir.toUpperCase()}</span> ${pos.size || pos.qty || '—'} SOL @ $${pos.entry || pos.avg_price || '—'}
+      <div class="row"><span class="k">Unreal. PnL</span><span class="v ${pnlClass(pos.unrealized_pnl || pos.PnL || pos.pnl || 0)}">${fmtMoney(pos.unrealized_pnl || pos.PnL || pos.pnl || 0)}</span></div>`;
+  } else { posEl.innerHTML = '<span class="pnl-neutral">無持倉</span>'; }
 
-  // Pending (from live MEXC)
   const pendEl = document.getElementById('pending-content');
   const stops = live.stop_orders || [];
   const plans = live.plan_orders || [];
   if (stops.length || plans.length) {
     let html = '';
-    for (const o of plans) {
-      html += `<div class="row"><span class="k">${o.direction || 'Plan'}</span><span class="v">@ ${o.trigger_price || o.price || '—'} vol=${o.vol || '—'}</span></div>`;
-    }
-    for (const o of stops) {
-      html += `<div class="row"><span class="k">Stop</span><span class="v">SL=${o.sl || '—'} TP=${o.tp || '—'} vol=${o.vol || '—'}</span></div>`;
-    }
+    for (const o of stops) html += `<div class="row"><span class="k">Stop</span><span class="v">SL=${o.sl || o.trigger_price || '—'} vol=${o.vol || o.qty || '—'}</span></div>`;
+    for (const o of plans) html += `<div class="row"><span class="k">Plan</span><span class="v">${o.side || ''} @ ${o.price || '—'}</span></div>`;
     pendEl.innerHTML = html;
+  } else { pendEl.innerHTML = '<span class="pnl-neutral">無掛單</span>'; }
+
+  // Bot state
+  const bot = s.bot || {};
+  const ls  = s.live_stats || {};
+  const botStateEl = document.getElementById('bot-state');
+  const stateName = bot.state || 'UNKNOWN';
+  botStateEl.textContent = stateName;
+  botStateEl.className = 'val bot-state-' + stateName;
+  document.getElementById('bot-state-ts').textContent = bot.ts_tpe || '—';
+  document.getElementById('bot-iter').textContent = (bot.extra && bot.extra.iter) || '—';
+  document.getElementById('bot-last-bar').textContent = stat.last_tick || '—';
+  document.getElementById('live-max-dd').textContent = (ls.max_dd_pct || 0).toFixed(2) + '%';
+
+  // Pending row (compact)
+  const pendingRow = document.getElementById('bot-pending-row');
+  const pendOrder = bot.pending_order;
+  if (pendOrder) {
+    pendingRow.innerHTML = `${pendOrder.side} @ trigger ${Number(pendOrder.trigger).toFixed(4)} qty ${Number(pendOrder.qty).toFixed(4)} (id ${pendOrder.order_id})`;
   } else {
-    pendEl.innerHTML = '<span class="pnl-neutral">無掛單</span>';
+    pendingRow.textContent = '無';
   }
 
-  // Event log
+  // Position row (compact)
+  const positionRow = document.getElementById('bot-position-row');
+  if (bot.position) {
+    const p = bot.position;
+    positionRow.innerHTML = `${p.side} ep=${Number(p.ep||0).toFixed(4)} qty=${Number(p.qty||0).toFixed(4)}`;
+  } else {
+    positionRow.textContent = '無';
+  }
+
+  // Last signal from event log
+  const lastSignal = (s.log && s.log.events || []).slice().reverse().find(e => e.kind === 'SIGNAL');
+  document.getElementById('bot-last-signal').textContent = lastSignal
+    ? `${lastSignal.ts} — ${lastSignal.msg}`
+    : '—';
+
   const events = (s.log && s.log.events) || [];
   const elog = document.getElementById('event-log');
-  if (events.length) {
-    elog.innerHTML = events.slice().reverse().map(e => {
-      const kindClass = (e.kind || '').replace(/[^A-Z\-]/gi, '');
-      return `<div class="row"><span class="ts">${(e.ts || '').substring(11)}</span><span class="kind ${kindClass}">[${e.kind || '?'}]</span>${(e.msg || '').replace(/^\[[A-Z\-]+\]\s*/,'')}</div>`;
-    }).join('');
-  } else {
-    elog.innerHTML = '<span class="pnl-neutral">無活動</span>';
-  }
+  elog.innerHTML = events.length
+    ? events.slice().reverse().map(e => `<div class="e-row"><span class="ts">${e.ts.substring(11)}</span><span class="${eventClass(e.msg)}">${e.msg}</span></div>`).join('')
+    : '<span class="pnl-neutral">無活動</span>';
 
-  // Error log
   const errLog = document.getElementById('error-log');
-  if (errs.length) {
-    errLog.innerHTML = errs.slice().reverse().map(e =>
-      `<div class="row"><span class="ts">${e.ts}</span><span class="kind HALT">${e.level}</span><br><span style="color:var(--dim);font-size:11px">${(e.msg || '').substring(0,200)}</span></div>`
-    ).join('');
-  } else {
-    errLog.innerHTML = '<span class="pnl-pos">✓ 無錯誤紀錄</span>';
-  }
+  errLog.innerHTML = errs.length
+    ? errs.slice().reverse().map(e => `<div class="e-row"><span class="ts">${e.ts}</span> <span class="sl">${e.level}</span><br><span style="color:var(--ink-dim);font-size:1.6cqi">${e.msg.substring(0,250)}</span></div>`).join('')
+    : '<span class="pnl-pos">✓ 無錯誤紀錄</span>';
+
+  // Equity chart (fine + daily + per-trade series)
+  lastEquityFine = s.equity_history || [];
+  lastEquityDaily = s.equity_daily || [];
+  lastEquityPerTrade = s.equity_per_trade || [];
+  renderEquityChart(currentInterval);
+  updateEquityComparison(lastEquityDaily);
+
+  // Trade log
+  renderTradeLog(s.trade_log || {});
 }
 
 refresh();
 setInterval(refresh, 5000);
+
+/* ============================================================
+   Equity Chart - multi-interval bucketing
+   ============================================================ */
+let equityChart = null;
+let currentInterval = '1d';
+let lastEquityFine = [];
+let lastEquityDaily = [];
+let lastEquityPerTrade = [];
+
+const INTERVAL_CONFIG = {
+  'trade': { src: 'trade', maxBuckets: 300 },                                    // per-trade
+  '1h':    { ms: 3_600_000,      src: 'fine',  fmt: 'MM-DD HH:00', maxBuckets: 168 },
+  '4h':    { ms: 14_400_000,     src: 'fine',  fmt: 'MM-DD HH:00', maxBuckets: 180 },
+  '1d':    { ms: 86_400_000,     src: 'daily', fmt: 'MM-DD',     maxBuckets: 90 },
+  '1w':    { ms: 604_800_000,    src: 'daily', fmt: 'MM-DD',     maxBuckets: 52 },
+  '1M':    { ms: 2_592_000_000,  src: 'daily', fmt: 'YYYY-MM',   maxBuckets: 24 },
+};
+
+function parseTs(entry) {
+  if (entry.ts) return new Date(entry.ts).getTime();
+  if (entry.date) return new Date(entry.date + 'T23:59:59+08:00').getTime();
+  return 0;
+}
+
+function formatBucket(timestamp, fmt) {
+  const d = new Date(timestamp);
+  const yyyy = d.getFullYear();
+  const MM = String(d.getMonth() + 1).padStart(2, '0');
+  const DD = String(d.getDate()).padStart(2, '0');
+  const HH = String(d.getHours()).padStart(2, '0');
+  const mm = String(d.getMinutes()).padStart(2, '0');
+  switch (fmt) {
+    case 'HH:mm':       return `${HH}:${mm}`;
+    case 'MM-DD HH:00': return `${MM}-${DD} ${HH}:00`;
+    case 'MM-DD':       return `${MM}-${DD}`;
+    case 'YYYY-MM':     return `${yyyy}-${MM}`;
+    default:            return `${MM}-${DD}`;
+  }
+}
+
+function bucketize(entries, intervalMs) {
+  // Group entries by bucket; take the LATEST value within each bucket
+  const buckets = new Map();
+  for (const e of entries) {
+    const t = parseTs(e);
+    if (!t) continue;
+    const start = Math.floor(t / intervalMs) * intervalMs;
+    const existing = buckets.get(start);
+    if (!existing || existing.t < t) {
+      buckets.set(start, { t, equity: e.equity });
+    }
+  }
+  return Array.from(buckets.entries())
+    .map(([start, v]) => ({ start, equity: v.equity }))
+    .sort((a, b) => a.start - b.start);
+}
+
+function buildChartData(interval) {
+  const cfg = INTERVAL_CONFIG[interval];
+  if (!cfg) return { labels: [], values: [] };
+
+  // Per-trade mode: no bucketing, plot each trade as one point
+  if (cfg.src === 'trade') {
+    let trades = lastEquityPerTrade || [];
+    if (trades.length > cfg.maxBuckets) trades = trades.slice(-cfg.maxBuckets);
+    return {
+      labels: trades.map(t => '#' + t.trade_idx),
+      values: trades.map(t => t.equity),
+    };
+  }
+
+  const src = cfg.src === 'daily' ? lastEquityDaily : lastEquityFine;
+  if (!src || src.length === 0) return { labels: [], values: [] };
+  let buckets = bucketize(src, cfg.ms);
+  if (buckets.length > cfg.maxBuckets) buckets = buckets.slice(-cfg.maxBuckets);
+  return {
+    labels: buckets.map(b => formatBucket(b.start, cfg.fmt)),
+    values: buckets.map(b => b.equity),
+  };
+}
+
+function renderEquityChart(interval) {
+  const canvas = document.getElementById('equity-chart');
+  if (!canvas) return;
+  const { labels, values } = buildChartData(interval);
+  if (labels.length === 0) return;
+
+  if (equityChart) {
+    equityChart.data.labels = labels;
+    equityChart.data.datasets[0].data = values;
+    equityChart.update('none');
+    return;
+  }
+
+  equityChart = new Chart(canvas.getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Equity ($)',
+        data: values,
+        borderColor: '#d4af37',
+        backgroundColor: (ctx) => {
+          const c = ctx.chart.ctx;
+          const g = c.createLinearGradient(0, 0, 0, 300);
+          g.addColorStop(0, 'rgba(212,175,55,0.35)');
+          g.addColorStop(1, 'rgba(212,175,55,0.02)');
+          return g;
+        },
+        borderWidth: 2.5,
+        tension: 0.25,
+        fill: true,
+        pointBackgroundColor: '#f0e0bb',
+        pointBorderColor: '#8b6914',
+        pointBorderWidth: 1.5,
+        pointRadius: 3,
+        pointHoverRadius: 7,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 200 },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(40,25,10,0.95)',
+          borderColor: '#8b6914',
+          borderWidth: 1,
+          titleColor: '#d4af37',
+          bodyColor: '#f0e0bb',
+          titleFont: { family: 'Special Elite', size: 13 },
+          bodyFont: { family: 'JetBrains Mono', size: 13 },
+          callbacks: {
+            label: (ctx) => '$' + ctx.parsed.y.toFixed(4),
+          },
+        },
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: '#5a3d20',
+            font: { family: 'JetBrains Mono', size: 10 },
+            maxRotation: 0,
+            autoSkip: true,
+            maxTicksLimit: 12,
+          },
+          grid: { color: 'rgba(110,84,48,0.2)' },
+        },
+        y: {
+          ticks: {
+            color: '#5a3d20',
+            font: { family: 'JetBrains Mono', size: 10 },
+            callback: (v) => '$' + v.toFixed(2),
+          },
+          grid: { color: 'rgba(110,84,48,0.2)' },
+        },
+      },
+    },
+  });
+}
+
+// Interval button click handlers
+document.querySelectorAll('.iv-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.iv-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentInterval = btn.dataset.iv;
+    // Force chart rebuild (since labels changed)
+    if (equityChart) { equityChart.destroy(); equityChart = null; }
+    renderEquityChart(currentInterval);
+  });
+});
+
+function updateEquityComparison(daily) {
+  if (!daily || daily.length === 0) {
+    document.getElementById('today-equity').textContent = '—';
+    document.getElementById('yesterday-equity').textContent = '—';
+    document.getElementById('equity-change').textContent = '—';
+    return;
+  }
+  const today = daily[daily.length - 1];
+  const yesterday = daily.length >= 2 ? daily[daily.length - 2] : null;
+
+  document.getElementById('today-equity').textContent = '$' + today.equity.toFixed(2);
+  document.getElementById('today-date').textContent = today.date;
+
+  if (yesterday) {
+    document.getElementById('yesterday-equity').textContent = '$' + yesterday.equity.toFixed(2);
+    document.getElementById('yesterday-date').textContent = yesterday.date;
+    const diff = today.equity - yesterday.equity;
+    const pct = (diff / yesterday.equity) * 100;
+    const cls = pnlClass(diff);
+    const sign = diff >= 0 ? '+' : '';
+    const ce = document.getElementById('equity-change');
+    const cp = document.getElementById('equity-change-pct');
+    ce.textContent = sign + '$' + diff.toFixed(4);
+    ce.className = 'val ' + cls;
+    cp.textContent = sign + pct.toFixed(2) + '%';
+    cp.className = 'sub ' + cls;
+  } else {
+    document.getElementById('yesterday-equity').textContent = '—';
+    document.getElementById('yesterday-date').textContent = '尚無數據';
+    document.getElementById('equity-change').textContent = '—';
+    document.getElementById('equity-change-pct').textContent = '需要 2 天以上資料';
+  }
+}
+
+/* ============================================================
+   Trade Log Table - pagination + render
+   ============================================================ */
+let tradeLogData = [];
+let tradePage = 1;
+const TRADES_PER_PAGE = 20;
+
+function renderTradeLog(tl) {
+  const summary = tl.summary;
+  if (summary) {
+    document.getElementById('ts-total').textContent = summary.total;
+    document.getElementById('ts-winrate').textContent = summary.win_rate.toFixed(1) + '%';
+    document.getElementById('ts-avg-win').textContent = '+$' + summary.avg_win.toFixed(2);
+    document.getElementById('ts-avg-loss').textContent = '$' + summary.avg_loss.toFixed(2);
+    document.getElementById('ts-big-win').textContent = '+$' + summary.biggest_win.toFixed(2);
+    document.getElementById('ts-big-loss').textContent = '$' + summary.biggest_loss.toFixed(2);
+  } else {
+    ['ts-total','ts-winrate','ts-avg-win','ts-avg-loss','ts-big-win','ts-big-loss'].forEach(id => {
+      document.getElementById(id).textContent = '—';
+    });
+  }
+  tradeLogData = (tl.trades || []).slice().reverse();    // newest first
+  renderTradePage();
+}
+
+function renderTradePage() {
+  const body = document.getElementById('trade-table-body');
+  if (tradeLogData.length === 0) {
+    body.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--ink-dim);">尚無交易紀錄</td></tr>';
+    document.getElementById('trade-pagination').innerHTML = '';
+    return;
+  }
+  const totalPages = Math.ceil(tradeLogData.length / TRADES_PER_PAGE);
+  if (tradePage > totalPages) tradePage = totalPages;
+  if (tradePage < 1) tradePage = 1;
+  const start = (tradePage - 1) * TRADES_PER_PAGE;
+  const slice = tradeLogData.slice(start, start + TRADES_PER_PAGE);
+  body.innerHTML = slice.map(t => {
+    const dir = (t.direction || '').toLowerCase();
+    const dirCls = dir === 'long' ? 'dir-long' : 'dir-short';
+    const pnlCls = t.profit > 0 ? 'pnl-pos' : (t.profit < 0 ? 'pnl-neg' : '');
+    const profitSign = t.profit >= 0 ? '+' : '';
+    const pctSign = t.profit_pct >= 0 ? '+' : '';
+    let ts = '—';
+    try {
+      const d = new Date(t.time);
+      ts = d.toLocaleString('zh-TW', {timeZone:'Asia/Taipei', hour12:false}).replace(',', '');
+    } catch(e) {}
+    return `<tr>
+      <td>${ts}</td>
+      <td><span class="${dirCls}">${dir.toUpperCase()}</span></td>
+      <td>${Number(t.entry).toFixed(2)}</td>
+      <td>${Number(t.exit).toFixed(2)}</td>
+      <td class="${pnlCls}">${profitSign}$${Number(t.profit).toFixed(4)}</td>
+      <td class="${pnlCls}">${pctSign}${Number(t.profit_pct).toFixed(2)}%</td>
+      <td class="reason">${t.exit_reason || ''}</td>
+    </tr>`;
+  }).join('');
+
+  // Pagination
+  const pg = document.getElementById('trade-pagination');
+  const pageButtons = [];
+  function btn(n, label) {
+    return `<button class="pg-btn ${n === tradePage ? 'active' : ''}" data-page="${n}">${label || n}</button>`;
+  }
+  function dots() { return `<span class="pg-btn dots">…</span>`; }
+  if (tradePage > 1) pageButtons.push(`<button class="pg-btn" data-page="${tradePage-1}">‹</button>`);
+  // Always show first
+  pageButtons.push(btn(1));
+  if (tradePage > 4) pageButtons.push(dots());
+  for (let i = Math.max(2, tradePage - 2); i <= Math.min(totalPages - 1, tradePage + 2); i++) {
+    pageButtons.push(btn(i));
+  }
+  if (tradePage < totalPages - 3) pageButtons.push(dots());
+  if (totalPages > 1) pageButtons.push(btn(totalPages));
+  if (tradePage < totalPages) pageButtons.push(`<button class="pg-btn" data-page="${tradePage+1}">›</button>`);
+  pageButtons.push(`<span class="pg-info">${tradeLogData.length} trades</span>`);
+  pg.innerHTML = pageButtons.join('');
+  pg.querySelectorAll('button[data-page]').forEach(b => {
+    b.addEventListener('click', () => {
+      tradePage = parseInt(b.dataset.page);
+      renderTradePage();
+    });
+  });
+}
+
+/* ============================================================
+   Bartender Dialog - RPG style
+   ============================================================ */
+const bartenderQuotes = [
+  "歡迎來到 Driftwood Tavern，旅人。坐下喝一杯吧。",
+  "今晚特調 — Old Fashioned，$8。",
+  "你看起來像剛被市場狠狠教訓過... 來杯威士忌？",
+  "Soup of the Day: WHISKEY. 我推這個。",
+  "PF 1.5 不錯，但你的 Max Drawdown 是多少？",
+  "100x 槓桿... 你是來賭命的還是來交易的？",
+  "Cut losses fast, let profits run. — 我祖父說的。",
+  "心情不好就喝一杯。但別把 Stop Loss 也喝掉了。",
+  "別交易了，喝酒就好。",
+  "你的 bot 真的有 edge 嗎？我有點懷疑。",
+  "Tips make me do a happy dance.",
+  "看你的 PnL... 我不予置評。",
+  "市場像酒，淺嘗即可，喝太多會吐。",
+  "我以前也是交易員，後來開了這間酒吧。",
+  "聽說 MSS 在 5m 上 PF 才 1.6，你還敢用 100 倍？",
+  "Wi-Fi password: driftwood87",
+  "We don't work during drinking hours.",
+  "Be kind, tip well, come back soon.",
+  "Good Times. Great People. 我們的座右銘。",
+  "強平率 8%？那不是策略，是慢動作自殺。",
+  "我看過太多人凌晨四點還在盯圖。別熬夜。",
+  "酒保的智慧：永遠別 all in。",
+  "BEER is proof that GOD loves us, and wants us to be happy.",
+  "Please don't feed the bartender. 但 tip 我歡迎。",
+  "我不收 SOL，只收美金跟笑容。",
+  "你今天虧了多少？... 不，別告訴我。我猜。",
+  "回測 100 倍報酬，實盤 -30% — 你應該很熟悉吧？",
+  "聽我的，先去睡覺，bot 它自己會跑。",
+  "Bar Rules: 1. Be nice. 2. Get drinks. 3. Have fun.",
+  "你還在這？回家陪老婆／男朋友啦。",
+];
+
+const dialog = document.getElementById('dialog');
+const dialogText = document.getElementById('dialog-text');
+const dialogClose = document.getElementById('dialog-close');
+const bartender = document.getElementById('bartender');
+let lastQuote = -1;
+
+function nextQuote() {
+  let idx;
+  do { idx = Math.floor(Math.random() * bartenderQuotes.length); }
+  while (idx === lastQuote && bartenderQuotes.length > 1);
+  lastQuote = idx;
+  typeWriter(bartenderQuotes[idx]);
+}
+
+let typeTimer = null;
+function typeWriter(text) {
+  if (typeTimer) clearInterval(typeTimer);
+  dialogText.textContent = '';
+  let i = 0;
+  typeTimer = setInterval(() => {
+    if (i >= text.length) { clearInterval(typeTimer); typeTimer = null; return; }
+    dialogText.textContent += text[i++];
+  }, 28);
+}
+
+bartender.addEventListener('click', (e) => {
+  e.stopPropagation();
+  dialog.classList.add('visible');
+  nextQuote();
+});
+
+dialog.addEventListener('click', (e) => {
+  if (e.target === dialogClose) return;
+  // If still typing, skip to end
+  if (typeTimer) {
+    clearInterval(typeTimer); typeTimer = null;
+    dialogText.textContent = bartenderQuotes[lastQuote];
+  } else {
+    nextQuote();
+  }
+});
+
+dialogClose.addEventListener('click', (e) => {
+  e.stopPropagation();
+  dialog.classList.remove('visible');
+});
 </script>
 </body>
 </html>
