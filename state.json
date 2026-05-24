@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-24 10:29:43",
-  "updated_at_iso": "2026-05-24T10:29:43.156161+08:00",
+  "updated_at": "2026-05-24 10:30:17",
+  "updated_at_iso": "2026-05-24T10:30:17.280155+08:00",
   "log_file": "sol_5m_single.log",
   "live": {
     "ok": true,
@@ -9,15 +9,11 @@
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-24T02:29:43.051804+00:00"
+    "fetched_at": "2026-05-24T02:30:17.173797+00:00"
   },
   "log": {
-    "last_tick": "2026-05-24 10:25:02",
+    "last_tick": "2026-05-24 10:30:04",
     "events": [
-      {
-        "ts": "2026-05-24 07:40:05",
-        "msg": "V1_FILTER skip SHORT at ts=2026-05-23 23:35:00 confirm l=85.6800 >= pivot l=85.6600"
-      },
       {
         "ts": "2026-05-24 08:10:02",
         "msg": "SL hit: {'direction': 'long', 'entry': 85.7, 'sl': 85.58, 'qty': 7.0, 'leverage': 100}"
@@ -133,6 +129,10 @@
       {
         "ts": "2026-05-24 10:20:03",
         "msg": "V1_FILTER skip SHORT at ts=2026-05-24 02:15:00 confirm l=86.0000 >= pivot l=85.9500"
+      },
+      {
+        "ts": "2026-05-24 10:30:08",
+        "msg": "All pending orders cancelled [verified]"
       }
     ],
     "errors": [
@@ -156,11 +156,41 @@
   },
   "v0": {
     "label": "V0 (no filter)",
-    "available": false
+    "available": true,
+    "initial": 30.0,
+    "equity": 30.0,
+    "pnl": 0.0,
+    "roi_pct": 0.0,
+    "trades": 0,
+    "wins": 0,
+    "losses": 0,
+    "win_rate": 0.0,
+    "peak_equity": 30.0,
+    "max_dd_pct": 0.0,
+    "position": null,
+    "pending": null,
+    "last_bar_ts": "2026-05-24 10:25:00",
+    "recent_trades": [],
+    "n_filtered": 0
   },
   "v1": {
     "label": "V1 (strict)",
-    "available": false
+    "available": true,
+    "initial": 30.0,
+    "equity": 30.0,
+    "pnl": 0.0,
+    "roi_pct": 0.0,
+    "trades": 0,
+    "wins": 0,
+    "losses": 0,
+    "win_rate": 0.0,
+    "peak_equity": 30.0,
+    "max_dd_pct": 0.0,
+    "position": null,
+    "pending": null,
+    "last_bar_ts": "2026-05-24 10:25:00",
+    "recent_trades": [],
+    "n_filtered": 0
   },
   "equity_history": [
     {
@@ -7038,6 +7068,10 @@
     {
       "ts": "2026-05-24T10:29:43.145375+08:00",
       "equity": 20.88039918
+    },
+    {
+      "ts": "2026-05-24T10:30:17.270368+08:00",
+      "equity": 20.88039918
     }
   ],
   "equity_daily": [
@@ -7065,7 +7099,7 @@
   },
   "status": {
     "online": true,
-    "last_tick": "2026-05-24 10:25:02",
-    "last_tick_age_sec": 281
+    "last_tick": "2026-05-24 10:30:04",
+    "last_tick_age_sec": 13
   }
 }
