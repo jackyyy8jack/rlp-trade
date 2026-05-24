@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-24 22:39:52",
-  "updated_at_iso": "2026-05-24T22:39:52.024198+08:00",
+  "updated_at": "2026-05-24 22:40:25",
+  "updated_at_iso": "2026-05-24T22:40:25.767649+08:00",
   "log_file": "mss_bot.log",
   "live": {
     "ok": true,
@@ -9,35 +9,26 @@
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-24T14:39:52.012234+00:00"
+    "fetched_at": "2026-05-24T14:40:25.753590+00:00"
   },
   "live_stats": {
     "max_dd_pct": 4.969534656471011
   },
   "bot": {
     "ok": true,
-    "state": "PENDING_ORDER",
-    "pending_order": {
-      "order_id": "DRY_1",
-      "side": "long",
-      "trigger": 86.14,
-      "qty": 3.482702577199907
-    },
+    "state": "NO_ORDER",
+    "pending_order": null,
     "position": null,
-    "ts": "2026-05-24T14:35:37.580794+00:00",
-    "ts_tpe": "2026-05-24 22:35:37",
+    "ts": "2026-05-24T14:40:05.982490+00:00",
+    "ts_tpe": "2026-05-24 22:40:05",
     "extra": {
-      "shutdown": "KeyboardInterrupt"
+      "iter": 1,
+      "last_bar": "2026-05-24T14:35:00+00:00"
     }
   },
   "log": {
-    "last_tick": "2026-05-24 22:35:05",
+    "last_tick": "2026-05-24 22:40:05",
     "events": [
-      {
-        "ts": "2026-05-24 19:35:05",
-        "kind": "BARS",
-        "msg": "[BARS] last=2026-05-24 11:35:00+00:00  close=86.6700"
-      },
       {
         "ts": "2026-05-24 19:40:05",
         "kind": "BARS",
@@ -282,6 +273,11 @@
         "ts": "2026-05-24 22:35:05",
         "kind": "BARS",
         "msg": "[BARS] last=2026-05-24 14:35:00+00:00  close=85.1700  low=85.1400  high=85.2000"
+      },
+      {
+        "ts": "2026-05-24 22:40:05",
+        "kind": "BARS",
+        "msg": "[BARS] last=2026-05-24 14:35:00+00:00  close=85.2500  low=85.0700  high=85.2600"
       }
     ],
     "errors": [],
@@ -1211,6 +1207,10 @@
     {
       "ts": "2026-05-24T22:39:52.021206+08:00",
       "equity": 20.84539918
+    },
+    {
+      "ts": "2026-05-24T22:40:25.764537+08:00",
+      "equity": 20.84539918
     }
   ],
   "equity_daily": [
@@ -1229,7 +1229,7 @@
   ],
   "status": {
     "online": true,
-    "last_tick": "2026-05-24 22:35:05",
-    "last_tick_age_sec": 287
+    "last_tick": "2026-05-24 22:40:05",
+    "last_tick_age_sec": 20
   }
 }
