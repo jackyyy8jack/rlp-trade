@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-24 21:59:55",
-  "updated_at_iso": "2026-05-24T21:59:55.638720+08:00",
+  "updated_at": "2026-05-24 22:00:29",
+  "updated_at_iso": "2026-05-24T22:00:29.335302+08:00",
   "log_file": "mss_bot.log",
   "live": {
     "ok": true,
@@ -9,25 +9,30 @@
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-24T13:59:55.628749+00:00"
+    "fetched_at": "2026-05-24T14:00:29.326324+00:00"
   },
   "live_stats": {
     "max_dd_pct": 4.969534656471011
   },
   "bot": {
     "ok": true,
-    "state": "NO_ORDER",
-    "pending_order": null,
+    "state": "PENDING_ORDER",
+    "pending_order": {
+      "order_id": "DRY_1",
+      "side": "long",
+      "trigger": 86.14,
+      "qty": 3.482702577199907
+    },
     "position": null,
-    "ts": "2026-05-24T13:55:05.456051+00:00",
-    "ts_tpe": "2026-05-24 21:55:05",
+    "ts": "2026-05-24T14:00:05.569044+00:00",
+    "ts_tpe": "2026-05-24 22:00:05",
     "extra": {
-      "iter": 6,
-      "last_bar": "2026-05-24T13:55:00+00:00"
+      "iter": 7,
+      "last_bar": "2026-05-24T14:00:00+00:00"
     }
   },
   "log": {
-    "last_tick": "2026-05-24 21:55:05",
+    "last_tick": "2026-05-24 22:00:05",
     "events": [
       {
         "ts": "2026-05-24 19:20:05",
@@ -243,6 +248,21 @@
         "ts": "2026-05-24 21:55:05",
         "kind": "BARS",
         "msg": "[BARS] last=2026-05-24 13:55:00+00:00  close=85.9400  low=85.8500  high=85.9400"
+      },
+      {
+        "ts": "2026-05-24 22:00:05",
+        "kind": "BARS",
+        "msg": "[BARS] last=2026-05-24 14:00:00+00:00  close=85.8400  low=85.8400  high=85.8700"
+      },
+      {
+        "ts": "2026-05-24 22:00:05",
+        "kind": "SIGNAL",
+        "msg": "[SIGNAL] dir=long  trigger=86.1400  sl=85.8600  qty=3.4827  lev=100x  balance=100.00"
+      },
+      {
+        "ts": "2026-05-24 22:00:05",
+        "kind": "ORDER",
+        "msg": "[ORDER] place_stop  side=long  trigger=86.1400  qty=3.4827  sl=85.86  lev=100x  [DRY]"
       }
     ],
     "errors": [],
@@ -888,6 +908,10 @@
     {
       "ts": "2026-05-24T21:59:55.636726+08:00",
       "equity": 20.84539918
+    },
+    {
+      "ts": "2026-05-24T22:00:29.332841+08:00",
+      "equity": 20.84539918
     }
   ],
   "equity_daily": [
@@ -906,7 +930,7 @@
   ],
   "status": {
     "online": true,
-    "last_tick": "2026-05-24 21:55:05",
-    "last_tick_age_sec": 290
+    "last_tick": "2026-05-24 22:00:05",
+    "last_tick_age_sec": 24
   }
 }
