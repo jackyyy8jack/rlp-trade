@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-25 21:34:35",
-  "updated_at_iso": "2026-05-25T21:34:35.681945+08:00",
+  "updated_at": "2026-05-25 21:35:09",
+  "updated_at_iso": "2026-05-25T21:35:09.520191+08:00",
   "log_file": "mss_bot.log",
   "live": {
     "ok": true,
@@ -9,14 +9,14 @@
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-25T13:34:35.648449+00:00"
+    "fetched_at": "2026-05-25T13:35:09.479884+00:00"
   },
   "live_stats": {
     "max_dd_pct": 4.969534656471011
   },
   "bot": {
     "ok": true,
-    "state": "IN_POSITION",
+    "state": "EXIT_PENDING",
     "pending_order": null,
     "position": {
       "side": "short",
@@ -24,27 +24,17 @@
       "qty": 3.4000000000000004,
       "entry_ts": "2026-05-25 13:15:00+00:00"
     },
-    "ts": "2026-05-25T13:30:05.443676+00:00",
-    "ts_tpe": "2026-05-25 21:30:05",
+    "ts": "2026-05-25T13:35:05.566385+00:00",
+    "ts_tpe": "2026-05-25 21:35:05",
     "extra": {
-      "iter": 7,
-      "last_bar": "2026-05-25T13:25:00+00:00",
+      "iter": 8,
+      "last_bar": "2026-05-25T13:30:00+00:00",
       "last_processed_signal_ts": "2026-05-25T13:25:00+00:00"
     }
   },
   "log": {
-    "last_tick": "2026-05-25 21:30:05",
+    "last_tick": "2026-05-25 21:35:05",
     "events": [
-      {
-        "ts": "2026-05-25 18:10:06",
-        "kind": "BARS",
-        "msg": "[BARS] last=2026-05-25 10:05:00+00:00  close=85.9700  low=85.8800  high=85.9700"
-      },
-      {
-        "ts": "2026-05-25 18:15:05",
-        "kind": "BARS",
-        "msg": "[BARS] last=2026-05-25 10:10:00+00:00  close=85.9800  low=85.9300  high=85.9900"
-      },
       {
         "ts": "2026-05-25 18:20:05",
         "kind": "BARS",
@@ -284,6 +274,16 @@
         "ts": "2026-05-25 21:30:05",
         "kind": "SIGNAL",
         "msg": "[SIGNAL] dir=long  trigger=85.8800  sl=85.7900  cost=3USDT  size=3.4000SOL  lev=100x  balance=100.00"
+      },
+      {
+        "ts": "2026-05-25 21:35:05",
+        "kind": "BARS",
+        "msg": "[BARS] last=2026-05-25 13:30:00+00:00  close=85.7900  low=85.7500  high=85.8500"
+      },
+      {
+        "ts": "2026-05-25 21:35:05",
+        "kind": "PIVOT-EXIT",
+        "msg": "[PIVOT-EXIT] confirmed for short → EXIT_PENDING"
       }
     ],
     "errors": [
@@ -11009,6 +11009,10 @@
     {
       "ts": "2026-05-25T21:34:35.670586+08:00",
       "equity": 20.84539918
+    },
+    {
+      "ts": "2026-05-25T21:35:09.508223+08:00",
+      "equity": 20.84539918
     }
   ],
   "equity_daily": [
@@ -11031,7 +11035,7 @@
   ],
   "status": {
     "online": true,
-    "last_tick": "2026-05-25 21:30:05",
-    "last_tick_age_sec": 270
+    "last_tick": "2026-05-25 21:35:05",
+    "last_tick_age_sec": 4
   }
 }
