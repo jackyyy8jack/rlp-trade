@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-25 15:29:39",
-  "updated_at_iso": "2026-05-25T15:29:39.711607+08:00",
+  "updated_at": "2026-05-25 15:30:13",
+  "updated_at_iso": "2026-05-25T15:30:13.554534+08:00",
   "log_file": "mss_bot.log",
   "live": {
     "ok": true,
@@ -9,7 +9,7 @@
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-25T07:29:39.689103+00:00"
+    "fetched_at": "2026-05-25T07:30:13.528587+00:00"
   },
   "live_stats": {
     "max_dd_pct": 4.969534656471011
@@ -23,21 +23,17 @@
       "ep": 85.24,
       "qty": 3.5
     },
-    "ts": "2026-05-25T07:25:05.827522+00:00",
-    "ts_tpe": "2026-05-25 15:25:05",
+    "ts": "2026-05-25T07:30:05.954846+00:00",
+    "ts_tpe": "2026-05-25 15:30:05",
     "extra": {
-      "iter": 196,
-      "last_bar": "2026-05-25T07:20:00+00:00"
+      "iter": 197,
+      "last_bar": "2026-05-25T07:25:00+00:00",
+      "skipped_signal": "long_past_sl"
     }
   },
   "log": {
-    "last_tick": "2026-05-25 15:25:05",
+    "last_tick": "2026-05-25 15:30:05",
     "events": [
-      {
-        "ts": "2026-05-25 11:40:05",
-        "kind": "SIGNAL",
-        "msg": "[SIGNAL] dir=long  trigger=84.8900  sl=84.8300  cost=3USDT  size=3.5000SOL  lev=100x  balance=100.00"
-      },
       {
         "ts": "2026-05-25 11:45:06",
         "kind": "BARS",
@@ -282,6 +278,11 @@
         "ts": "2026-05-25 15:25:05",
         "kind": "BARS",
         "msg": "[BARS] last=2026-05-25 07:20:00+00:00  close=85.7100  low=85.5400  high=85.7200"
+      },
+      {
+        "ts": "2026-05-25 15:30:05",
+        "kind": "BARS",
+        "msg": "[BARS] last=2026-05-25 07:25:00+00:00  close=85.6000  low=85.5800  high=85.7100"
       }
     ],
     "errors": [
@@ -319,9 +320,14 @@
         "ts": "2026-05-25 12:40:05",
         "level": "WARN",
         "msg": "2026-05-25 12:40:05,526 [WARNING] [SIGNAL-SKIP] dir=short trigger=84.9900 sl=85.1100 — current price 85.2500 already past SL, setup invalidated"
+      },
+      {
+        "ts": "2026-05-25 15:30:05",
+        "level": "WARN",
+        "msg": "2026-05-25 15:30:05,954 [WARNING] [SIGNAL-SKIP] dir=long trigger=85.9300 sl=85.8700 — current price 85.6000 already past SL, setup invalidated"
       }
     ],
-    "error_count_1h": 0
+    "error_count_1h": 1
   },
   "equity_history": [
     {
@@ -8419,6 +8425,10 @@
     {
       "ts": "2026-05-25T15:29:39.703127+08:00",
       "equity": 20.84539918
+    },
+    {
+      "ts": "2026-05-25T15:30:13.545991+08:00",
+      "equity": 20.84539918
     }
   ],
   "equity_daily": [
@@ -8441,7 +8451,7 @@
   ],
   "status": {
     "online": true,
-    "last_tick": "2026-05-25 15:25:05",
-    "last_tick_age_sec": 274
+    "last_tick": "2026-05-25 15:30:05",
+    "last_tick_age_sec": 8
   }
 }
