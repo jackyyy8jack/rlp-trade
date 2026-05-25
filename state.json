@@ -1,50 +1,40 @@
 {
-  "updated_at": "2026-05-26 03:50:01",
-  "updated_at_iso": "2026-05-26T03:50:01.793041+08:00",
+  "updated_at": "2026-05-26 03:50:35",
+  "updated_at_iso": "2026-05-26T03:50:35.790917+08:00",
   "log_file": "mss_bot.log",
   "live": {
     "ok": true,
-    "equity": 21.80225292,
+    "equity": 21.56665292,
     "available": 0.54549715651,
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-25T19:50:01.754254+00:00"
+    "fetched_at": "2026-05-25T19:50:35.757281+00:00"
   },
   "live_stats": {
     "max_dd_pct": 35.90434988813473
   },
   "bot": {
     "ok": true,
-    "state": "NO_ORDER",
-    "pending_order": null,
+    "state": "PENDING_ORDER",
+    "pending_order": {
+      "order_id": "DRY_3",
+      "side": "long",
+      "trigger": 85.65,
+      "qty": 3.5
+    },
     "position": null,
-    "ts": "2026-05-25T19:45:05.358161+00:00",
-    "ts_tpe": "2026-05-26 03:45:05",
+    "ts": "2026-05-25T19:50:05.487060+00:00",
+    "ts_tpe": "2026-05-26 03:50:05",
     "extra": {
-      "iter": 82,
-      "last_bar": "2026-05-25T19:40:00+00:00",
-      "last_processed_signal_ts": "2026-05-25T13:40:00+00:00"
+      "iter": 83,
+      "last_bar": "2026-05-25T19:45:00+00:00",
+      "last_processed_signal_ts": "2026-05-25T19:45:00+00:00"
     }
   },
   "log": {
-    "last_tick": "2026-05-26 03:45:05",
+    "last_tick": "2026-05-26 03:50:05",
     "events": [
-      {
-        "ts": "2026-05-25 23:40:05",
-        "kind": "BARS",
-        "msg": "[BARS] last=2026-05-25 15:35:00+00:00  close=86.2500  low=86.1400  high=86.2800"
-      },
-      {
-        "ts": "2026-05-25 23:45:06",
-        "kind": "BARS",
-        "msg": "[BARS] last=2026-05-25 15:40:00+00:00  close=86.2600  low=86.1800  high=86.2700"
-      },
-      {
-        "ts": "2026-05-25 23:50:05",
-        "kind": "BARS",
-        "msg": "[BARS] last=2026-05-25 15:45:00+00:00  close=86.1600  low=86.1000  high=86.2700"
-      },
       {
         "ts": "2026-05-25 23:55:05",
         "kind": "BARS",
@@ -279,6 +269,21 @@
         "ts": "2026-05-26 03:45:05",
         "kind": "BARS",
         "msg": "[BARS] last=2026-05-25 19:40:00+00:00  close=85.6100  low=85.4700  high=85.6100"
+      },
+      {
+        "ts": "2026-05-26 03:50:05",
+        "kind": "BARS",
+        "msg": "[BARS] last=2026-05-25 19:45:00+00:00  close=85.6100  low=85.5600  high=85.6500"
+      },
+      {
+        "ts": "2026-05-26 03:50:05",
+        "kind": "SIGNAL",
+        "msg": "[SIGNAL] dir=long  trigger=85.6500  sl=85.4800  cost=3USDT  size=3.5000SOL  lev=100x  balance=100.00"
+      },
+      {
+        "ts": "2026-05-26 03:50:05",
+        "kind": "ORDER",
+        "msg": "[ORDER] place_stop  side=long  trigger=85.6500  qty=3.5000  sl=85.48  lev=100x  [DRY]"
       }
     ],
     "errors": [
@@ -13674,6 +13679,10 @@
     {
       "ts": "2026-05-26T03:50:01.779012+08:00",
       "equity": 21.80225292
+    },
+    {
+      "ts": "2026-05-26T03:50:35.776818+08:00",
+      "equity": 21.56665292
     }
   ],
   "equity_daily": [
@@ -13695,12 +13704,12 @@
     },
     {
       "date": "2026-05-26",
-      "equity": 21.80225292
+      "equity": 21.56665292
     }
   ],
   "status": {
     "online": true,
-    "last_tick": "2026-05-26 03:45:05",
-    "last_tick_age_sec": 296
+    "last_tick": "2026-05-26 03:50:05",
+    "last_tick_age_sec": 30
   }
 }
