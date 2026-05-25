@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-25 21:49:50",
-  "updated_at_iso": "2026-05-25T21:49:50.512873+08:00",
+  "updated_at": "2026-05-25 21:50:24",
+  "updated_at_iso": "2026-05-25T21:50:24.419418+08:00",
   "log_file": "mss_bot.log",
   "live": {
     "ok": true,
@@ -9,37 +9,32 @@
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-25T13:49:50.480408+00:00"
+    "fetched_at": "2026-05-25T13:50:24.387498+00:00"
   },
   "live_stats": {
     "max_dd_pct": 4.969534656471011
   },
   "bot": {
     "ok": true,
-    "state": "PENDING_ORDER",
-    "pending_order": {
-      "order_id": "DRY_2",
+    "state": "IN_POSITION",
+    "pending_order": null,
+    "position": {
       "side": "long",
-      "trigger": 85.79,
-      "qty": 3.4000000000000004
+      "ep": 85.79,
+      "qty": 3.4000000000000004,
+      "entry_ts": "2026-05-25 13:45:00+00:00"
     },
-    "position": null,
-    "ts": "2026-05-25T13:45:05.830799+00:00",
-    "ts_tpe": "2026-05-25 21:45:05",
+    "ts": "2026-05-25T13:50:05.952346+00:00",
+    "ts_tpe": "2026-05-25 21:50:05",
     "extra": {
-      "iter": 10,
-      "last_bar": "2026-05-25T13:40:00+00:00",
+      "iter": 11,
+      "last_bar": "2026-05-25T13:45:00+00:00",
       "last_processed_signal_ts": "2026-05-25T13:40:00+00:00"
     }
   },
   "log": {
-    "last_tick": "2026-05-25 21:45:05",
+    "last_tick": "2026-05-25 21:50:05",
     "events": [
-      {
-        "ts": "2026-05-25 18:40:05",
-        "kind": "BARS",
-        "msg": "[BARS] last=2026-05-25 10:35:00+00:00  close=85.9300  low=85.9200  high=86.0400"
-      },
       {
         "ts": "2026-05-25 18:45:05",
         "kind": "BARS",
@@ -284,6 +279,11 @@
         "ts": "2026-05-25 21:45:05",
         "kind": "ORDER",
         "msg": "[ORDER] place_stop  side=long  trigger=85.7900  qty=3.4000  sl=85.75  lev=100x  [DRY]"
+      },
+      {
+        "ts": "2026-05-25 21:50:05",
+        "kind": "BARS",
+        "msg": "[BARS] last=2026-05-25 13:45:00+00:00  close=85.9300  low=85.7900  high=85.9500"
       }
     ],
     "errors": [
@@ -11117,6 +11117,10 @@
     {
       "ts": "2026-05-25T21:49:50.500359+08:00",
       "equity": 20.84539918
+    },
+    {
+      "ts": "2026-05-25T21:50:24.408447+08:00",
+      "equity": 20.84539918
     }
   ],
   "equity_daily": [
@@ -11139,7 +11143,7 @@
   ],
   "status": {
     "online": true,
-    "last_tick": "2026-05-25 21:45:05",
-    "last_tick_age_sec": 285
+    "last_tick": "2026-05-25 21:50:05",
+    "last_tick_age_sec": 19
   }
 }
