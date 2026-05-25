@@ -1,55 +1,35 @@
 {
-  "updated_at": "2026-05-26 04:54:56",
-  "updated_at_iso": "2026-05-26T04:54:56.510484+08:00",
+  "updated_at": "2026-05-26 04:55:30",
+  "updated_at_iso": "2026-05-26T04:55:30.533764+08:00",
   "log_file": "mss_bot.log",
   "live": {
     "ok": true,
-    "equity": 24.26845292,
+    "equity": 24.04045292,
     "available": 0.54549715651,
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-25T20:54:56.473584+00:00"
+    "fetched_at": "2026-05-25T20:55:30.493581+00:00"
   },
   "live_stats": {
     "max_dd_pct": 35.90434988813473
   },
   "bot": {
     "ok": true,
-    "state": "EXIT_PENDING",
+    "state": "NO_ORDER",
     "pending_order": null,
-    "position": {
-      "side": "long",
-      "ep": 85.65,
-      "qty": 3.5,
-      "entry_ts": "2026-05-25 20:00:00+00:00"
-    },
-    "ts": "2026-05-25T20:50:06.123438+00:00",
-    "ts_tpe": "2026-05-26 04:50:06",
+    "position": null,
+    "ts": "2026-05-25T20:55:05.228803+00:00",
+    "ts_tpe": "2026-05-26 04:55:05",
     "extra": {
-      "iter": 95,
-      "last_bar": "2026-05-25T20:45:00+00:00",
-      "skipped_signal": "long_past_sl"
+      "iter": 96,
+      "last_bar": "2026-05-25T20:50:00+00:00",
+      "last_processed_signal_ts": "2026-05-25T20:20:00+00:00"
     }
   },
   "log": {
-    "last_tick": "2026-05-26 04:50:06",
+    "last_tick": "2026-05-26 04:55:05",
     "events": [
-      {
-        "ts": "2026-05-26 01:05:05",
-        "kind": "BARS",
-        "msg": "[BARS] last=2026-05-25 17:00:00+00:00  close=86.2900  low=86.2100  high=86.3200"
-      },
-      {
-        "ts": "2026-05-26 01:10:05",
-        "kind": "BARS",
-        "msg": "[BARS] last=2026-05-25 17:05:00+00:00  close=86.3000  low=86.2500  high=86.3600"
-      },
-      {
-        "ts": "2026-05-26 01:15:05",
-        "kind": "BARS",
-        "msg": "[BARS] last=2026-05-25 17:10:00+00:00  close=86.2200  low=86.2200  high=86.3000"
-      },
       {
         "ts": "2026-05-26 01:20:05",
         "kind": "BARS",
@@ -284,6 +264,21 @@
         "ts": "2026-05-26 04:50:06",
         "kind": "PIVOT-EXIT",
         "msg": "[PIVOT-EXIT] confirmed for long → EXIT_PENDING"
+      },
+      {
+        "ts": "2026-05-26 04:55:05",
+        "kind": "BARS",
+        "msg": "[BARS] last=2026-05-25 20:50:00+00:00  close=85.4400  low=85.3400  high=85.4400"
+      },
+      {
+        "ts": "2026-05-26 04:55:05",
+        "kind": "EXIT",
+        "msg": "[EXIT] EXIT_PENDING → market close at open=85.34"
+      },
+      {
+        "ts": "2026-05-26 04:55:05",
+        "kind": "CLOSE",
+        "msg": "[CLOSE] market_close_position  [DRY]"
       }
     ],
     "errors": [
@@ -14144,6 +14139,10 @@
     {
       "ts": "2026-05-26T04:54:56.496521+08:00",
       "equity": 24.26845292
+    },
+    {
+      "ts": "2026-05-26T04:55:30.518503+08:00",
+      "equity": 24.04045292
     }
   ],
   "equity_daily": [
@@ -14165,12 +14164,12 @@
     },
     {
       "date": "2026-05-26",
-      "equity": 24.26845292
+      "equity": 24.04045292
     }
   ],
   "status": {
     "online": true,
-    "last_tick": "2026-05-26 04:50:06",
-    "last_tick_age_sec": 290
+    "last_tick": "2026-05-26 04:55:05",
+    "last_tick_age_sec": 25
   }
 }
