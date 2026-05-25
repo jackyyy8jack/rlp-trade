@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-25 21:14:48",
-  "updated_at_iso": "2026-05-25T21:14:48.753930+08:00",
+  "updated_at": "2026-05-25 21:15:22",
+  "updated_at_iso": "2026-05-25T21:15:22.842684+08:00",
   "log_file": "mss_bot.log",
   "live": {
     "ok": true,
@@ -9,42 +9,32 @@
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-25T13:14:48.717843+00:00"
+    "fetched_at": "2026-05-25T13:15:22.814496+00:00"
   },
   "live_stats": {
     "max_dd_pct": 4.969534656471011
   },
   "bot": {
     "ok": true,
-    "state": "NO_ORDER",
-    "pending_order": null,
+    "state": "PENDING_ORDER",
+    "pending_order": {
+      "order_id": "DRY_1",
+      "side": "short",
+      "trigger": 85.95,
+      "qty": 3.4000000000000004
+    },
     "position": null,
-    "ts": "2026-05-25T13:10:05.880434+00:00",
-    "ts_tpe": "2026-05-25 21:10:05",
+    "ts": "2026-05-25T13:15:06.078798+00:00",
+    "ts_tpe": "2026-05-25 21:15:06",
     "extra": {
-      "iter": 3,
-      "last_bar": "2026-05-25T13:05:00+00:00",
-      "last_processed_signal_ts": null
+      "iter": 4,
+      "last_bar": "2026-05-25T13:10:00+00:00",
+      "last_processed_signal_ts": "2026-05-25T13:10:00+00:00"
     }
   },
   "log": {
-    "last_tick": "2026-05-25 21:10:05",
+    "last_tick": "2026-05-25 21:15:06",
     "events": [
-      {
-        "ts": "2026-05-25 17:40:05",
-        "kind": "BARS",
-        "msg": "[BARS] last=2026-05-25 09:35:00+00:00  close=85.9800  low=85.9400  high=86.0800"
-      },
-      {
-        "ts": "2026-05-25 17:40:05",
-        "kind": "SIGNAL",
-        "msg": "[SIGNAL] dir=short  trigger=85.9900  sl=86.0000  cost=3USDT  size=3.4000SOL  lev=100x  balance=100.00"
-      },
-      {
-        "ts": "2026-05-25 17:45:05",
-        "kind": "BARS",
-        "msg": "[BARS] last=2026-05-25 09:40:00+00:00  close=85.9400  low=85.9200  high=85.9900"
-      },
       {
         "ts": "2026-05-25 17:50:05",
         "kind": "BARS",
@@ -279,6 +269,21 @@
         "ts": "2026-05-25 21:10:05",
         "kind": "BARS",
         "msg": "[BARS] last=2026-05-25 13:05:00+00:00  close=85.9400  low=85.8800  high=86.0000"
+      },
+      {
+        "ts": "2026-05-25 21:15:06",
+        "kind": "BARS",
+        "msg": "[BARS] last=2026-05-25 13:10:00+00:00  close=85.8600  low=85.8100  high=85.9600"
+      },
+      {
+        "ts": "2026-05-25 21:15:06",
+        "kind": "SIGNAL",
+        "msg": "[SIGNAL] dir=short  trigger=85.9500  sl=86.0000  cost=3USDT  size=3.4000SOL  lev=100x  balance=100.00"
+      },
+      {
+        "ts": "2026-05-25 21:15:06",
+        "kind": "ORDER",
+        "msg": "[ORDER] place_stop  side=short  trigger=85.9500  qty=3.4000  sl=86.0  lev=100x  [DRY]"
       }
     ],
     "errors": [
@@ -10864,6 +10869,10 @@
     {
       "ts": "2026-05-25T21:14:48.737787+08:00",
       "equity": 20.84539918
+    },
+    {
+      "ts": "2026-05-25T21:15:22.830926+08:00",
+      "equity": 20.84539918
     }
   ],
   "equity_daily": [
@@ -10886,7 +10895,7 @@
   ],
   "status": {
     "online": true,
-    "last_tick": "2026-05-25 21:10:05",
-    "last_tick_age_sec": 283
+    "last_tick": "2026-05-25 21:15:06",
+    "last_tick_age_sec": 16
   }
 }
