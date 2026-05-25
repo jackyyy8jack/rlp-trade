@@ -1,15 +1,15 @@
 {
-  "updated_at": "2026-05-26 00:24:41",
-  "updated_at_iso": "2026-05-26T00:24:41.052436+08:00",
+  "updated_at": "2026-05-26 00:25:14",
+  "updated_at_iso": "2026-05-26T00:25:14.778563+08:00",
   "log_file": "mss_bot.log",
   "live": {
     "ok": true,
-    "equity": 19.44245292,
+    "equity": 19.59445292,
     "available": 0.54549715651,
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-25T16:24:41.018529+00:00"
+    "fetched_at": "2026-05-25T16:25:14.743635+00:00"
   },
   "live_stats": {
     "max_dd_pct": 28.18679654753503
@@ -19,22 +19,17 @@
     "state": "NO_ORDER",
     "pending_order": null,
     "position": null,
-    "ts": "2026-05-25T16:20:06.138165+00:00",
-    "ts_tpe": "2026-05-26 00:20:06",
+    "ts": "2026-05-25T16:25:05.303109+00:00",
+    "ts_tpe": "2026-05-26 00:25:05",
     "extra": {
-      "iter": 41,
-      "last_bar": "2026-05-25T16:15:00+00:00",
+      "iter": 42,
+      "last_bar": "2026-05-25T16:20:00+00:00",
       "last_processed_signal_ts": "2026-05-25T13:40:00+00:00"
     }
   },
   "log": {
-    "last_tick": "2026-05-26 00:20:06",
+    "last_tick": "2026-05-26 00:25:05",
     "events": [
-      {
-        "ts": "2026-05-25 21:10:05",
-        "kind": "BARS",
-        "msg": "[BARS] last=2026-05-25 13:05:00+00:00  close=85.9400  low=85.8800  high=86.0000"
-      },
       {
         "ts": "2026-05-25 21:15:06",
         "kind": "BARS",
@@ -279,14 +274,14 @@
         "ts": "2026-05-26 00:20:06",
         "kind": "BARS",
         "msg": "[BARS] last=2026-05-25 16:15:00+00:00  close=86.0000  low=85.9500  high=86.0900"
+      },
+      {
+        "ts": "2026-05-26 00:25:05",
+        "kind": "BARS",
+        "msg": "[BARS] last=2026-05-25 16:20:00+00:00  close=85.9900  low=85.9400  high=86.0400"
       }
     ],
     "errors": [
-      {
-        "ts": "2026-05-25 00:25:05",
-        "level": "WARN",
-        "msg": "2026-05-25 00:25:05,918 [WARNING] [SIGNAL-SKIP] dir=short trigger=85.4300 sl=85.5300 — current price 85.5300 already past SL, setup invalidated"
-      },
       {
         "ts": "2026-05-25 06:20:05",
         "level": "WARN",
@@ -12208,6 +12203,10 @@
     {
       "ts": "2026-05-26T00:24:41.040468+08:00",
       "equity": 19.44245292
+    },
+    {
+      "ts": "2026-05-26T00:25:14.766441+08:00",
+      "equity": 19.59445292
     }
   ],
   "equity_daily": [
@@ -12229,12 +12228,12 @@
     },
     {
       "date": "2026-05-26",
-      "equity": 19.44245292
+      "equity": 19.59445292
     }
   ],
   "status": {
     "online": true,
-    "last_tick": "2026-05-26 00:20:06",
-    "last_tick_age_sec": 275
+    "last_tick": "2026-05-26 00:25:05",
+    "last_tick_age_sec": 9
   }
 }
