@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-25 21:09:42",
-  "updated_at_iso": "2026-05-25T21:09:42.884355+08:00",
+  "updated_at": "2026-05-25 21:10:16",
+  "updated_at_iso": "2026-05-25T21:10:16.935615+08:00",
   "log_file": "mss_bot.log",
   "live": {
     "ok": true,
@@ -9,7 +9,7 @@
     "position": null,
     "plan_orders": [],
     "stop_orders": [],
-    "fetched_at": "2026-05-25T13:09:42.853187+00:00"
+    "fetched_at": "2026-05-25T13:10:16.901694+00:00"
   },
   "live_stats": {
     "max_dd_pct": 4.969534656471011
@@ -19,22 +19,17 @@
     "state": "NO_ORDER",
     "pending_order": null,
     "position": null,
-    "ts": "2026-05-25T13:05:05.721525+00:00",
-    "ts_tpe": "2026-05-25 21:05:05",
+    "ts": "2026-05-25T13:10:05.880434+00:00",
+    "ts_tpe": "2026-05-25 21:10:05",
     "extra": {
-      "iter": 2,
-      "last_bar": "2026-05-25T13:00:00+00:00",
+      "iter": 3,
+      "last_bar": "2026-05-25T13:05:00+00:00",
       "last_processed_signal_ts": null
     }
   },
   "log": {
-    "last_tick": "2026-05-25 21:05:05",
+    "last_tick": "2026-05-25 21:10:05",
     "events": [
-      {
-        "ts": "2026-05-25 17:35:06",
-        "kind": "BARS",
-        "msg": "[BARS] last=2026-05-25 09:30:00+00:00  close=86.0800  low=85.9700  high=86.2100"
-      },
       {
         "ts": "2026-05-25 17:40:05",
         "kind": "BARS",
@@ -279,6 +274,11 @@
         "ts": "2026-05-25 21:05:05",
         "kind": "BARS",
         "msg": "[BARS] last=2026-05-25 13:00:00+00:00  close=85.9500  low=85.7900  high=85.9500"
+      },
+      {
+        "ts": "2026-05-25 21:10:05",
+        "kind": "BARS",
+        "msg": "[BARS] last=2026-05-25 13:05:00+00:00  close=85.9400  low=85.8800  high=86.0000"
       }
     ],
     "errors": [
@@ -338,7 +338,7 @@
         "msg": "2026-05-25 20:10:05,257 [WARNING] [SIGNAL-SKIP] dir=long trigger=85.9700 sl=85.8500 — current price 85.7900 already past SL, setup invalidated"
       }
     ],
-    "error_count_1h": 1
+    "error_count_1h": 0
   },
   "equity_history": [
     {
@@ -10828,6 +10828,10 @@
     {
       "ts": "2026-05-25T21:09:42.872435+08:00",
       "equity": 20.84539918
+    },
+    {
+      "ts": "2026-05-25T21:10:16.923640+08:00",
+      "equity": 20.84539918
     }
   ],
   "equity_daily": [
@@ -10850,7 +10854,7 @@
   ],
   "status": {
     "online": true,
-    "last_tick": "2026-05-25 21:05:05",
-    "last_tick_age_sec": 277
+    "last_tick": "2026-05-25 21:10:05",
+    "last_tick_age_sec": 11
   }
 }
