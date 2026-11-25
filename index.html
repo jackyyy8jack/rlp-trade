@@ -52,6 +52,16 @@
     background-color: #0a0500;
   }
 
+  .scene-video {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+  }
+
   /* Bartender clickable hotspot */
   .bartender-area {
     position: absolute;
@@ -150,6 +160,7 @@
   /* CORKBOARD — overlays the bulletin board in bg.jpg, hides original pinned notes */
   .corkboard {
     position: absolute;
+    z-index: 1;
     /* From find_corkboard.html: */
     left:   4.39%;
     top:    9.20%;
@@ -508,6 +519,9 @@
 <body>
 
 <div class="scene">
+  <video class="scene-video" autoplay loop muted playsinline aria-hidden="true">
+    <source src="bg.mp4?v=gemini-4b643e88" type="video/mp4">
+  </video>
   <!-- Clickable bartender -->
   <div class="bartender-area" id="bartender"></div>
 
